@@ -13,7 +13,7 @@ const link = {
 export default class Navbar extends React.Component {
     render() {
         return (
-            <div class="navbar">
+            <div className="navbar">
             <NavLink
                 to="/"
                 exact
@@ -39,13 +39,14 @@ export default class Navbar extends React.Component {
                 }}
             >Signup</NavLink>
             <NavLink
-                to="/squares"
+                to="/bookmarks"
                 exact
                 style={link}
                 activeStyle={{
                 background: 'red'
                 }}
-            >Squares</NavLink>
+            >Bookmarks</NavLink>
+            
             </div>
         )
         

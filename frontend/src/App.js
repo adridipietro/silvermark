@@ -5,14 +5,18 @@ import './App.css';
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
+import Bookmarks from './Bookmarks'
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} /> 
+      <Router>
+        <Navbar/>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} /> 
+        <Route exact path="/bookmarks" component={Bookmarks} />
+      </Router>
     </div>
   );
 }
