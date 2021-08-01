@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 // fetching a list of our bookmarks from our api
 
-export default class Bookmarks extends React.Component {
-    /* const [bookmarks, setBookmarks] = useState([])
-
-    useEffect(()=> {
-        //get bookmarks from api
-        //update bookmarks in our state
-
-
-    }) */
-
+export default class Bookmarks extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -22,22 +13,26 @@ export default class Bookmarks extends React.Component {
         fetch("http://localhost:3000/bookmarks")
         .then(response => response.json())
         .then(json => {
-            {debugger}
             this.setState({bookmarks: json})
             // function .setState
-            // we use "this" bc we are inside a class component
-            
+            // we use "this" bc we are inside a class component 
         })
     }
     
     
     render() {
-        const list = "hi"
+        const { bookmarks } = this.state 
         return (
             <>
                 <h2>Bookmarks</h2>
                 <div className="bookmarks">
-                    <ul>{list}</ul>
+                    <ul>
+                        {bookmarks.map(item => (
+                            <li key={item.id}>
+                                {item.headline}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </>
         )
