@@ -46,7 +46,14 @@ export default class Navbar extends Component {
                 background: 'red'
                 }}
             >Bookmarks</NavLink>
-            
+            <NavLink
+                to="/bookmarks/new"
+                exact
+                style={link}
+                activeStyle={{
+                background: 'red'
+                }}
+            >Add</NavLink>
             </div>
         )
         

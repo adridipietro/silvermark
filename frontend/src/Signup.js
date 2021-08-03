@@ -4,7 +4,7 @@ import React from 'react';
 export default class Signup extends React.Component {
     render(){
         return (
-            <div id="form">
+            <div id="signup-form">
               <h1>Signup</h1>
               <form>
                 <div>
@@ -16,7 +16,7 @@ export default class Signup extends React.Component {
                 <div>
                   <input type="password" name="password" placeholder="Password" />
                 </div><br></br>
-                <input type="submit" value="Login" />
+                <input type="submit" value="Signup" />
               </form>
             </div>
         )

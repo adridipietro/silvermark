@@ -6,6 +6,7 @@ import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
 import Bookmarks from './Bookmarks'
+import NewBookmark from './NewBookmark'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} /> 
         <Route exact path="/bookmarks" component={Bookmarks} />
+        <Route exact path="/bookmarks/new" component={NewBookmark} />
       </Router>
     </div>
   );

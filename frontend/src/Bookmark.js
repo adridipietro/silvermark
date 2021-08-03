@@ -17,7 +17,7 @@ export default class Bookmark extends React.Component {
         fetch(`http://localhost:3000/bookmarks/${bookmark.id}`)
         .then(response => response.json())
         .then(json => {
-            this.setState({bookmarks: json.data})
+            this.setState({bookmark: json.data})
             // function .setState
             // we use "this" bc we are inside a class component 
         })
@@ -32,9 +32,11 @@ export default class Bookmark extends React.Component {
                 <div className="bookmark">
                     <li>{bookmark.description}</li>
                     <li>{bookmark.web_url}</li>
+                
                 </div>
             </>
         )
+        // make web url clickable link 
 
     }
 }
