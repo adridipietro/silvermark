@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 
 const link = {
@@ -10,7 +10,7 @@ const link = {
     color: 'black',
   }
   
-export default class Navbar extends React.Component {
+export default class Navbar extends Component {
     render() {
         return (
             <div className="navbar">

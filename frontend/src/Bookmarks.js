@@ -13,10 +13,11 @@ export default class Bookmarks extends Component {
         fetch("http://localhost:3000/bookmarks")
         .then(response => response.json())
         .then(json => {
-            this.setState({bookmarks: json})
+            this.setState({bookmarks: json.data})
             // function .setState
             // we use "this" bc we are inside a class component 
         })
+        
     }
     
     
