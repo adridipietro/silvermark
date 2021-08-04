@@ -1,20 +1,11 @@
 import React from 'react'
 
 export default class Bookmark extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            bookmark: [
-                // keys & values for each bookmark
-                // headline, description, web_url
-
-            ]
-        }
-    }
+    
     
 
     componentDidMount(){
-        fetch(`http://localhost:3000/bookmarks/${bookmark.id}`)
+        fetch(`http://localhost:3000/bookmarks/:bookmarkID`)
         .then(response => response.json())
         .then(json => {
             this.setState({bookmark: json.data})

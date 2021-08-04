@@ -2,16 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
+// initializing the store
+// applyMiddleware() is a function from redux
+// thunk is from redux-thunk package and passed into applyMiddleware
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// Middleware allows us to slightly alter the behavior of actions
+// Middleware allows us to add async behavior
+
+
+
+// Thunk allows us to return a function inside of our action creator
+// Normally, an action creater returns a JS object
+// This function, instead, receive's the store's dispatch function as its arg
+// Able to dispatch multiple actions from inside that returned function

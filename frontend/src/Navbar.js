@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
+// NavLink updates brower URL and renders the Route Component
 
 const link = {
     width: '100px',
@@ -28,7 +29,8 @@ export default class Navbar extends Component {
                 style={link}
                 activeStyle={{
                 background: 'red'
-                }}
+                }} 
+                
             >Login</NavLink>
             <NavLink
                 to="/signup"
