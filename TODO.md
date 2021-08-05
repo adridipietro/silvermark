@@ -1,0 +1,10 @@
+AUGUST 5 
+- fix fetch [x]
+- render each bookmark data onto page [x]
+- create bookmark card [x]
+- start bookmark form [x]
+- create + migrate resource Category []
+- add favorite attribute to bookmark []
+- add category_id to bookmark []
+- create + migrate resource User []
+- add keywords attribute to bookmark []
