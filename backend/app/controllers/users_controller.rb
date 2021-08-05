@@ -3,11 +3,14 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    users = User.all
+
+    render json: UserSerializer.new(users).serializable_json
   end
 
   # GET /users/1 or /users/1.json
   def show
+    render json: UserSerializer.new(user)
   end
 
   # GET /users/new
@@ -64,6 +67,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :categories, :bookmarks)
     end
 end
