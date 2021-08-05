@@ -11,7 +11,7 @@ const BookmarkSearch = ( { handleSearch }) => {
 
     return (
         <div className="bookmark-search">
-            <input type="text" className="searchTerm" value={searchTerm} name="searchTerm" placeholder="Search.." />
+            <input type="text" className="searchTerm"  name="searchTerm" placeholder="Search.." />
             <input type="submit" value="Search" onSubmit={handleSubmit}/> 
         </div>
     )

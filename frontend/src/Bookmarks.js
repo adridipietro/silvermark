@@ -7,12 +7,17 @@ export default class Bookmarks extends Component {
     constructor(props) {
         super(props)
         this.state = { 
-            bookmarks: [] 
+            bookmarks: [],
+            searchTerm: '' 
         }
     }
+    // binding in the constructor
+    // "this" refers to the class component
+    // 
 
 
     componentDidMount() {
+
         fetch(`http://localhost:3000/bookmarks`)
         .then(response => response.json())
         .then(json => {
@@ -32,27 +37,30 @@ export default class Bookmarks extends Component {
         // 3. componentDidMount is called
         // 4. once request finishes, setState() is called
         // 5. bookmark property is filled with bookmarks from backend
-
-
-
     }
+
+
     
     
     render() {
         const { bookmarks } = this.state
+        // object destructuring : assigning a value to a variable w/o duplicating the name
+        // this is the same as "const bookmarks = this.state.bookmarks"
         return (
             <div className="bookmarks">
                 <h2>Bookmarks</h2>
                 <BookmarkSearch />
+                
                     <ul>
-                        {Object.keys(bookmarks).map(bookmark => (
-                            <Bookmark key={bookmark.id} {...bookmarks}/>
-                        ))}
+                        {bookmarks.map(({attributes}) => {
+                            return (<Bookmark key={attributes.id} {...attributes}/>)
+                        })}
                     </ul>
             </div>
         )
-        // Object.keys() method returns an array given an object
-        
+        // defining constant bookmarks as this class' state
+        // iterating over the collection of bookmarks and returning a Bookmark grid item for each
+
     }
 
 
