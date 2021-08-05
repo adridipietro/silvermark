@@ -11,6 +11,7 @@ import Home from './Home'
 import Bookmarks from './Bookmarks'
 import NewBookmark from './NewBookmark'
 
+
 function App() {
   return (
     <div className="App">
@@ -19,7 +20,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} /> 
-        <Route path="/bookmarks" render={routerProps => <Bookmarks {...routerProps} />} />
+        <Route exact path="/bookmarks" component={Bookmarks} />
         <Route exact path="/bookmarks/new" component={NewBookmark} />
       </Router>
     </div>
