@@ -4,16 +4,22 @@ import BookmarkSearch from './BookmarkSearch'
 import Bookmark from './Bookmark'
 
 export default class Bookmarks extends Component {
-        state = {
-            bookmarks: []
+    constructor(props) {
+        super(props)
+        this.state = { 
+            bookmarks: [] 
         }
+    }
 
 
-    componentDidMount(){
+    componentDidMount() {
         fetch(`http://localhost:3000/bookmarks`)
-        .then((response) => response.json())
-        .then(bookmarkList => {
-            this.setState({ bookmarks: bookmarkList })
+        .then(response => response.json())
+        .then(json => {
+            this.setState({ 
+                bookmarks: json.data
+            })
+
             // function .setState() triggers a new render
             // we use "this" bc we are inside a class component 
         })
@@ -33,20 +39,20 @@ export default class Bookmarks extends Component {
     
     
     render() {
+        const { bookmarks } = this.state
         return (
-            <>
+            <div className="bookmarks">
                 <h2>Bookmarks</h2>
                 <BookmarkSearch />
-                <div className="bookmarks">
                     <ul>
-                        {this.state.bookmarks.map((bookmark) => (
-                            <Bookmark key={bookmark.id} {...bookmark}/>
+                        {Object.keys(bookmarks).map(bookmark => (
+                            <Bookmark key={bookmark.id} {...bookmarks}/>
                         ))}
                     </ul>
-                </div>
-            </>
+            </div>
         )
-
+        // Object.keys() method returns an array given an object
+        
     }
 
 

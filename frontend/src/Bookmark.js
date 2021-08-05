@@ -1,12 +1,13 @@
 import React from 'react'
 
-const Bookmark = ({ headline, web_url, description }) => {
+const Bookmark = (props) => {
     return (
-        <div className="bookmark">
-
-            <h2 id="bookmark-headline">{headline}</h2>
-                <li id="bookmark-description">{description}</li>
-                <li id="bookmark-weburl">{web_url}</li>
+        <div className="bookmark-card" id={`bookmark-${props.id}`}>
+            <h2 id="bookmark-headline">{props.headline}</h2>
+                <li id="bookmark-description">{props.description}</li>
+                <a href id="bookmark-weburl">{props.web_url}</a>
+                <button className="edit-button">Edit</button>
+                <button className="delete-button">Delete</button>
         </div>
 
     )

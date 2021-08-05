@@ -16,3 +16,26 @@ div.navbar {
   padding: 1em
 }
 
+
+
+.bookmark-card {
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 10rem;
+  height: 15rem;
+  display: inline-grid;
+  margin: 1rem 2rem;
+}
+
+button {
+ 
+}
+
+
+
+button:hover {
+  background-color: rgb(245, 245, 245);
+  border: #5ce04b solid 1px;
+}
+
