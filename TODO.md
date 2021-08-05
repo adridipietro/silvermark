@@ -6,5 +6,5 @@ AUGUST 5
 - create + migrate resource Category []
 - add favorite attribute to bookmark []
 - add category_id to bookmark []
-- create + migrate resource User []
+- create + migrate resource User [x]
 - add keywords attribute to bookmark []
