@@ -13,7 +13,7 @@ bookmarks = Bookmark.create([
         web_url: "www.freecourses.com", 
         description: "Free courses offered to people entering the technology industry.",
         favorite: false,
-        keywords: ["technology", "career", "free"],
+        keywords: '',
         category_id: 1
     },
     {
@@ -21,7 +21,7 @@ bookmarks = Bookmark.create([
         web_url: "www.portfoliohelp.com", 
         description: "Tips and secrets to building a really good portfolio.",
         favorite: false,
-        keywords: ["portfolio", "career", "resume"],
+        keywords: '',
         category_id: 1
     },
     {
@@ -29,7 +29,7 @@ bookmarks = Bookmark.create([
         web_url: "www.veganrecipes.com", 
         description: "Vegan recipe blog",
         favorite: true,
-        keywords: ["vegan", "food", "recipes"],
+        keywords: '',
         category_id: 2
     },
     {
@@ -37,10 +37,10 @@ bookmarks = Bookmark.create([
         web_url: "www.petsmart.com", 
         description: "Website that shows pets in your area up for adoption.",
         favorite: true,
-        keywords: ["pets", "cats", "dogs"],
+        keywords: '',
         category_id: 3
 
-    },
+    }
 ])
 
 categories = Category.create([

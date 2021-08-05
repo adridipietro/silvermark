@@ -1,23 +1,25 @@
 class CategoriesController < ApplicationController
-    def index
+  before_action :set_category, only: %i[ show destroy ]
+  
+  def index
         categories = Category.all
-
-        render json: CategorySerializer.new(categories).serializable_hash
-      end
+        
+        render json: CategorySerializer.new(categories).serialized_json
+  end
     
       # GET /categories/1 or /categories/1.json
-      def show
-        render json: CategorySerializer.new(category).serializable_hash
-      end
+  def show
+        render json: CategorySerializer.new(category)
+  end
     
       # GET /categories/new
-      def new
+  def new
         @category = Category.new
-      end
+  end
     
     
       # POST /categories or /categories.json
-      def create
+  def create
         @category = Category.new(category_params)
     
         respond_to do |format|
@@ -29,7 +31,7 @@ class CategoriesController < ApplicationController
             format.json { render json: @category.errors, status: :unprocessable_entity }
           end
         end
-      end
+  end
     
     
       # DELETE /categories/1 or /categories/1.json
@@ -49,6 +51,6 @@ class CategoriesController < ApplicationController
     
         # Only allow a list of trusted parameters through.
         def category_params
-          params.require(:category).permit(:name, :bookmarks)
+          params.require(:category).permit(:name, :bookmarks, :user_id)
         end
 end

@@ -5,7 +5,7 @@ class BookmarksController < ApplicationController
   def index
     bookmarks = Bookmark.all
 
-    render json: BookmarkSerializer.new(bookmarks).serializable_hash
+    render json: BookmarkSerializer.new(bookmarks).serialized_json
   end
 
   # GET /bookmarks/1 or /bookmarks/1.json
@@ -67,6 +67,6 @@ class BookmarksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bookmark_params
-      params.require(:bookmark).permit(:headline, :web_url, :description, :id, :favorite, :keywords, :category_id)
+      params.require(:bookmark).permit(:headline, :web_url, :description, :favorite, :keywords, :category_id)
     end
 end
