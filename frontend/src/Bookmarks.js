@@ -13,7 +13,7 @@ export default class Bookmarks extends Component {
     }
     // binding in the constructor
     // "this" refers to the class component
-    // 
+
 
 
     componentDidMount() {
@@ -38,6 +38,7 @@ export default class Bookmarks extends Component {
         // 4. once request finishes, setState() is called
         // 5. bookmark property is filled with bookmarks from backend
     }
+
 
 
     
