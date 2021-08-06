@@ -23,8 +23,8 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} /> 
         <Route exact path="/bookmarks" component={Bookmarks} />
-        <Route exact path="/bookmarks/new" component={BookmarkForm} />
         <Route exact path="/categories/new" component={CategoryForm} />
+        <Bookmarks/>
       </Router>
     </div>
   ) 

@@ -2,22 +2,45 @@ import React, { Component } from 'react'
 // fetching a list of our bookmarks from our api
 import BookmarkSearch from './BookmarkSearch'
 import Bookmark from './Bookmark'
+import EditForm from './EditForm'
+import BookmarkForm from './BookmarkForm'
+
+
+
+
 
 export default class Bookmarks extends Component {
     constructor(props) {
         super(props)
         this.state = { 
             bookmarks: [],
-            searchTerm: '' 
+            searchTerm: ''
         }
     }
     // binding in the constructor
     // "this" refers to the class component
 
+    handleEdit(){
+        <EditForm/>
+    }
+
+    handleDelete(){
+        console.log("hi")
+    }
+
+    handleCreate(createdBookmark){
+        this.setState({
+            bookmarks: [...this.state.bookmarks, createdBookmark]
+        })
+        // existing state, adding newly created Bookmark and updating the state
+    }
+
+    
+
+
 
 
     componentDidMount() {
-
         fetch(`http://localhost:3000/bookmarks`)
         .then(response => response.json())
         .then(json => {
@@ -49,13 +72,18 @@ export default class Bookmarks extends Component {
         // this is the same as "const bookmarks = this.state.bookmarks"
         return (
             <div className="bookmarks">
-                <h2>Bookmarks</h2>
                 <BookmarkSearch />
-                
+                <BookmarkForm handleCreate={this.handleCreate}/>
                     <ul>
                         {bookmarks.map(({attributes}) => {
-                            return (<Bookmark key={attributes.id} {...attributes}/>)
+                            return (
+                            <Bookmark 
+                            key={attributes.id} {...attributes}
+                            handleEdit={this.handleEdit}
+                            handleDelete={this.handleDelete}
+                            />)
                         })}
+                        
                     </ul>
             </div>
         )

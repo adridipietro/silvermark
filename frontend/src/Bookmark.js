@@ -1,18 +1,18 @@
 import React from 'react'
-import { BrowserRouter as Router, Link } from 'react-router-dom' 
 
 
 const Bookmark = (props) => {
+
     
 
     return (
-        <div className="bookmark-card" id={`bookmark-${props.id}`} onClick={handleFavorite}>
+        <div className="bookmark-card" id={`bookmark-${props.id}`}>
             <h2 className="bookmark-headline">{props.headline}</h2>
                 <p className="bookmark-description">{props.description}</p>
-                <a href='#' className="bookmark-web-url" onClick={handleURL}>{props.web_url}</a>
-                <button className="bookmark-favorite" onClick="{handleFavorite}"></button>
-                <button className="edit-button" onClick={handleEdit}>Edit</button>
-                <button className="delete-button" onClick={handleDelete}>Delete</button>
+                <a href='#' className="bookmark-web-url" >{props.web_url}</a>
+                <button className="bookmark-favorite" >Favorite</button>
+                <button className="edit-button" >Edit</button>
+                <button className="delete-button" >Delete</button>
                 <button className="show-button">Show</button>
         </div>
 
