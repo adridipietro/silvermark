@@ -8,8 +8,6 @@ import './App.css'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
-import Bookmarks from './Bookmarks'
-import BookmarkForm from './BookmarkForm'
 import CategoryForm from './CategoryForm'
 
 
@@ -22,9 +20,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} /> 
-        <Route exact path="/bookmarks" component={Bookmarks} />
         <Route exact path="/categories/new" component={CategoryForm} />
-        <Bookmarks/>
       </Router>
     </div>
   ) 

@@ -1,3 +1,4 @@
+
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: %i[ show edit update destroy ]
 

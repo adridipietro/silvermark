@@ -1,12 +1,14 @@
 import React from 'react'
+import Bookmarks from './Bookmarks'
 
 
 export default class Home extends React.Component {
     render() {
         return (
-            <>
-                <h1>Home</h1>    
-            </>
+            <div className="home">
+                <h1></h1>
+                <Bookmarks/>   
+            </div>
         )
     }
     

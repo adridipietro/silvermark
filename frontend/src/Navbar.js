@@ -41,14 +41,6 @@ export default class Navbar extends Component {
                 }}
             >Signup</NavLink>
             <NavLink
-                to="/bookmarks"
-                exact
-                style={link}
-                activeStyle={{
-                background: 'red'
-                }}
-            >Bookmarks</NavLink>
-            <NavLink
                 to="/categories/new"
                 exact
                 style={link}

@@ -20,15 +20,15 @@ export default class Bookmarks extends Component {
     // binding in the constructor
     // "this" refers to the class component
 
-    handleEdit(){
+    handleEdit = () => {
         <EditForm/>
     }
 
-    handleDelete(){
+    handleDelete = () => {
         console.log("hi")
     }
 
-    handleCreate(createdBookmark){
+    handleCreate = (createdBookmark) => {
         this.setState({
             bookmarks: [...this.state.bookmarks, createdBookmark]
         })
@@ -36,10 +36,6 @@ export default class Bookmarks extends Component {
     }
 
     
-
-
-
-
     componentDidMount() {
         fetch(`http://localhost:3000/bookmarks`)
         .then(response => response.json())
