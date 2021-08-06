@@ -12,3 +12,11 @@ AUGUST 5
 - generate serializer for User [x]
 - add attributes + associates to Bookmark serializer [x]
 - create controllers for Category + User, render json [x]
+
+
+AUGUST 6 
+- create category form []
+- logout navlink []
+- edit bookmark form []
+- favorite button []
+- filter by category []

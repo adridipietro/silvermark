@@ -55,8 +55,17 @@ export default class Navbar extends Component {
                 activeStyle={{
                 background: 'red'
                 }}
-            >Add</NavLink>
+            >Add Bookmark</NavLink>
+            <NavLink
+                to="/categories/new"
+                exact
+                style={link}
+                activeStyle={{
+                background: 'red'
+                }}
+            >Add Category</NavLink>
             </div>
+            
         )
         
     }
