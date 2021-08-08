@@ -16,7 +16,5 @@ AUGUST 5
 
 AUGUST 6 
 - create category form [x]
-- logout navlink []
-- edit bookmark form []
-- favorite button []
-- filter by category []
+- finish new bookmark form []
+

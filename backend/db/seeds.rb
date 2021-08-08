@@ -13,7 +13,6 @@ bookmarks = Bookmark.create([
         web_url: "www.freecourses.com", 
         description: "Free courses offered to people entering the technology industry.",
         favorite: false,
-        keywords: '',
         category_id: 1
     },
     {
@@ -21,7 +20,6 @@ bookmarks = Bookmark.create([
         web_url: "www.portfoliohelp.com", 
         description: "Tips and secrets to building a really good portfolio.",
         favorite: false,
-        keywords: '',
         category_id: 1
     },
     {
@@ -29,7 +27,6 @@ bookmarks = Bookmark.create([
         web_url: "www.veganrecipes.com", 
         description: "Vegan recipe blog",
         favorite: true,
-        keywords: '',
         category_id: 2
     },
     {
@@ -37,32 +34,11 @@ bookmarks = Bookmark.create([
         web_url: "www.petsmart.com", 
         description: "Website that shows pets in your area up for adoption.",
         favorite: true,
-        keywords: '',
         category_id: 3
 
     }
 ])
 
-categories = Category.create([
-    {
-        name: "Career",
-        user_id: 1
-    },
-    {
-        name: "Food",
-        user_id: 1
-    },
-    {
-        name: "Miscellaneous",
-        user_id: 1
-    }
-])
 
-users = User.create([
-    {
-        name: "Adri",
-        email: "adriana@gmail.com",
-        password: "password!"
-    }
-])
+
 
