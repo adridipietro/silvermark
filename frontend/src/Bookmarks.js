@@ -31,6 +31,7 @@ export default class Bookmarks extends Component {
     handleCreate = (createdBookmark) => {
         this.setState({
             bookmarks: [...this.state.bookmarks, createdBookmark]
+            // updating the key "bookmarks" with the createdBookmark
         })
         // existing state, adding newly created Bookmark and updating the state
     }

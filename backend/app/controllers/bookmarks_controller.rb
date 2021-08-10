@@ -1,16 +1,18 @@
 
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
 
   # GET /bookmarks or /bookmarks.json
   def index
     bookmarks = Bookmark.all
-
-    render json: BookmarkSerializer.new(bookmarks).serialized_json
+    
+    render json: BookmarkSerializer.new(bookmarks)
   end
 
   # GET /bookmarks/1 or /bookmarks/1.json
   def show
+    bookmark = Bookmark.find_by(id: params[:id])
     render json: BookmarkSerializer.new(bookmark)
   end
 
@@ -25,30 +27,25 @@ class BookmarksController < ApplicationController
 
   # POST /bookmarks or /bookmarks.json
   def create
-    @bookmark = Bookmark.new(bookmark_params)
+    bookmark = Bookmark.new(bookmark_params)
 
-    respond_to do |format|
-      if @bookmark.save
-        format.html { redirect_to @bookmark, notice: "Bookmark was successfully created." }
-        format.json { render :show, status: :created, location: @bookmark }
+      if bookmark.save
+        render json: BookmarkSerializer.new(bookmark)
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+        render json: {error: bookmark.errors.messages}, status: 422
       end
-    end
+
   end
 
   # PATCH/PUT /bookmarks/1 or /bookmarks/1.json
   def update
-    respond_to do |format|
-      if @bookmark.update(bookmark_params)
-        format.html { redirect_to @bookmark, notice: "Bookmark was successfully updated." }
-        format.json { render :show, status: :ok, location: @bookmark }
+    bookmark = Bookmark.find_by(id: params[:id])
+
+      if bookmark.update(bookmark_params)
+        render json: BookmarkSerializer.new(bookmark).serialized_json
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+        render json: {error: bookmark.errors.messages}, status: 422
       end
-    end
   end
 
   # DELETE /bookmarks/1 or /bookmarks/1.json
@@ -68,6 +65,6 @@ class BookmarksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bookmark_params
-      params.require(:bookmark).permit(:headline, :web_url, :description, :favorite, :category_id)
+      params.require(:bookmark).permit(:headline, :web_url, :description, :favorite, :category_id, :id)
     end
 end

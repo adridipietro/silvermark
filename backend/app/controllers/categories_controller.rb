@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   def index
         categories = Category.all
         
-        render json: CategorySerializer.new(categories).serialized_json
+        render json: CategorySerializer.new(categories)
   end
     
       # GET /categories/1 or /categories/1.json
@@ -51,6 +51,6 @@ class CategoriesController < ApplicationController
     
         # Only allow a list of trusted parameters through.
         def category_params
-          params.require(:category).permit(:name, :bookmarks, :user_id)
+          params.require(:category).permit(:name, :bookmarks, :user_id, :id)
         end
 end

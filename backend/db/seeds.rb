@@ -39,6 +39,26 @@ bookmarks = Bookmark.create([
     }
 ])
 
+categories = Category.create([
+    {
+        name: "Career",
+        user_id: 1
+    },
+    {
+        name: "Food",
+        user_id: 1
+    },
+    {
+        name: "Miscellaneous",
+        user_id: 1
+    }
+])
 
-
+users = User.create!([
+    {
+        name: "Adri",
+        email: "adriana@gmail.com",
+        password: "password!"
+    }
+])
 

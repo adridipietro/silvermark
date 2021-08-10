@@ -8,15 +8,13 @@ export default class BookmarkForm extends React.Component {
             headline: '',
             description: '',
             web_url: '',
-            favorite: false
+            favorite: false,
+            category_id: null
     
         }
 
 
     }
-
-
-
     handleSubmit = (e) => {
         // prevent default
         // clear the form
@@ -24,17 +22,16 @@ export default class BookmarkForm extends React.Component {
         // fetch call to api
         // method, headers, body
         e.preventDefault()
-        debugger
-        const data = { ...this.state, favorite: false }
+
+        const data = { ...this.state }
         const dataObject = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         }
-        fetch(`http://localhost:3000/bookmarks`, dataObject)
+        fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
         .then(json => this.props.handleCreate(json))
     }
@@ -46,6 +43,10 @@ export default class BookmarkForm extends React.Component {
             [eName]: eValue
         })
     }
+
+
+
+    
 
     render() {
         return (
