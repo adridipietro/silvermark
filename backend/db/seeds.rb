@@ -7,6 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+
+
+users = User.create!([
+    {
+        name: "Adri",
+        email: "adriana@gmail.com",
+        password: "password!"
+    }
+])
+
+
 bookmarks = Bookmark.create([
     {
         headline: "New to Tech? Try out these free courses!",
@@ -51,14 +62,6 @@ categories = Category.create([
     {
         name: "Miscellaneous",
         user_id: 1
-    }
-])
-
-users = User.create!([
-    {
-        name: "Adri",
-        email: "adriana@gmail.com",
-        password: "password!"
     }
 ])
 

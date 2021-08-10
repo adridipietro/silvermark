@@ -41,13 +41,13 @@ export default class Navbar extends Component {
                 }}
             >Signup</NavLink>
             <NavLink
-                to="/categories/new"
+                to="/categories"
                 exact
                 style={link}
                 activeStyle={{
                 background: 'red'
                 }}
-            >Add Category</NavLink>
+            >Categories</NavLink>
             </div>
             
         )

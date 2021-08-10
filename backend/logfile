@@ -1,0 +1,7 @@
+2021-08-10 13:33:27.528 EDT [48248] LOG:  starting PostgreSQL 13.3 on x86_64-apple-darwin19.6.0, compiled by Apple clang version 12.0.0 (clang-1200.0.32.29), 64-bit
+2021-08-10 13:33:27.530 EDT [48248] LOG:  listening on IPv6 address "::1", port 5432
+2021-08-10 13:33:27.530 EDT [48248] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-08-10 13:33:27.534 EDT [48248] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2021-08-10 13:33:27.540 EDT [48249] LOG:  database system was shut down at 2021-08-10 13:32:33 EDT
+2021-08-10 13:33:27.544 EDT [48248] LOG:  database system is ready to accept connections
+2021-08-10 13:33:43.199 EDT [48259] FATAL:  database "backend_development" does not exist

@@ -7,28 +7,9 @@ export default class CategoryForm extends React.Component {
         bookmarks: []
     }
 
+
+
     
-
-
-    onFormSubmit = (e) => {
-        e.preventDefault()
-        const data = { ...this.state }
-        const dataObject = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(data)
-        }
-        fetch(`http://localhost:3000/categories`, dataObject)
-        .then(response => response.json())
-        .then(json => {
-            this.setState({
-                categories: json
-            })
-        })
-    }
 
     handleChange = (e) => {
         const eName = e.target.name
@@ -44,7 +25,7 @@ export default class CategoryForm extends React.Component {
             <form className="category-form">
                 <h2>New Category</h2>
                 <input type="text" name="category-name" placeholder="name" defaultValue={this.state.name} onChange={this.handleChange}/>
-                <input type="submit" className="submit-button" value="Submit" onSubmit={this.onFormSubmit}/>
+                <input type="submit" className="submit-button" value="Submit" />
             </form>
         )
 

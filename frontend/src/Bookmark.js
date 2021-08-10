@@ -9,7 +9,7 @@ const Bookmark = (props) => {
         <div className="bookmark-card" id={`bookmark-${props.id}`}>
             <h2 className="bookmark-headline">{props.headline}</h2>
                 <p className="bookmark-description">{props.description}</p>
-                <a href='#' className="bookmark-web-url" >{props.web_url}</a>
+                <p className="bookmark-web-url" >{props.web_url}</p>
                 <button className="bookmark-favorite" >Favorite</button>
                 <button className="edit-button" >Edit</button>
                 <button className="delete-button" >Delete</button>

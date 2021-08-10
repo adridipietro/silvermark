@@ -4,12 +4,12 @@ class CategoriesController < ApplicationController
   def index
         categories = Category.all
         
-        render json: CategorySerializer.new(categories)
+        render json: CategorySerializer.new(categories).serialized_json
   end
     
       # GET /categories/1 or /categories/1.json
   def show
-        render json: CategorySerializer.new(category)
+        render json: @category
   end
     
       # GET /categories/new

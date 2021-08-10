@@ -13,20 +13,20 @@ export default class Bookmarks extends Component {
     constructor(props) {
         super(props)
         this.state = { 
-            bookmarks: [],
-            searchTerm: ''
+            bookmarks: []
         }
-    }
+        
     // binding in the constructor
     // "this" refers to the class component
-
-    handleEdit = () => {
+    }
+    
+    /* handleEdit = () => {
         <EditForm/>
     }
 
     handleDelete = () => {
         console.log("hi")
-    }
+    } */
 
     handleCreate = (createdBookmark) => {
         this.setState({
@@ -34,6 +34,28 @@ export default class Bookmarks extends Component {
             // updating the key "bookmarks" with the createdBookmark
         })
         // existing state, adding newly created Bookmark and updating the state
+    }
+
+    handleSubmit = (e) => {
+        // prevent default
+        // clear the form
+        // assign the state to var
+        // fetch call to api
+        // method, headers, body
+        e.preventDefault()
+
+        const data = { ...this.state }
+        const dataObject = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            },
+            body: JSON.stringify(data)
+        }
+        fetch('http://localhost:3000/bookmarks', dataObject)
+        .then(response => response.json())
+        .then(json => this.props.handleCreate(json))
     }
 
     
@@ -59,28 +81,20 @@ export default class Bookmarks extends Component {
         // 5. bookmark property is filled with bookmarks from backend
     }
 
-
-
     
     
     render() {
-        const { bookmarks } = this.state
         // object destructuring : assigning a value to a variable w/o duplicating the name
         // this is the same as "const bookmarks = this.state.bookmarks"
         return (
             <div className="bookmarks">
                 <BookmarkSearch />
-                <BookmarkForm handleCreate={this.handleCreate}/>
+                <BookmarkForm onSubmit={this.handleSubmit} handleCreate={this.handleCreate}/>
                     <ul>
-                        {bookmarks.map(({attributes}) => {
+                        { this.state.bookmarks.map(({attributes}) => {
                             return (
-                            <Bookmark 
-                            key={attributes.id} {...attributes}
-                            handleEdit={this.handleEdit}
-                            handleDelete={this.handleDelete}
-                            />)
+                            <Bookmark key={attributes.id} {...attributes}/>)
                         })}
-                        
                     </ul>
             </div>
         )
@@ -88,6 +102,6 @@ export default class Bookmarks extends Component {
         // iterating over the collection of bookmarks and returning a Bookmark grid item for each
 
     }
-
+    
 
 }
