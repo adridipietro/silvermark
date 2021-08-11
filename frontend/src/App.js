@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css'
 import Login from './Login'
 import Signup from './Signup'
-import Home from './Home'
+
 import CategoryForm from './CategoryForm'
 import BookmarkForm from './BookmarkForm'
 import Bookmarks from './Bookmarks'
@@ -19,14 +19,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar/>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} /> 
-        <Route exact path="/categories/new" component={CategoryForm} />
-        <Route exact path="/bookmarks/new" component={BookmarkForm} />
-        <Route exact path="/categories" component={Categories} />
-        <Route exact path="/" component={Bookmarks} />
+          <Navbar/>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} /> 
+          <Route exact path="/categories/new" component={CategoryForm} />
+          <Route exact path="/bookmarks/new" component={BookmarkForm} />
+          <Route exact path="/categories" component={Categories} />
+          <Route exact path="/" component={Bookmarks} />
       </Router>
     </div>
   ) 

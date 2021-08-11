@@ -18,6 +18,8 @@ export default class Bookmarks extends Component {
         
     // binding in the constructor
     // "this" refers to the class component
+
+    this.handleCreate = this.handleCreate.bind(this)
     }
     
     /* handleEdit = () => {
@@ -28,43 +30,18 @@ export default class Bookmarks extends Component {
         console.log("hi")
     } */
 
-    handleCreate = (createdBookmark) => {
-        this.setState({
-            bookmarks: [...this.state.bookmarks, createdBookmark]
-            // updating the key "bookmarks" with the createdBookmark
-        })
-        // existing state, adding newly created Bookmark and updating the state
-    }
+    
 
-    handleSubmit = (e) => {
-        // prevent default
-        // clear the form
-        // assign the state to var
-        // fetch call to api
-        // method, headers, body
-        e.preventDefault()
-
-        const data = { ...this.state }
-        const dataObject = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(data)
-        }
-        fetch('http://localhost:3000/bookmarks', dataObject)
-        .then(response => response.json())
-        .then(json => this.props.handleCreate(json))
-    }
+    
 
     
     componentDidMount() {
-        fetch(`http://localhost:3000/bookmarks`)
+        fetch('http://localhost:3000/bookmarks')
         .then(response => response.json())
         .then(json => {
             this.setState({ 
                 bookmarks: json.data
+                // takes the key "bookmarks" and updates its value with json object from backend
             })
 
             // function .setState() triggers a new render
@@ -79,23 +56,38 @@ export default class Bookmarks extends Component {
         // 3. componentDidMount is called
         // 4. once request finishes, setState() is called
         // 5. bookmark property is filled with bookmarks from backend
+        console.log(this)
     }
 
+    handleCreate(createdBookmark) {
+        let _bookmarks = this.state.bookmarks
+        _bookmarks.unshift(createdBookmark)
+        //unshift adds to beginning
+        this.setState({
+            bookmarks: _bookmarks
+            // updating the key "bookmarks" with the createdBookmark
+        })
+        // existing state, adding newly created Bookmark and updating the state
+    }
+
+    renderBookmarkCollection(){
+        return (
+            this.state.bookmarks.map(({attributes}) => <Bookmark key={attributes.id} {...attributes}/>)
+        )
+    }
     
+
     
     render() {
         // object destructuring : assigning a value to a variable w/o duplicating the name
         // this is the same as "const bookmarks = this.state.bookmarks"
+        console.log(this.state.bookmarks)
         return (
             <div className="bookmarks">
-                <BookmarkSearch />
-                <BookmarkForm onSubmit={this.handleSubmit} handleCreate={this.handleCreate}/>
-                    <ul>
-                        { this.state.bookmarks.map(({attributes}) => {
-                            return (
-                            <Bookmark key={attributes.id} {...attributes}/>)
-                        })}
-                    </ul>
+                <BookmarkForm handleCreate={this.handleCreate} />
+                <Bookmark />
+                {this.renderBookmarkCollection()}
+                
             </div>
         )
         // defining constant bookmarks as this class' state

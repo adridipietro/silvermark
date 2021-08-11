@@ -1,9 +1,17 @@
 import React from 'react'
+import EditForm from './EditForm'
+import { Grid } from '@material-ui/core'
 
 
-const Bookmark = (props) => {
+function Bookmark(props) {
+    const handleEdit= (e) => {
+        console.log('edit')
+    }
 
-    
+    const handleDelete = (e) => {
+        console.log('delete')
+    }
+
 
     return (
         <div className="bookmark-card" id={`bookmark-${props.id}`}>
@@ -11,8 +19,8 @@ const Bookmark = (props) => {
                 <p className="bookmark-description">{props.description}</p>
                 <p className="bookmark-web-url" >{props.web_url}</p>
                 <button className="bookmark-favorite" >Favorite</button>
-                <button className="edit-button" >Edit</button>
-                <button className="delete-button" >Delete</button>
+                <button className="edit-button"onClick={handleEdit}>Edit</button>
+                <button className="delete-button" onClick={handleDelete}>Delete</button>
                 <button className="show-button">Show</button>
         </div>
 

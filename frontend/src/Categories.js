@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import CategoryForm from './CategoryForm'
 
-const Categories = ()  => {
+const Categories = (props)  => {
     const [categories, setCategories] = useState([])
+    // [name of the object, name of the function used to set state of this object] = sets initial value of the state 
 
     useEffect(() => {
         // get all categories from api

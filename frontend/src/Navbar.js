@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 // NavLink updates brower URL and renders the Route Component
 
+
 const link = {
     width: '100px',
     padding: '12px',
@@ -9,7 +10,9 @@ const link = {
     background: 'pink',
     textDecoration: 'none',
     color: 'black',
+
   }
+
   
 export default class Navbar extends Component {
     render() {
