@@ -1,6 +1,9 @@
 import React from 'react'
 import EditForm from './EditForm'
-import { Grid } from '@material-ui/core'
+import Button from "@material-ui/core/Button"
+import DeleteIcon from "@material-ui/icons/Delete"
+import EditIcon from "@material-ui/icons/Edit"
+import FavoriteIcon from "@material-ui/icons/Favorite"
 
 
 function Bookmark(props) {
@@ -9,7 +12,12 @@ function Bookmark(props) {
     }
 
     const handleDelete = (e) => {
-        console.log('delete')
+        props.deleteItem(props.bookmark)
+    
+    }
+
+    const handleFavorite= (e) => {
+        console.log('favorite')
     }
 
 
@@ -18,10 +26,30 @@ function Bookmark(props) {
             <h2 className="bookmark-headline">{props.headline}</h2>
                 <p className="bookmark-description">{props.description}</p>
                 <p className="bookmark-web-url" >{props.web_url}</p>
-                <button className="bookmark-favorite" >Favorite</button>
-                <button className="edit-button"onClick={handleEdit}>Edit</button>
-                <button className="delete-button" onClick={handleDelete}>Delete</button>
-                <button className="show-button">Show</button>
+                <Button 
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    startIcon={<FavoriteIcon />}
+                    onClick={handleFavorite}
+                    className="favorite-button" >
+                </Button>
+                <Button 
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    startIcon={<EditIcon />}
+                    onClick={handleEdit}
+                    className="edit-button" >
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    startIcon={<DeleteIcon />}
+                    onClick={handleDelete}
+                    className="delete-button">
+                </Button>
         </div>
 
     )

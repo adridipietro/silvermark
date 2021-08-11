@@ -1,22 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show destroy ]
 
-  # GET /users or /users.json
-  def index
-    users = User.all
   
-    render json: UserSerializer.new(users)
-  end
 
   # GET /users/1 or /users/1.json
   def show
-    render json: UserSerializer.new(user)
+    user = User.find(params[:id].to_i)
+    render json: UserSerializer.new(user).serializable_hash
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
 
   # POST /users or /users.json
   def create

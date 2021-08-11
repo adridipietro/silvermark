@@ -20,15 +20,28 @@ export default class Bookmarks extends Component {
     // "this" refers to the class component
 
     this.handleCreate = this.handleCreate.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
     }
     
-    /* handleEdit = () => {
-        <EditForm/>
+    editItem(bookmark) {
+
     }
 
-    handleDelete = () => {
-        console.log("hi")
-    } */
+    deleteItem(bookmark) {
+        {debugger}
+        fetch(`http://localhost:3000/bookmarks/${bookmark.id}`, {
+            method: "DELETE"
+        })
+        .then(() => {
+            let _bookmarks = this.state._bookmarks
+            var index = _bookmarks.indexOf(bookmark)
+            _bookmarks.splice(index, 1)
+            // splice: removing 1 element
+            this.setState({
+                bookmarks: _bookmarks
+            })
+        })
+    }
 
     
 
@@ -75,6 +88,8 @@ export default class Bookmarks extends Component {
             this.state.bookmarks.map(({attributes}) => <Bookmark key={attributes.id} {...attributes}/>)
         )
     }
+
+
     
 
     
@@ -85,7 +100,7 @@ export default class Bookmarks extends Component {
         return (
             <div className="bookmarks">
                 <BookmarkForm handleCreate={this.handleCreate} />
-                <Bookmark />
+                <Bookmark deleteItem={this.deleteItem}/>
                 {this.renderBookmarkCollection()}
                 
             </div>

@@ -6,7 +6,7 @@ class BookmarksController < ApplicationController
   # GET /bookmarks or /bookmarks.json
   def index
     bookmarks = Bookmark.all
-    render json: BookmarkSerializer.new(bookmarks)
+    render json: BookmarkSerializer.new(bookmarks).serializable_hash
   end
 
   # GET /bookmarks/1 or /bookmarks/1.json
