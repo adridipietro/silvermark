@@ -24,19 +24,38 @@ export default class Bookmarks extends Component {
     }
     
     editItem(bookmark) {
-
+        const updatedData = 
+        fetch(`http://localhost:3000/bookmarks/${bookmark.id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": 'application/json',
+                "Accepts": 'application/json'
+            },
+            body: JSON.stringify(updatedData) 
+            })
+        .then(resp => resp.json())
+        .then(json => {
+            alert("Successfully Updated")
+    
+        })
     }
+    
 
     deleteItem(bookmark) {
-        {debugger}
+        
         fetch(`http://localhost:3000/bookmarks/${bookmark.id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Content-Type": 'application/json',
+                "Accepts": 'application/json'
+            }
         })
         .then(() => {
             let _bookmarks = this.state._bookmarks
             var index = _bookmarks.indexOf(bookmark)
             _bookmarks.splice(index, 1)
             // splice: removing 1 element
+            alert("Succesfully Deleted")
             this.setState({
                 bookmarks: _bookmarks
             })
@@ -109,6 +128,6 @@ export default class Bookmarks extends Component {
         // iterating over the collection of bookmarks and returning a Bookmark grid item for each
 
     }
-    
+ 
 
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CategoryForm from './CategoryForm'
+import CategoryCard from './CategoryCard'
 
 const Categories = (props)  => {
     const [categories, setCategories] = useState([])
@@ -28,7 +29,8 @@ const Categories = (props)  => {
     }, [categories.length])
 
     const categoryList = categories.map(({attributes}) => {
-        return (<li key={attributes.id}>{attributes.name}</li>)
+        return <CategoryCard key={attributes.id} {...attributes}/>
+
     })
 
     const handleSubmit = (e) => {
@@ -49,6 +51,10 @@ const Categories = (props)  => {
                 categories: json
             })
         })
+    }
+
+    const deleteItem = (bookmark) => {
+        
     }
 
     return (

@@ -1,6 +1,8 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 
 export default class BookmarkForm extends React.Component {
     constructor(props) {
@@ -10,7 +12,8 @@ export default class BookmarkForm extends React.Component {
             description: '',
             web_url: '',
             favorite: false,
-            category_id: null
+            category_id: null,
+            categories: []
     
         }
         this.handleChange = this.handleChange.bind(this)
@@ -76,6 +79,12 @@ export default class BookmarkForm extends React.Component {
                 <TextField id="headline-input" type="text" name="bookmark[headline]"  defaultValue={this.state.headline} placeholder="headline" onChange={this.handleChange}/><br></br>
                 <TextField id="description-input" type="text" name="description"  defaultValue={this.state.description} placeholder="description" onChange={this.handleChange}/><br></br>
                 <TextField id="weburl-input" type="text" name="web-url" defaultValue={this.state.web_url} placeholder="url" onChange={this.handleChange}/><br></br>
+                <Select id="category-input" placeholder="Category Select"  onChange={this.handleChange} >
+                    {this.state.categories.map(category => {
+                        <MenuItem key={this.state.category_id} {...category}>{this.state.category_id.name} </MenuItem>
+                    })}
+                    
+                </Select><br></br>
                 <Button type="submit" className="submit-button" >Submit</Button><br></br>
             </form>
         )

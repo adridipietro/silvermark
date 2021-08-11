@@ -8,7 +8,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite"
 
 function Bookmark(props) {
     const handleEdit= (e) => {
-        console.log('edit')
+        <EditForm />
+        //props.editItem(props.bookmark)
     }
 
     const handleDelete = (e) => {
@@ -27,29 +28,32 @@ function Bookmark(props) {
                 <p className="bookmark-description">{props.description}</p>
                 <p className="bookmark-web-url" >{props.web_url}</p>
                 <Button 
+                    id={props.id}
                     variant="contained"
                     color="secondary"
                     size="small"
                     startIcon={<FavoriteIcon />}
                     onClick={handleFavorite}
                     className="favorite-button" >
-                </Button>
+                </Button><br></br>
                 <Button 
+                    id={props.id}
                     variant="contained"
                     color="secondary"
                     size="small"
                     startIcon={<EditIcon />}
                     onClick={handleEdit}
                     className="edit-button" >
-                </Button>
+                </Button><br></br>
                 <Button
+                    id={props.id}
                     variant="contained"
                     color="secondary"
                     size="small"
                     startIcon={<DeleteIcon />}
                     onClick={handleDelete}
                     className="delete-button">
-                </Button>
+                </Button><br></br>
         </div>
 
     )
