@@ -26,10 +26,32 @@ const Categories = (props)  => {
         // 3. componentDidMount is called
         // 4. once request finishes, setState() is called
         // 5. bookmark property is filled with categories from backend
-    }, [categories.length])
+    }, [])
 
+    
+
+    const deleteCategory = (category) => {
+        fetch(`http://localhost:3000/categories/${category.id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": 'application/json',
+                "Accepts": 'application/json'
+            }
+        })
+        .then(() => {
+            let _categories = this.state.categories
+            var index = _categories.indexOf(category)
+            categories.splice(index, 1)
+            // splice: removing 1 element
+            alert("Succesfully Deleted")
+            this.setState({
+                categories: _categories
+            })
+        })
+    }
+    
     const categoryList = categories.map(({attributes}) => {
-        return <CategoryCard key={attributes.id} {...attributes}/>
+        return <CategoryCard key={attributes.id} {...attributes} deleteCategory={deleteCategory}/>
 
     })
 
@@ -53,9 +75,6 @@ const Categories = (props)  => {
         })
     }
 
-    const deleteItem = (bookmark) => {
-        
-    }
 
     return (
         <div>

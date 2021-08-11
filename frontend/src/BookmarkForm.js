@@ -39,10 +39,10 @@ export default class BookmarkForm extends React.Component {
         }
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
-        .then(json => this.props.handleCreate(json.data))
+        .then(json => this.props.handleCreate(json))
     }
 
-    handleSubmit(event) {
+    /* handleSubmit(event) {
         event.preventDefault()
         this.formSubmit(event.target)
     }
@@ -60,7 +60,7 @@ export default class BookmarkForm extends React.Component {
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
         .then(json => this.props.handleCreate(json))
-    }
+    } */
 
     
 

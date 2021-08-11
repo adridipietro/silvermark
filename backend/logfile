@@ -5,3 +5,4 @@
 2021-08-10 13:33:27.540 EDT [48249] LOG:  database system was shut down at 2021-08-10 13:32:33 EDT
 2021-08-10 13:33:27.544 EDT [48248] LOG:  database system is ready to accept connections
 2021-08-10 13:33:43.199 EDT [48259] FATAL:  database "backend_development" does not exist
+2021-08-11 05:31:23.750 EDT [48254] LOG:  stats_timestamp 2021-08-11 05:31:23.83459-04 is later than collector's time 2021-08-11 05:31:23.74072-04 for database 13711

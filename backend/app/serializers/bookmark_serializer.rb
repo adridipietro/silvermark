@@ -1,6 +1,6 @@
 class BookmarkSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :headline, :web_url, :description, :favorite
+  attributes :id, :headline, :web_url, :description, :favorite, :category_id
 
   belongs_to :category
 

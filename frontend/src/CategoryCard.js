@@ -6,7 +6,7 @@ export default function CategoryCard(props) {
 
 
     const handleDelete = (e) => {
-        props.deleteItem(props.category)
+        props.deleteCategory(props.category)
     
     }
 

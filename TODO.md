@@ -16,5 +16,11 @@ AUGUST 5
 
 AUGUST 6 
 - create category form [x]
-- finish new bookmark form []
+- finish new bookmark form [x]
 
+
+
+11 AUGUST
+- render category select []
+- render edit + update functionality []
+- 

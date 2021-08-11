@@ -4,7 +4,7 @@ import Bookmark from './Bookmark'
 export default function EditForm(props) {
 
     const handleSubmit = (e) => {
-        console.log("hi")
+        console.log("edit")
     }
     return (
         <form className="edit-bookmark-form" onSubmit={this.handleSubmit}>

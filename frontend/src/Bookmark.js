@@ -12,8 +12,9 @@ function Bookmark(props) {
         //props.editItem(props.bookmark)
     }
 
-    const handleDelete = (e) => {
-        props.deleteItem(props.bookmark)
+    const handleDelete = () => {
+        debugger
+       props.deleteItem(props.id)
     
     }
 

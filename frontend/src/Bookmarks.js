@@ -19,13 +19,18 @@ export default class Bookmarks extends Component {
     // binding in the constructor
     // "this" refers to the class component
 
-    this.handleCreate = this.handleCreate.bind(this)
-    this.deleteItem = this.deleteItem.bind(this)
-    }
+        this.handleCreate = this.handleCreate.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
     
-    editItem(bookmark) {
+        console.log(this)
+
+    }
+
+    
+    
+    editItem(e) {
         const updatedData = 
-        fetch(`http://localhost:3000/bookmarks/${bookmark.id}`, {
+        fetch(`http://localhost:3000/bookmarks/${e.target.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": 'application/json',
@@ -41,9 +46,10 @@ export default class Bookmarks extends Component {
     }
     
 
-    deleteItem(bookmark) {
-        
-        fetch(`http://localhost:3000/bookmarks/${bookmark.id}`, {
+    deleteItem(id) {
+        //debugger
+        debugger
+        fetch(`http://localhost:3000/bookmarks/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
@@ -51,10 +57,10 @@ export default class Bookmarks extends Component {
             }
         })
         .then(() => {
-            let _bookmarks = this.state._bookmarks
-            var index = _bookmarks.indexOf(bookmark)
+            let _bookmarks = [...this.state.bookmarks]
+            let index = _bookmarks.indexOf(id)
             _bookmarks.splice(index, 1)
-            // splice: removing 1 element
+            // splice: takes collection and then number of removed items; removing 1 element
             alert("Succesfully Deleted")
             this.setState({
                 bookmarks: _bookmarks
@@ -71,10 +77,9 @@ export default class Bookmarks extends Component {
         fetch('http://localhost:3000/bookmarks')
         .then(response => response.json())
         .then(json => {
-            this.setState({ 
-                bookmarks: json.data
+            this.setState({ bookmarks: json.data})
                 // takes the key "bookmarks" and updates its value with json object from backend
-            })
+            
 
             // function .setState() triggers a new render
             // we use "this" bc we are inside a class component 
@@ -103,8 +108,9 @@ export default class Bookmarks extends Component {
     }
 
     renderBookmarkCollection(){
+        //debugger
         return (
-            this.state.bookmarks.map(({attributes}) => <Bookmark key={attributes.id} {...attributes}/>)
+           this.state.bookmarks.map(({attributes}) => <Bookmark key={attributes.id} {...attributes} deleteItem={this.deleteItem}/>)
         )
     }
 
@@ -119,7 +125,6 @@ export default class Bookmarks extends Component {
         return (
             <div className="bookmarks">
                 <BookmarkForm handleCreate={this.handleCreate} />
-                <Bookmark deleteItem={this.deleteItem}/>
                 {this.renderBookmarkCollection()}
                 
             </div>
