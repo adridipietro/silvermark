@@ -3,26 +3,51 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 export default class Signup extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {value: ''}
+  constructor(props){
+    super(props)
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
     }
+}
 
-    handleSubmit(e){
-        e.preventDefault()
+handleSubmit(e){
+    // prevent default
+    // clear the form
+    // assign the state to var
+    // fetch call to api
+    // method, headers, body
+    e.preventDefault()
 
+    const data = { ...this.state }
+    const dataObject = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json"
+        },
+        body: JSON.stringify(data)
     }
+    fetch('http://localhost:3000/users', dataObject)
+    .then(response => response.json())
+    .then(json => {debugger})
+}
 
-    handleChange(e) {
-        this.setState({value: e.target.value})
-    }
+
+
+handleChange(e) {
+  const eName = e.target.name
+  const eValue = e.target.value
+  this.setState({ [eName]: eValue})
+}
 
     render(){
 
         
 
         return (
-            <div id="signup-form">
+            <div className="signup-form">
               <h1>Signup</h1>
               <form onSubmit={this.handleSubmit}>
                 <div>

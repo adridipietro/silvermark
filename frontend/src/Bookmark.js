@@ -65,8 +65,7 @@ Bookmark.defaultProps = {
     headline: 'Unknown',
     description: '',
     web_url: 'Unknown',
-    favorite: false, 
-    keywords: []
+    favorite: false
 }
     
     
