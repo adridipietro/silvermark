@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // fetching a list of our bookmarks from our api
-import BookmarkCard from './components/BookmarkCard'
+import BookmarkCard from './BookmarkCard'
 import BookmarkForm from './BookmarkForm'
 import CategoryForm from './CategoryForm'
 
