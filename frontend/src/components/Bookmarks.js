@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // fetching a list of our bookmarks from our api
 import BookmarkSearch from './BookmarkSearch'
 import Bookmark from './Bookmark'
-import EditForm from './EditForm'
+import EditForm from '../EditForm'
 import BookmarkForm from './BookmarkForm'
 import CategoryForm from './CategoryForm'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import BookmarkForm from './BookmarkForm'
+import BookmarkForm from './components/BookmarkForm'
 
 export default function EditForm(props) {
 
