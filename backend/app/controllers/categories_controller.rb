@@ -2,9 +2,9 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :destroy ]
   
   def index
-        categories = Category.all
+        @categories = Category.all
         
-        render json: CategorySerializer.new(categories).serialized_json
+        render json: @categories
   end
     
       # GET /categories/1 or /categories/1.json

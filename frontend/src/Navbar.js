@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-// NavLink updates brower URL and renders the Route Component
+// NavLink updates browser URL and renders the Route Component
 
 
 const link = {

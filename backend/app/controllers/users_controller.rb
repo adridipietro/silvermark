@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    render json: UserSerializer.new(user).serializable_hash
+    render json: @user
   end
 
 
@@ -27,13 +27,13 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    user.destroy
+    @user.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      user = User.find(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
