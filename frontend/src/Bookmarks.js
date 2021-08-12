@@ -113,7 +113,7 @@ export default class Bookmarks extends Component {
         fetch('http://localhost:3000/bookmarks')
         .then(response => response.json())
         .then(json => {
-            this.setState({ bookmarks: json.data})
+            this.setState({ bookmarks: json})
                 // takes the key "bookmarks" and updates its value with json object from backend
             
 
@@ -146,7 +146,7 @@ export default class Bookmarks extends Component {
     renderBookmarkCollection(){
         //debugger
         return (
-           this.state.bookmarks.map(({attributes}) => <Bookmark key={attributes.id} {...attributes} editItem={this.editItem}deleteItem={this.deleteItem} handleFavorite={this.handleFavorite}/>)
+           this.state.bookmarks.map(bookmark => <Bookmark key={bookmark.id} {...bookmark} editItem={this.editItem} deleteItem={this.deleteItem} handleFavorite={this.handleFavorite}/>)
         )
     }
 

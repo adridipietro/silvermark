@@ -12,7 +12,7 @@ const Categories = (props)  => {
         fetch(`http://localhost:3000/categories`)
         .then(response => response.json())
         .then(json => {
-            setCategories(json.data)
+            setCategories(json)
         })
 
     
@@ -48,8 +48,8 @@ const Categories = (props)  => {
         })
     }
     
-    const categoryList = categories.map(({attributes}) => {
-        return <CategoryCard key={attributes.id} {...attributes} deleteCategory={deleteCategory}/>
+    const categoryList = categories.map(category => {
+        return <CategoryCard key={category.id} {...category} deleteCategory={deleteCategory}/>
 
     })
 
@@ -67,7 +67,7 @@ const Categories = (props)  => {
         fetch(`http://localhost:3000/categories`, dataObject)
         .then(response => response.json())
         .then(json => {
-            setCategories(json.data)
+            setCategories(json)
         })
     }
 
