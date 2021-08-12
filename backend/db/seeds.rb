@@ -12,8 +12,8 @@
 users = User.create!([
     {
         name: "Adri",
-        email: "adriana@gmail.com",
-        password: "password!"
+        email: "mary@gmail.com",
+        password_digest: "password!"
     }
 ])
 
@@ -47,6 +47,13 @@ bookmarks = Bookmark.create([
         favorite: true,
         category_id: 3
 
+    },
+    {
+        headline: "Top 10 MTV Music Video's",
+        web_url: "www.mtv.com/top10", 
+        description: "Best music videos from the 90s",
+        favorite: false,
+        category_id: 3
     }
 ])
 
