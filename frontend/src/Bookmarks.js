@@ -161,9 +161,11 @@ export default class Bookmarks extends Component {
         // this is the same as "const bookmarks = this.state.bookmarks"
         console.log(this.state.bookmarks)
         return (
-            <div className="bookmarks">
+            <div className="bookmarks-container">
+                <br></br>
                 <BookmarkForm  handleCreate={this.handleCreate}/>
                 <CategoryForm  />
+                <br></br>
                 {this.renderBookmarkCollection()}
                 
             </div>

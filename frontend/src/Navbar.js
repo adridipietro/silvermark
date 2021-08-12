@@ -27,7 +27,7 @@ export default class Navbar extends Component {
                 background: 'black',
                 color: 'white'
                 }}
-            >Home</NavLink>
+            >HOME</NavLink>
             <NavLink
                 to="/login"
                 exact
@@ -37,7 +37,7 @@ export default class Navbar extends Component {
                 color: 'white'
                 }} 
                 
-            >Login</NavLink>
+            >LOGIN</NavLink>
             <NavLink
                 to="/signup"
                 exact
@@ -46,7 +46,7 @@ export default class Navbar extends Component {
                 background: 'black',
                 color: 'white'
                 }}
-            >Signup</NavLink>
+            >SIGNUP</NavLink>
             <NavLink
                 to="/categories"
                 exact
@@ -55,7 +55,7 @@ export default class Navbar extends Component {
                 background: 'black',
                 color: 'white'
                 }}
-            >Categories</NavLink>
+            >CATEGORIES</NavLink>
             </div>
             
         )

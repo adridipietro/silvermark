@@ -12,7 +12,7 @@ export default class Signup extends React.Component {
     }
 }
 
-handleSubmit(e){
+handleSubmit = (e) =>{
     // prevent default
     // clear the form
     // assign the state to var
@@ -35,29 +35,36 @@ handleSubmit(e){
 }
 
 
-
-handleChange(e) {
-  const eName = e.target.name
-  const eValue = e.target.value
-  this.setState({ [eName]: eValue})
+redirect = () => {
+    this.props.history.push("/")
 }
 
-    render(){
 
-        
 
+handleChange = (e) => {
+  const { name, value } = e.target
+  this.setState({
+      [name]: value,
+  })
+}
+
+
+
+  render(){
+
+    const { email, password, name } = this.state
         return (
             <div className="signup-form">
               <h1>Signup</h1>
               <form onSubmit={this.handleSubmit}>
                 <div>
-                  <TextField type="text" name="name" placeholder="Name" onChange={this.handleChange}/>
+                  <TextField type="text" name="name" placeholder="Name" onChange={this.handleChange} value={name}/>
                 </div>
                 <div>
-                  <TextField type="text" name="email" placeholder="Email" onChange={this.handleChange}/>
+                  <TextField type="text" name="email" placeholder="Email" onChange={this.handleChange} value={email}/>
                 </div>
                 <div>
-                  <TextField type="password" name="password" placeholder="Password" onChange={this.handleChange} />
+                  <TextField type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} />
                 </div><br></br>
                 <Button type="submit">Signup</Button>
               </form>
