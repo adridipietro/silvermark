@@ -21,6 +21,8 @@ export default class Bookmarks extends Component {
 
         this.handleCreate = this.handleCreate.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
+        this.editItem = this.editItem.bind(this)
+        this.handleFavorite = this.handleFavorite.bind(this)
     
         console.log(this)
 
@@ -28,13 +30,14 @@ export default class Bookmarks extends Component {
 
     
     
-    editItem(id) {
+    editItem = (id) => {
+        let _bookmarks = [...this.state.bookmarks]
+        let bookmark = _bookmarks.find(bookmark => bookmark.id === id)
         const updatedData = {
-            headline: this.props.headline,
-            description: this.props.description,
-            web_url: this.props.web_url,
-            category_id: this.props.category_id
-
+            headline: bookmark.headline,
+            description: bookmark.description,
+            web_url: bookmark.description,
+            category_id: bookmark.category_id
         }
 
         fetch(`http://localhost:3000/bookmarks/${id}`, {
@@ -57,7 +60,7 @@ export default class Bookmarks extends Component {
     }
     
 
-    deleteItem(id) {
+    deleteItem = (id) => {
         fetch(`http://localhost:3000/bookmarks/${id}`, {
             method: "DELETE",
             headers: {
@@ -77,7 +80,7 @@ export default class Bookmarks extends Component {
         })
     }
 
-    handleFavorite(id) {
+    handleFavorite = (id) => {
         let _bookmarks = [...this.state.bookmarks]
         let bookmark = _bookmarks.find(bookmark => bookmark.id === id)
         const data = {
