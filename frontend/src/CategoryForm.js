@@ -44,8 +44,7 @@ export default class CategoryForm extends React.Component {
     render() {
         return (
             <form className="category-form" onSubmit={this.handleSubmit}>
-                <h2>New Category</h2>
-                <TextField type="text" name="category-name" placeholder="name" defaultValue={this.state.name} onChange={this.handleChange}/>
+                <TextField type="text" name="category-name" placeholder="new category" defaultValue={this.state.name} onChange={this.handleChange}/>
                 <Button type="submit" className="submit-button">Submit</Button>
             </form>
         )

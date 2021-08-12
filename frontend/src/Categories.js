@@ -67,7 +67,6 @@ const Categories = (props)  => {
 
     return (
         <div>
-            
             {categoryList}
         </div>
     )

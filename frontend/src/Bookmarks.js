@@ -135,6 +135,7 @@ export default class Bookmarks extends Component {
 
     handleCreate(createdBookmark) {
         let _bookmarks = this.state.bookmarks
+        debugger
         _bookmarks.unshift(createdBookmark)
         //unshift adds to beginning
         this.setState({
@@ -161,7 +162,7 @@ export default class Bookmarks extends Component {
         console.log(this.state.bookmarks)
         return (
             <div className="bookmarks">
-                <BookmarkForm handleCreate={this.handleCreate} />
+                <BookmarkForm  handleCreate={this.handleCreate}/>
                 <CategoryForm  />
                 {this.renderBookmarkCollection()}
                 

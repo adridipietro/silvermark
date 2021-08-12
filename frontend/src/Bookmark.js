@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import EditForm from './EditForm'
 import Button from "@material-ui/core/Button"
 import DeleteIcon from "@material-ui/icons/Delete"
@@ -6,22 +6,26 @@ import EditIcon from "@material-ui/icons/Edit"
 import FavoriteIcon from "@material-ui/icons/Favorite"
 
 
-function Bookmark(props) {
+const Bookmark = (props) => {
+    const [favorite, setFavorite] = useState(props.favorite)
+    
+    const handleFavorite = (favorite) => {
+        setFavorite(prevState => !prevState)
+    }
+
+
+
     const handleEdit= () => {
         <EditForm />
         props.editItem(props.id)
     }
 
     const handleDelete = () => {
-        debugger
        props.deleteItem(props.id)
     
     }
 
-    const handleFavorite= () => {
-        props.handleFavorite(props.id)
-    }
-
+   
 
     return (
         <div className="bookmark-card" id={`bookmark-${props.id}`}>
@@ -30,17 +34,12 @@ function Bookmark(props) {
                 <p className="bookmark-web-url" >{props.web_url}</p>
                 <Button 
                     id={props.id}
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    startIcon={<FavoriteIcon />}
                     onClick={handleFavorite}
-                    className="favorite-button" >
+                    className="favorite-button" 
+                    startIcon={<FavoriteIcon/>}>
                 </Button><br></br>
                 <Button 
                     id={props.id}
-                    variant="contained"
-                    color="secondary"
                     size="small"
                     startIcon={<EditIcon />}
                     onClick={handleEdit}
@@ -48,8 +47,6 @@ function Bookmark(props) {
                 </Button><br></br>
                 <Button
                     id={props.id}
-                    variant="contained"
-                    color="secondary"
                     size="small"
                     startIcon={<DeleteIcon />}
                     onClick={handleDelete}
@@ -62,12 +59,7 @@ function Bookmark(props) {
 
 }
 
-Bookmark.defaultProps = {
-    headline: 'Unknown',
-    description: 'Unknown',
-    web_url: 'Unknown',
-    favorite: false
-}
+
     
     
 

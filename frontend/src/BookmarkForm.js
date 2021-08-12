@@ -27,8 +27,13 @@ export default class BookmarkForm extends React.Component {
         // fetch call to api
         // method, headers, body
         e.preventDefault()
-
-        const data = [...this.state]
+        const { headline, web_url, description } = this.state
+        let data = {
+            headline: headline,
+            web_url: web_url,
+            description: description
+        }
+        
         const dataObject = {
             method: "POST",
             headers: {
@@ -40,15 +45,15 @@ export default class BookmarkForm extends React.Component {
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
         .then(json => this.props.handleCreate(json))
+        debugger
     }
 
     
 
     handleChange = (e) => {
-        const eName = e.target.name
-        const eValue = e.target.value
+        const { name, defaultValue } = e.target
         this.setState({
-            [eName]: eValue
+            [name]: defaultValue
         })
         // html name attribute as a key
         // uses the key to tell what part of state we are going to update
@@ -71,11 +76,12 @@ export default class BookmarkForm extends React.Component {
     
 
     render() {
+        const { headline, description, web_url} = this.state
         return (
-            <form className="bookmark-form" onSubmit={this.handleSubmit} handleCreate={this.handleCreate} >
-                <TextField id="headline-input" type="text" name="headline"   placeholder="headline" onChange={this.handleChange}/><br></br>
-                <TextField id="description-input" type="text" name="description"  placeholder="description" onChange={this.handleChange}/><br></br>
-                <TextField id="weburl-input" type="text" name="web-url"  placeholder="url" onChange={this.handleChange}/><br></br>
+            <form className="bookmark-form" onSubmit={this.handleSubmit}  >
+                <TextField id="headline-input" type="text" name="headline"   placeholder="headline" defaultValue={headline} onChange={this.handleChange}/><br></br>
+                <TextField id="description-input" type="text" name="description"  placeholder="description"  defaultValue={description} onChange={this.handleChange}/><br></br>
+                <TextField id="web-url-input" type="text" name="web-url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
                 
                 <Button type="submit" className="submit-button" >Submit</Button><br></br>
             </form>
