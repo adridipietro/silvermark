@@ -53,28 +53,21 @@ const Categories = (props)  => {
 
     })
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        const data = { ...this.state }
-        const dataObject = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(data)
-        }
-        fetch(`http://localhost:3000/categories`, dataObject)
-        .then(response => response.json())
-        .then(json => {
-            setCategories(json)
-        })
+    const handleCreate = (createdCategory) => {
+        let _categories = [categories]
+        _categories.unshift(createdCategory)
+        //unshift adds to beginning
+        setCategories(_categories)
+            // updating the key "bookmarks" with the createdBookmark
+        // existing state, adding newly created Bookmark and updating the state
     }
+
+    
 
 
     return (
         <div>
-            <CategoryForm onSubmit={handleSubmit}/>
+            
             {categoryList}
         </div>
     )

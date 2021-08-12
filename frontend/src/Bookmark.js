@@ -64,7 +64,7 @@ function Bookmark(props) {
 
 Bookmark.defaultProps = {
     headline: 'Unknown',
-    description: '',
+    description: 'Unknown',
     web_url: 'Unknown',
     favorite: false
 }

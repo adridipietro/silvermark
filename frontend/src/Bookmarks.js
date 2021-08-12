@@ -4,6 +4,7 @@ import BookmarkSearch from './BookmarkSearch'
 import Bookmark from './Bookmark'
 import EditForm from './EditForm'
 import BookmarkForm from './BookmarkForm'
+import CategoryForm from './CategoryForm'
 
 
 
@@ -161,6 +162,7 @@ export default class Bookmarks extends Component {
         return (
             <div className="bookmarks">
                 <BookmarkForm handleCreate={this.handleCreate} />
+                <CategoryForm  />
                 {this.renderBookmarkCollection()}
                 
             </div>

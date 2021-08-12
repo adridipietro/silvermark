@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css'
 import Login from './Login'
 import Signup from './Signup'
-
+import Sidebar from './Sidebar/Sidebar'
 import CategoryForm from './CategoryForm'
 import BookmarkForm from './BookmarkForm'
 import Bookmarks from './Bookmarks'
@@ -27,6 +27,7 @@ function App() {
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/" component={Bookmarks} />
       </Router>
+      <Sidebar/>
     </div>
   ) 
   // we pass in a component to be rendered at the exact path
