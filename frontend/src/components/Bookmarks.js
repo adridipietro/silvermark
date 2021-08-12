@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 // fetching a list of our bookmarks from our api
-import BookmarkSearch from './BookmarkSearch'
-import Bookmark from './Bookmark'
-import EditForm from '../EditForm'
+import BookmarkCard from './components/BookmarkCard'
 import BookmarkForm from './BookmarkForm'
 import CategoryForm from './CategoryForm'
 
@@ -148,7 +146,7 @@ export default class Bookmarks extends Component {
     renderBookmarkCollection(){
         //debugger
         return (
-           this.state.bookmarks.map(bookmark => <Bookmark key={bookmark.id} {...bookmark} editItem={this.editItem} deleteItem={this.deleteItem} handleFavorite={this.handleFavorite}/>)
+           this.state.bookmarks.map(bookmark => <BookmarkCard key={bookmark.id} {...bookmark} editItem={this.editItem} deleteItem={this.deleteItem} handleFavorite={this.handleFavorite}/>)
         )
     }
 

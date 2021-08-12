@@ -6,7 +6,7 @@ import EditIcon from "@material-ui/icons/Edit"
 import FavoriteIcon from "@material-ui/icons/Favorite"
 
 
-const Bookmark = (props) => {
+const BookmarkCard = (props) => {
     const [favorite, setFavorite] = useState(props.favorite)
     
     const handleFavorite = (favorite) => {
@@ -67,4 +67,4 @@ const Bookmark = (props) => {
 
 
     
-export default Bookmark
+export default BookmarkCard
