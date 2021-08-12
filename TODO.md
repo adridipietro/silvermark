@@ -23,4 +23,4 @@ AUGUST 6
 11 AUGUST
 - render category select []
 - render edit + update functionality []
-- 
+- fix delete functionality [x]

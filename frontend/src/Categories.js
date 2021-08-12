@@ -23,8 +23,8 @@ const Categories = (props)  => {
 
         // 1. component begins to get mounted to DOM
         // 2. initial render happens (empty array of categories)
-        // 3. componentDidMount is called
-        // 4. once request finishes, setState() is called
+        // 3. useEffect() is called
+        // 4. once request finishes, setCategories() is called
         // 5. bookmark property is filled with categories from backend
     }, [])
 
@@ -39,14 +39,12 @@ const Categories = (props)  => {
             }
         })
         .then(() => {
-            let _categories = this.state.categories
+            let _categories = [categories]
             var index = _categories.indexOf(category)
-            categories.splice(index, 1)
+            _categories.splice(index, 1)
             // splice: removing 1 element
             alert("Succesfully Deleted")
-            this.setState({
-                categories: _categories
-            })
+            setCategories(_categories)
         })
     }
     
@@ -69,9 +67,7 @@ const Categories = (props)  => {
         fetch(`http://localhost:3000/categories`, dataObject)
         .then(response => response.json())
         .then(json => {
-            this.setState({
-                categories: json
-            })
+            setCategories(json.data)
         })
     }
 

@@ -7,9 +7,9 @@ import FavoriteIcon from "@material-ui/icons/Favorite"
 
 
 function Bookmark(props) {
-    const handleEdit= (e) => {
+    const handleEdit= () => {
         <EditForm />
-        //props.editItem(props.bookmark)
+        props.editItem(props.id)
     }
 
     const handleDelete = () => {
@@ -18,8 +18,8 @@ function Bookmark(props) {
     
     }
 
-    const handleFavorite= (e) => {
-        console.log('favorite')
+    const handleFavorite= () => {
+        props.handleFavorite(props.id)
     }
 
 

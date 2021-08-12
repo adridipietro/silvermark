@@ -28,9 +28,16 @@ export default class Bookmarks extends Component {
 
     
     
-    editItem(e) {
-        const updatedData = 
-        fetch(`http://localhost:3000/bookmarks/${e.target.id}`, {
+    editItem(id) {
+        const updatedData = {
+            headline: this.props.headline,
+            description: this.props.description,
+            web_url: this.props.web_url,
+            category_id: this.props.category_id
+
+        }
+
+        fetch(`http://localhost:3000/bookmarks/${id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": 'application/json',
@@ -39,16 +46,18 @@ export default class Bookmarks extends Component {
             body: JSON.stringify(updatedData) 
             })
         .then(resp => resp.json())
-        .then(json => {
+        .then(() => {
+            let _bookmarks = [...this.state.bookmarks]
             alert("Successfully Updated")
+            this.setState({
+                bookmarks: _bookmarks
+            })
     
         })
     }
     
 
     deleteItem(id) {
-        //debugger
-        debugger
         fetch(`http://localhost:3000/bookmarks/${id}`, {
             method: "DELETE",
             headers: {
@@ -64,6 +73,30 @@ export default class Bookmarks extends Component {
             alert("Succesfully Deleted")
             this.setState({
                 bookmarks: _bookmarks
+            })
+        })
+    }
+
+    handleFavorite(id) {
+        let _bookmarks = [...this.state.bookmarks]
+        let bookmark = _bookmarks.find(bookmark => bookmark.id === id)
+        const data = {
+            favorite: bookmark.favorite
+        }
+        const configObject = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }
+
+        fetch(`http://localhost:3000/bookmarks/${id}`, configObject)
+        .then(response => response.json())
+        .then(json => {
+            this.setState(prevState => {
+                const idx = prevState.bookmarks.findIndex(bookmark => bookmark.id === json.id)
+                return {...prevState.bookmarks.slice(0, idx), json}
             })
         })
     }
@@ -110,7 +143,7 @@ export default class Bookmarks extends Component {
     renderBookmarkCollection(){
         //debugger
         return (
-           this.state.bookmarks.map(({attributes}) => <Bookmark key={attributes.id} {...attributes} deleteItem={this.deleteItem}/>)
+           this.state.bookmarks.map(({attributes}) => <Bookmark key={attributes.id} {...attributes} editItem={this.editItem}deleteItem={this.deleteItem} handleFavorite={this.handleFavorite}/>)
         )
     }
 

@@ -71,6 +71,21 @@ export default class BookmarkForm extends React.Component {
         // html name attribute as a key
         // uses the key to tell what part of state we are going to update
     }
+
+    fetchCategoriesForSelect = (e) => {
+        if (e.target.matches('#category-input')) {
+            fetch('http://localhost:3000/categories')
+                .then(resp => resp.json())
+                .then(json => {
+                    this.setState({ categories: json.data})
+                })
+        }   
+
+    }
+
+
+
+      
     
 
     render() {
@@ -80,8 +95,8 @@ export default class BookmarkForm extends React.Component {
                 <TextField id="description-input" type="text" name="description"  defaultValue={this.state.description} placeholder="description" onChange={this.handleChange}/><br></br>
                 <TextField id="weburl-input" type="text" name="web-url" defaultValue={this.state.web_url} placeholder="url" onChange={this.handleChange}/><br></br>
                 <Select id="category-input" placeholder="Category Select"  onChange={this.handleChange} >
-                    {this.state.categories.map(category => {
-                        <MenuItem key={this.state.category_id} {...category}>{this.state.category_id.name} </MenuItem>
+                    {this.state.categories.map(({attributes}) => {
+                        <MenuItem key={attributes.id} {...attributes}>{attributes.name} </MenuItem>
                     })}
                     
                 </Select><br></br>
