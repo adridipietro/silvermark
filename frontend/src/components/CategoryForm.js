@@ -25,7 +25,7 @@ export default class CategoryForm extends React.Component {
         }
         fetch(`http://localhost:3000/categories`, dataObject)
         .then(response => response.json())
-        .then(json => this.props.handleCreate(json))
+        .then(json => this.props.createCategory(json))
     
     }
 
@@ -34,7 +34,7 @@ export default class CategoryForm extends React.Component {
         // clear form
         // add to page, update state
         e.preventDefault()
-        this.props.handleCreate({...this.state})
+        this.props.createCategory({...this.state})
         this.setState({
             name: ''
         })

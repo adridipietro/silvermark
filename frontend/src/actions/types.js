@@ -3,7 +3,7 @@
 export const CREATE_USER = 'CREATE_USER'
 export const CURRENT_USER = 'CURRENT_USER'
 export const GET_USERS = 'GET_USERS'
-// delete user?
+
 
 export const CREATE_BOOKMARK = 'CREATE_BOOKMARK'
 export const FAVORITE_BOOKMARK = 'FAVORITE_BOOKMARK'

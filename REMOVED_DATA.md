@@ -32,6 +32,19 @@
       
     }, []) */
 
+     const handleCreate = (createdCategory) => {
+        let _categories = [...categories]
+        _categories.unshift(createdCategory)
+        return _categories
+       // setCategories(_categories)
+        
+       // updating the key "categories" with the createdCategory
+        // existing state, adding newly created category and updating the state
+    }
+
+
+
+
 //bookmarks.js
 
     this.handleCreate = this.handleCreate.bind(this)
@@ -135,4 +148,15 @@ componentDidMount() {
         // 4. once request finishes, setState() is called
         // 5. bookmark property is filled with bookmarks from backend
         console.log(this)
+    }
+
+    const handleCreate = (createdBookmark) => {
+        let _bookmarks = [...bookmarks]
+        //debugger
+        _bookmarks.unshift(createdBookmark)
+        //unshift adds to beginning
+        return _bookmarks
+        
+        // updating the key "bookmarks" with the createdBookmark
+        // existing state, adding newly created Bookmark and updating the state
     }

@@ -31,7 +31,7 @@ export default class BookmarkForm extends React.Component {
         }
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
-        .then(json => this.props.handleCreate(json))
+        .then(json => this.props.createBookmark(json))
         //debugger
     }
 
@@ -42,7 +42,7 @@ export default class BookmarkForm extends React.Component {
         // clear form
         // add to page, update state
         e.preventDefault()
-        this.props.handleCreate({...this.state})
+        this.props.createBookmark({...this.state})
         this.setState({
             headline: '',
             web_url: '',
