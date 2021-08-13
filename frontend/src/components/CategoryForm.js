@@ -4,47 +4,47 @@ import Button from '@material-ui/core/Button'
 
 export default class CategoryForm extends React.Component {
     state = {
-        name: '',
-        bookmarks: []
+        name: ''
     }
-
-
-
-    
 
     handleChange = (e) => {
-        const eName = e.target.name
-        const eValue = e.target.value
-        this.setState({
-            [eName]: eValue
-        })
+        this.setState({[e.target.name]: e.target.value})
+        // html name attribute as a key
+        // uses the key to tell what part of state we are going to update
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        const data = { ...this.state }
+    submittedCategory = (category) => {
         const dataObject = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(category)
         }
         fetch(`http://localhost:3000/categories`, dataObject)
         .then(response => response.json())
-        .then(json => {
-            this.setState({
-                categories: json
-            })
+        .then(json => this.props.handleCreate(json))
+    
+    }
+
+    handleSubmit = (e) => {
+         // prevent default
+        // clear form
+        // add to page, update state
+        e.preventDefault()
+        this.props.handleCreate({...this.state})
+        this.setState({
+            name: ''
         })
     }
 
     
     render() {
+        const { name } = this.state
         return (
             <form className="category-form" onSubmit={this.handleSubmit}>
-                <TextField type="text" name="category-name" placeholder="new category" defaultValue={this.state.name} onChange={this.handleChange}/>
+                <TextField id="name-input" type="text" name="name" placeholder="new category" defaultValue={name} onChange={this.handleChange}/>
                 <Button type="submit" className="submit-button">Submit</Button>
             </form>
         )

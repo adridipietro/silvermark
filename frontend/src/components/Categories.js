@@ -28,10 +28,18 @@ const Categories = (props)  => {
         // 5. bookmark property is filled with categories from backend
     }, [])
 
+    const handleCreate = (createdCategory) => {
+        let _categories = [...categories]
+        _categories.unshift(createdCategory)
+        //unshift adds to beginning
+        setCategories(_categories)
+            // updating the key "categories" with the createdCategory
+        // existing state, adding newly created category and updating the state
+    }
     
 
-    const deleteCategory = (category) => {
-        fetch(`http://localhost:3000/categories/${category.id}`, {
+    const deleteCategory = (id) => {
+        fetch(`http://localhost:3000/categories/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
@@ -40,7 +48,7 @@ const Categories = (props)  => {
         })
         .then(() => {
             let _categories = [categories]
-            var index = _categories.indexOf(category)
+            var index = _categories.indexOf(id)
             _categories.splice(index, 1)
             // splice: removing 1 element
             alert("Succesfully Deleted")
@@ -53,20 +61,12 @@ const Categories = (props)  => {
 
     })
 
-    const handleCreate = (createdCategory) => {
-        let _categories = [categories]
-        _categories.unshift(createdCategory)
-        //unshift adds to beginning
-        setCategories(_categories)
-            // updating the key "bookmarks" with the createdBookmark
-        // existing state, adding newly created Bookmark and updating the state
-    }
 
     
 
-
     return (
         <div>
+            <CategoryForm  handleCreate={handleCreate}/>
             {categoryList}
         </div>
     )

@@ -5,8 +5,8 @@ import DeleteIcon from "@material-ui/icons/Delete"
 export default function CategoryCard(props) {
 
 
-    const handleDelete = (e) => {
-        props.deleteCategory(props.category)
+    const handleDelete = () => {
+        props.deleteCategory(props.id)
     
     }
 

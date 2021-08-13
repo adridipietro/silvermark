@@ -162,7 +162,6 @@ export default class Bookmarks extends Component {
             <div className="bookmarks-container">
                 <br></br>
                 <BookmarkForm  handleCreate={this.handleCreate}/>
-                <CategoryForm  />
                 <br></br>
                 {this.renderBookmarkCollection()}
                 

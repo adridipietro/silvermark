@@ -5,9 +5,8 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
 export default class BookmarkForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+    
+    state = {
             headline: '',
             description: '',
             web_url: '',
@@ -15,65 +14,61 @@ export default class BookmarkForm extends React.Component {
             category_id: null,
             categories: []
     
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit = (e) => {
-        // prevent default
-        // clear the form
-        // assign the state to var
+
+    submittedBookmark = (bookmark) => {
         // fetch call to api
         // method, headers, body
-        e.preventDefault()
-        const { headline, web_url, description } = this.state
-        let data = {
-            headline: headline,
-            web_url: web_url,
-            description: description
-        }
-        
         const dataObject = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(bookmark)
         }
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
         .then(json => this.props.handleCreate(json))
-        debugger
+        //debugger
+    }
+
+    handleSubmit = (e) => {
+        // prevent default
+        // clear form
+        // add to page, update state
+        e.preventDefault()
+        this.props.handleCreate({...this.state})
+        this.setState({
+            headline: '',
+            web_url: '',
+            description: '',
+            favorite: false
+
+        })
     }
 
     
 
     handleChange = (e) => {
-        const { name, defaultValue } = e.target
-        this.setState({
-            [name]: defaultValue
-        })
+        this.setState({[e.target.name]: e.target.value})
         // html name attribute as a key
         // uses the key to tell what part of state we are going to update
     }
 
-    fetchCategoriesForSelect = (e) => {
-        if (e.target.matches('#category-input')) {
+    fetchCategoriesForSelect = () => {
             fetch('http://localhost:3000/categories')
                 .then(resp => resp.json())
                 .then(json => {
                     this.setState({ categories: json})
+                    
                 })
-        }   
 
     }
 
 
 
-      
-    
 
     render() {
         const { headline, description, web_url} = this.state
@@ -81,8 +76,10 @@ export default class BookmarkForm extends React.Component {
             <form className="bookmark-form" onSubmit={this.handleSubmit}  >
                 <TextField id="headline-input" type="text" name="headline"   placeholder="headline" defaultValue={headline} onChange={this.handleChange}/><br></br>
                 <TextField id="description-input" type="text" name="description"  placeholder="description"  defaultValue={description} onChange={this.handleChange}/><br></br>
-                <TextField id="web-url-input" type="text" name="web-url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
-                
+                <TextField id="web-url-input" type="text" name="web_url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
+                <Select id="category-input" fetchCategoriesForSelect={this.fetchCategoriesForSelect}>
+                    {this.state.categories.map(category => <option key={category.id}>{category.name}</option>)}
+                </Select><br></br>
                 <Button type="submit" className="submit-button" >Submit</Button><br></br>
             </form>
         )

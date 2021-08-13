@@ -49,6 +49,15 @@ export default class Navbar extends Component {
                 color: 'white'
                 }}
             >SIGNUP</NavLink>
+            <NavLink
+                to="/categories"
+                exact
+                style={link}
+                activeStyle={{
+                background: 'black',
+                color: 'white'
+                }}
+            >CATEGORIES</NavLink>
             <select
                 to='/categories'
                 exact
