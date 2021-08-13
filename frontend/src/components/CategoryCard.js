@@ -14,14 +14,13 @@ export default function CategoryCard(props) {
     return (
         <div className="category-card" id={`category-${props.id}`}>
             <h2 className="category-name">{props.name}</h2>
-                <ul>
-                    bookmarks go here
+                <ul className="category-bookmark-list">
+                    {props.bookmarks.map(bookmark => 
+                        <p key={bookmark.id}>{bookmark.headline}</p>
+                    )}
                 </ul>
                 <Button
                     id={props.id}
-                    variant="contained"
-                    color="secondary"
-                    size="small"
                     startIcon={<DeleteIcon />}
                     onClick={handleDelete}
                     className="delete-button">

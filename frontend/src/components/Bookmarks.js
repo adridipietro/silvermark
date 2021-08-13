@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 // fetching a list of our bookmarks from our api
 import BookmarkCard from './BookmarkCard'
 import BookmarkForm from './BookmarkForm'
-import CategoryForm from './CategoryForm'
-
-
-
+//import CategoryForm from './CategoryForm'
 
 
 export default class Bookmarks extends Component {
@@ -23,13 +20,13 @@ export default class Bookmarks extends Component {
         this.editItem = this.editItem.bind(this)
         this.handleFavorite = this.handleFavorite.bind(this)
     
-        console.log(this)
+        //console.log(this)
 
     }
 
     
     
-    editItem = (id) => {
+    /* editItem = (id) => {
         let _bookmarks = [...this.state.bookmarks]
         let bookmark = _bookmarks.find(bookmark => bookmark.id === id)
         const updatedData = {
@@ -101,7 +98,7 @@ export default class Bookmarks extends Component {
                 return {...prevState.bookmarks.slice(0, idx), json}
             })
         })
-    }
+    } */
 
     
 

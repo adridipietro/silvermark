@@ -62,7 +62,6 @@ export default class BookmarkForm extends React.Component {
                 .then(resp => resp.json())
                 .then(json => {
                     this.setState({ categories: json})
-                    
                 })
 
     }
@@ -77,8 +76,8 @@ export default class BookmarkForm extends React.Component {
                 <TextField id="headline-input" type="text" name="headline"   placeholder="headline" defaultValue={headline} onChange={this.handleChange}/><br></br>
                 <TextField id="description-input" type="text" name="description"  placeholder="description"  defaultValue={description} onChange={this.handleChange}/><br></br>
                 <TextField id="web-url-input" type="text" name="web_url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
-                <Select id="category-input" fetchCategoriesForSelect={this.fetchCategoriesForSelect}>
-                    {this.state.categories.map(category => <option key={category.id}>{category.name}</option>)}
+                <Select id="category-input" >
+                    {this.state.categories.map(category => <MenuItem key={category.id}>{category.name}</MenuItem>)}
                 </Select><br></br>
                 <Button type="submit" className="submit-button" >Submit</Button><br></br>
             </form>
