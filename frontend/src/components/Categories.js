@@ -19,7 +19,7 @@ const Categories = (props)  => {
 
     
     const categoryList = categories.map(category => {
-        return <CategoryCard key={category.id} {...category} deleteCategory={deleteCategory}/>
+        return <CategoryCard key={category.id} {...category} />
 
     })
 

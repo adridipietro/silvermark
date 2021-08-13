@@ -1,7 +1,7 @@
-import { ADD_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, FILTER_BY_CATEGORY } from './types'
+import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, FILTER_BY_CATEGORY } from './types'
 
 
-export function addCategory(category){
+export function createCategory(category){
     return (dispatch) => {
         const dataObject = {
             method: "POST",
@@ -13,7 +13,7 @@ export function addCategory(category){
         }
         fetch("http://localhost:3000/categories", dataObject)
         .then(resp => resp.json())
-        .then(json => dispatch({type: ADD_CATEGORY, payload: json}))
+        .then(json => dispatch({type: CREATE_CATEGORY, payload: json}))
     }
 }
 
@@ -32,7 +32,7 @@ export function deleteCategory(id){
 }
 
 export function getCategories(categories){
-    return(dispatch, getState) => {
+    return(dispatch) => {
         fetch("http://localhost:3000/categories")
         .then(resp => resp.json())
         .then(json => dispatch({type: GET_CATEGORIES, payload: json}))
@@ -40,7 +40,7 @@ export function getCategories(categories){
 }
 
 export function filterByCategory(id){
-    return (dispatch) => {
+    return (dispatch, getState) => {
         let category = getState().categories.find(category => category.id === id)
             const data = {
                 name: category.name,

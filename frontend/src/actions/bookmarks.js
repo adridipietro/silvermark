@@ -1,6 +1,6 @@
-import { ADD_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK } from './types'
+import { CREATE_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK } from './types'
 
-export function addBookmark(bookmark){
+export function createBookmark(bookmark){
     return (dispatch) => {
         const dataObject = {
             method: "POST",
@@ -12,7 +12,7 @@ export function addBookmark(bookmark){
         }
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
-        .then(json => dispatch({type: ADD_BOOKMARK, payload: json}))
+        .then(json => dispatch({type: CREATE_BOOKMARK, payload: json}))
 
         }
 }

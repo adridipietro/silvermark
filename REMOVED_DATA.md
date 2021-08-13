@@ -34,6 +34,11 @@
 
 //bookmarks.js
 
+    this.handleCreate = this.handleCreate.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
+        this.editItem = this.editItem.bind(this)
+        this.handleFavorite = this.handleFavorite.bind(this)
+
  /* editItem = (id) => {
         let _bookmarks = [...this.state.bookmarks]
         let bookmark = _bookmarks.find(bookmark => bookmark.id === id)

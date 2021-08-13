@@ -9,7 +9,7 @@ export function createUser(user){
                 "Accepts": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(User)
+            body: JSON.stringify(user)
         }
         fetch("http://localhost:3000/users", dataObject)
         .then(resp => resp.json())
