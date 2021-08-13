@@ -1,5 +1,6 @@
 import {
     CREATE_CATEGORY,
+    GET_CATEGORIES,
     DELETE_CATEGORY,
     FILTER_BY_CATEGORY
 } from '../actions/types'
@@ -12,6 +13,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case GET_CATEGORIES:
+            return {...state}
         case CREATE_CATEGORY:
             return {...state}
         case DELETE_CATEGORY:
