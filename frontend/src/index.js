@@ -8,13 +8,23 @@ import reduxThunk from "redux-thunk";
 import rootReducer from "./reducers";
 
 
-const store = createStore(
-  rootReducer, 
-  composeEnhanvers(applyMiddleware(reduxThunk))
-)
+function createStore(reducer) {
+  let state
+  return {
+    getState: () => state,
+    dispatch: (action) => {
+      state = reducer(state, action)
+      return state
+    }
+
+  }
+
+}
+
+
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={createStore}>
     <App />
   </Provider >,
   document.getElementById('root')
