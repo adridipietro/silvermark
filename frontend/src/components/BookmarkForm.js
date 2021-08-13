@@ -35,6 +35,8 @@ export default class BookmarkForm extends React.Component {
         //debugger
     }
 
+    
+
     handleSubmit = (e) => {
         // prevent default
         // clear form

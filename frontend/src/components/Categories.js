@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import CategoryForm from './CategoryForm'
 import CategoryCard from './CategoryCard'
+import PropTypes  from 'prop-types'
 
-const Categories = (props)  => {
-    const [categories, setCategories] = useState([])
+const Categories = ({ categories })  => {
+    //const [categories, setCategories] = useState([])
     // [name of the object, name of the function used to set state of this object] = sets initial value of the state 
 
 
     const handleCreate = (createdCategory) => {
         let _categories = [...categories]
         _categories.unshift(createdCategory)
+        return _categories
         //unshift adds to beginning
-        setCategories(_categories)
-            // updating the key "categories" with the createdCategory
+       // setCategories(_categories)
+        
+       // updating the key "categories" with the createdCategory
         // existing state, adding newly created category and updating the state
     }
     
@@ -24,11 +27,21 @@ const Categories = (props)  => {
     })
 
     return (
-        <div>
+        <div className="categories-container">
+            <br></br>
             <CategoryForm  handleCreate={handleCreate}/>
+            <br></br>
             {categoryList}
         </div>
     )
+}
+
+Categories.propTypes = {
+    categories: PropTypes.array
+}
+
+Categories.defaultProps = {
+    categories: []
 }
 
 export default Categories

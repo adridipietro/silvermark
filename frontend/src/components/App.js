@@ -38,17 +38,23 @@ class  App extends React.Component {
       </div>
     ) 
   }
-  // we pass in a component to be rendered at the exact path
 }
 
+
 const mapStateToProps = (currentState) => {
-  return{
+  return {
     bookmarks: currentState.bookmarks,
     categories: currentState.categories
   }
 }
 
-const mapDispatch = (dispatch, props) => {
+// mSTP selects the part of the data from the store to be connected to App Component
+// mSTP reutrns a plain object containing the data from the store
+// called every time Redux store state changes
+// first arg = the entire store state
+// key:value pairs => each field becomes a prop for app component
+
+const mapDispatchToProps = (dispatch) => {
   return {
     createBookmark: (bookmark) => dispatch(createBookmark(bookmark)),
     deleteBookmark: (id) => dispatch(deleteBookmark(id)),
@@ -60,4 +66,13 @@ const mapDispatch = (dispatch, props) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatch)(App)
+// mDTP dispatches actions to the store
+// first arg: dispatch => a function of the store; the only way to trigger a state change
+// we return each action function with dispatch inside
+// we pass to dispatch the action and its args
+// we bind on each component mount
+// mDTP returns a plain object
+// each field becomes a separate prop for app component
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+// connect() accesses the store for us
