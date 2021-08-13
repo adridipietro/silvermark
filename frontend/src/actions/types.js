@@ -1,0 +1,15 @@
+// export constants
+
+export const CREATE_USER = 'CREATE_USER'
+export const CURRENT_USER = 'CURRENT_USER'
+// delete user?
+
+export const CREATE_BOOKMARK = 'CREATE_BOOKMARK'
+export const FAVORITE_BOOKMARK = 'FAVORITE_BOOKMARK'
+export const EDIT_BOOKMARK = 'EDIT_BOOKMARK'
+export const DELETE_BOOKMARK = 'DELETE_BOOKMARK'
+
+
+export const CREATE_CATEGORY = 'CREATE_CATEGORY'
+export const FILTER_BY_CATEGORY= 'FILTER_BY_CATEGORY'
+export const DELETE_CATEGORY = 'DELETE_CATEGORY'

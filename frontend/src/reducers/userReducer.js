@@ -9,6 +9,8 @@ export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case CURRENT_USER:
             return{...state}
+        case CREATE_USER:
+            return{...state}
         default:
             return state
     }
