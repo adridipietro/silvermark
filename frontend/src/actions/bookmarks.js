@@ -1,4 +1,4 @@
-import { ADD_BOOKMARK, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK } from './types'
+import { ADD_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK } from './types'
 
 export function addBookmark(bookmark){
     return (dispatch) => {
