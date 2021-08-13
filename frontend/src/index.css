@@ -19,6 +19,10 @@ div.navbar {
 
 }
 
+select {
+  border: none
+}
+
 
 
 .bookmark-card {

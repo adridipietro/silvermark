@@ -16,6 +16,8 @@ const link = {
 
   
 export default class Navbar extends Component {
+    
+
     render() {
         return (
             <div className="navbar">
@@ -47,15 +49,22 @@ export default class Navbar extends Component {
                 color: 'white'
                 }}
             >SIGNUP</NavLink>
-            <NavLink
-                to="/categories"
+            <select
+                to='/categories'
                 exact
+    
                 style={link}
                 activeStyle={{
                 background: 'black',
                 color: 'white'
                 }}
-            >CATEGORIES</NavLink>
+            >
+                <option>FILTER</option>
+                <option>CAREER</option>
+                <option>MISCELLANEOUS</option>
+                <option>FOOD</option>
+                <option>SCHOOL</option>
+            </select>
             </div>
             
         )
