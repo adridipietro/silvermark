@@ -41,4 +41,23 @@ class  App extends React.Component {
   // we pass in a component to be rendered at the exact path
 }
 
-export default App
+const mapStateToProps = (currentState) => {
+  return{
+    bookmarks: currentState.bookmarks,
+    categories: currentState.categories
+  }
+}
+
+const mapDispatch = (dispatch, props) => {
+  return {
+    createBookmark: (bookmark) => dispatch(createBookmark(bookmark)),
+    deleteBookmark: (id) => dispatch(deleteBookmark(id)),
+    getBookmarks: (bookmarks) => dispatch(getBookmarks(bookmarks)),
+    favoriteBookmark: (id) => dispatch(favoriteBookmark(id)),
+    createCategory: (category) => dispatch(createCategory(category)),
+    deleteCategory: (id) => dispatch(deleteCategory(id)),
+    getCategories: (categories) => dispatch(getCategories(categories))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatch)(App)
