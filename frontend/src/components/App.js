@@ -8,18 +8,19 @@ import './App.css'
 import Login from './Login'
 import Signup from './Signup'
 import BookmarkForm from './BookmarkForm'
-import Bookmarks from './containers/Bookmarks'
-import Categories from './containers/Categories'
+import Bookmarks from '../containers/Bookmarks'
+import Categories from '../containers/Categories'
 import {connect} from 'react-redux'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
-import { getCategories, createCategory, deleteCategory} from '../actions/index'
+import { getCategories, createCategory, deleteCategory } from '../actions/index'
+import { signupUser, loginUser, logoutUser, currentUser } from '../actions/index'
 
 
 
 class  App extends React.Component {
-  componentDidMount(){
+  /* componentDidMount(){
     this.props.getBookmarks()
-  }
+  } */
 
   render() {
     return (
@@ -29,8 +30,8 @@ class  App extends React.Component {
             <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} /> 
-              <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} addCategory={this.props.addCategory} {...routeProps} /> }/>
-              <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm {...routeProps} addBookmark={this.props.addBookmark}/>} />
+              <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} /> }/>
+              <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm {...routeProps} createBookmark={this.props.createBookmark}/>} />
               <Route exact path="/" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps} />}/>
             </Switch>
         </Router>

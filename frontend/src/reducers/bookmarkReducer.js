@@ -15,9 +15,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_BOOKMARKS:
-            return {...state}
+            return {bookmarks: action.payload}
         case CREATE_BOOKMARK:
-            return {...state}
+            return {bookmarks: action.payload}
         case EDIT_BOOKMARK:
             return {...state}
         case FAVORITE_BOOKMARK:

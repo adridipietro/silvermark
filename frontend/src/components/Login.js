@@ -1,17 +1,15 @@
-import React from 'react'
+import React, {useState, useDispatch } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import { LOGIN_USER } from '../actions/types'
 
-export default class Login extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-          email: '',
-          password: ''
-        }
-    }
+const Login = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    handleSubmit = (e) =>{
+    const dispatch = useDispatch()
+
+    const handleSubmit = (e) =>{
         // prevent default
         // clear the form
         // assign the state to var
@@ -19,7 +17,10 @@ export default class Login extends React.Component {
         // method, headers, body
         e.preventDefault()
 
-        const data = { ...this.state }
+        const data = {
+          email: email,
+          password: password
+        }
         const dataObject = {
             method: "POST",
             headers: {
@@ -30,39 +31,30 @@ export default class Login extends React.Component {
         }
         fetch('http://localhost:3000/users', dataObject)
         .then(response => response.json())
-        .then(json => {
-
-        })
+        .then(json => dispatch({type: LOGIN_USER, payload: json}))
     }
 
     
-
-    handleChange = (e) => {
-      const { name, value } = e.target;
-      this.setState({
-        [name]: value,
-      })
-    }
-
-    redirect = () => {
+    /* redirect = () => {
       this.props.history.push("/");
-    }
+    } */
     
-    render() {
-      const { email, password } = this.state;
+   
         return (
             <div className="login-form">
               <h1>Login</h1>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <div>
-                  <TextField type="text" name="email" placeholder="Email" onChange={this.handleChange} value={email} />
+                  <TextField type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} />
                 </div>
                 <div>
-                  <TextField type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password}/>
+                  <TextField type="password" name="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                 </div><br></br>
                 <Button type="submit" value="Login">Login</Button>
               </form>
             </div>
         )
-    }
+
 } 
+
+export default Login
