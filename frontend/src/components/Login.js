@@ -1,59 +1,56 @@
-import React, {useState, useDispatch } from 'react'
+import React, {useState, useEffect} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { LOGIN_USER } from '../actions/types'
+import { loginUser } from '../actions/index'
 
-const Login = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
 
-    const dispatch = useDispatch()
+class Login extends React.Component {
+    state ={
+      email: '',
+      password: ''
+    }
 
-    const handleSubmit = (e) =>{
+    
+
+     handleSubmit = (e) =>{
         // prevent default
         // clear the form
         // assign the state to var
         // fetch call to api
         // method, headers, body
         e.preventDefault()
-
-        const data = {
-          email: email,
-          password: password
-        }
-        const dataObject = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(data)
-        }
-        fetch('http://localhost:3000/users', dataObject)
-        .then(response => response.json())
-        .then(json => dispatch({type: LOGIN_USER, payload: json}))
+        this.props.loginUser(this.state.email, this.state.password)
+        this.setState({
+          email: '',
+          password: ''
+        })
     }
 
     
-    /* redirect = () => {
-      this.props.history.push("/");
-    } */
+    handleChange = (e) => {
+      //debugger
+      this.setState({[e.target.name]: e.target.value})
+      // html name attribute as a key
+      // uses the key to tell what part of state we are going to update
+    }
     
-   
-        return (
-            <div className="login-form">
-              <h1>Login</h1>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <TextField type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                </div>
-                <div>
-                  <TextField type="password" name="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                </div><br></br>
-                <Button type="submit" value="Login">Login</Button>
-              </form>
-            </div>
-        )
+   render() {
+     const {email, password} = this.state
+     return (
+         <div className="login-form">
+           <h1>Login</h1>
+           <form onSubmit={this.handleSubmit}>
+             <div>
+               <TextField type="text" name="email" placeholder="Email" onChange={this.handleChange} value={email} />
+             </div>
+             <div>
+               <TextField type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password}/>
+             </div><br></br>
+             <Button type="submit" value="Login">Login</Button>
+           </form>
+         </div>
+     )
+   }
 
 } 
 

@@ -19,6 +19,7 @@ export function createBookmark(bookmark){
 
 export function getBookmarks(bookmarks){
     return(dispatch, getState) => {
+        let bookmarks = getState().bookmarks.bookmarks
         fetch("http://localhost:3000/bookmarks")
         .then(resp => resp.json())
         .then(json => dispatch({type: GET_BOOKMARKS, payload: json}))
