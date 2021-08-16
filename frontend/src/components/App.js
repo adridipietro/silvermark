@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 // importing BrowserRouter from react-router-dom, creating alias Router.
 // react-router-dom is a node package
@@ -7,20 +6,36 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import Login from './Login'
 import Signup from './Signup'
-import BookmarkForm from './BookmarkForm'
-import Bookmarks from '../containers/Bookmarks'
-import Categories from '../containers/Categories'
 import {connect} from 'react-redux'
-import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
-import { getCategories, createCategory, deleteCategory } from '../actions/index'
-import { signupUser, loginUser, logoutUser, currentUser } from '../actions/index'
+import { signupUser, loginUser, logoutUser } from '../actions/index'
 
 
 
 class  App extends React.Component {
-  /* componentDidMount(){
-    this.props.getBookmarks()
-  } */
+  state = {
+    isLoggedIn: false,
+    user = {}
+  }
+
+  componentDidMount(){
+    this.loginStatus()
+    return this.props.loggedInState ? this.redirect() : null
+  }
+
+  loginStatus = () => {
+    fetch("http://localhost:3000/login", { user })
+    .then(response => {
+      if (response.data.logged_in){
+        this.props.loginUser(response)
+      } else {
+        this.props.logoutUser()
+      }
+    })
+  }
+
+  redirect = () => {
+    this.props.history.push('/')
+  }
 
   render() {
     return (
@@ -28,11 +43,8 @@ class  App extends React.Component {
         <Router>
             <Navbar/>
             <Switch>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} /> 
-              <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} /> }/>
-              <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm {...routeProps} createBookmark={this.props.createBookmark}/>} />
-              <Route exact path="/" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps} />}/>
+              <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
+              <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
             </Switch>
         </Router>
         

@@ -3,29 +3,36 @@ import React from 'react'
 import BookmarkCard from './BookmarkCard'
 import BookmarkForm from '../components/BookmarkForm'
 import PropTypes  from 'prop-types'
+import { getBookmarks } from '../actions/index'
 
 
-const Bookmarks = ({ bookmarks }) => {
+class Bookmarks extends React.Component {
+    state = {
+        bookmarks: []
+    }
+    
+    componentDidMount(){
+        this.props.getBookmarks(bookmarks)
+    }
     
 
-    
-
-    const renderBookmarkCollection = bookmarks.map(bookmark => {
+    renderBookmarkCollection = bookmarks.map(bookmark => {
         return <BookmarkCard key={bookmark.id} {...bookmark}/>
     })
     
 
+        render() {
+            return (
+                <div className="bookmarks-container">
+                    <br></br>
+                    <BookmarkForm />
+                    <br></br>
+                    {this.renderBookmarkCollection}
+                    
+                </div>
+            )
+        }
 
-
-        return (
-            <div className="bookmarks-container">
-                <br></br>
-                <BookmarkForm />
-                <br></br>
-                {renderBookmarkCollection}
-                
-            </div>
-        )
         // defining constant bookmarks as this class' state
         // iterating over the collection of bookmarks and returning a Bookmark grid item for each
 

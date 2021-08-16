@@ -7,9 +7,11 @@ import {
 } from '../actions/types'
 
 const INITIAL_STATE = {
-    name: '',
-    bookmarks: [],
-    user_id: null
+    headline: '',
+    description: '',
+    web_url: '',
+    category_id: null,
+    favorite: false
 }
 
 export default (state = INITIAL_STATE, action) => {

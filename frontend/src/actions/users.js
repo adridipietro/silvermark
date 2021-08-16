@@ -50,7 +50,7 @@ export function loginUser(user){
 }
 
 export function logoutUser(){
-    return(state)=> {
-        state.user = null
+    return(dispatch)=> {
+        dispatch({type: LOGOUT_USER, payload: null})
     }
 }

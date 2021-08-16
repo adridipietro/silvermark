@@ -13,16 +13,16 @@ export function createBookmark(bookmark){
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
         .then(json => dispatch({type: CREATE_BOOKMARK, payload: json}))
-
-        }
+    }
 }
 
-export function getBookmarks(bookmarks){
-    return(dispatch, getState) => {
-        let bookmarks = getState().bookmarks.bookmarks
+export function getBookmarks(){
+    return(dispatch) => {
         fetch("http://localhost:3000/bookmarks")
         .then(resp => resp.json())
-        .then(json => dispatch({type: GET_BOOKMARKS, payload: json}))
+        .then(json => {
+            dispatch(json)
+        })
     }
 }
 
