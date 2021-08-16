@@ -16,7 +16,11 @@ export default (state = {categories: []}, action) => {
             const categories = state.filter(category => category.id != action.payload)
             return {cateories: categories}
         case FILTER_BY_CATEGORY:
-            return {...state}
+            let value = action.payload.value
+            let filteredValues = state.categories.filter(category => {
+                return category.name.includes(value)
+            })
+            return {... state, categories: filteredValues}
         default:
             return state
     }

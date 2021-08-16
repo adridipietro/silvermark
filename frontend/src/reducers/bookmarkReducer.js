@@ -22,7 +22,7 @@ export default (state = {bookmarks: []}, action) => {
                     ...state.bookmarks.slice(0, index), 
                     action.payload,
                     ...state.bookmarks.slice(index + 1)
-                ], error: "", loading: false} 
+                ]} 
             ): state
         case DELETE_BOOKMARK:
             const newBookmarks = state.bookmarks.filter(bookmark => bookmark.id != action.payload)

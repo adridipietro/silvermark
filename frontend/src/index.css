@@ -19,8 +19,26 @@ div.navbar {
 
 }
 
+select:hover{
+  color: black
+}
+
+option {
+  font-size: large;
+}
+
+
+
 select {
   border: none
+}
+
+.MuiButtonBase-root:focus{
+  color: red
+}
+
+.MuiButtonBase-root:hover{
+  color: red
 }
 
 

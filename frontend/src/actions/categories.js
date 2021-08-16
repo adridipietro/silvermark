@@ -31,7 +31,7 @@ export function deleteCategory(id){
     }
 }
 
-export function getCategories(categories){
+export function getCategories(){
     return(dispatch) => {
         fetch("http://localhost:3000/categories")
         .then(resp => resp.json())

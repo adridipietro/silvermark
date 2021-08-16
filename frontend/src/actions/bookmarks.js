@@ -42,7 +42,7 @@ export function deleteBookmark(id){
 
 export function favoriteBookmark(id){
         return(dispatch, getState) => {
-            let bookmark = getState().bookmarks.find(bookmark => bookmark.id === id)
+            const bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
             const data = {
                 headline: bookmark.headline,
                 description: bookmark.description,

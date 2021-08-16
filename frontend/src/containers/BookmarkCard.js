@@ -14,13 +14,12 @@ const BookmarkCard = (props) => {
 
 
 
-    const handleEdit= () => {
+    const handleEdit= (id) => {
         <EditForm />
         editBookmark(props.id)
     }
 
-    const handleDelete = () => {
-        //debugger
+    const handleDelete = (id) => {
        deleteBookmark(props.id)
     
     }
@@ -34,7 +33,7 @@ const BookmarkCard = (props) => {
                 <p className="bookmark-web-url" >{props.web_url}</p>
                 <Button 
                     id={props.id}
-                    onClick={handleFavorite()}
+                    onClick={handleFavorite}
                     className="favorite-button" 
                     startIcon={<FavoriteIcon/>}>
                 </Button><br></br>
@@ -42,14 +41,14 @@ const BookmarkCard = (props) => {
                     id={props.id}
                     size="small"
                     startIcon={<EditIcon />}
-                    onClick={handleEdit()}
+                    onClick={handleEdit}
                     className="edit-button" >
                 </Button><br></br>
                 <Button
                     id={props.id}
                     size="small"
                     startIcon={<DeleteIcon />}
-                    onClick={handleDelete()}
+                    onClick={handleDelete}
                     className="delete-button">
                 </Button><br></br>
         </div>
