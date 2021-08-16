@@ -2,10 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy]
   skip_before_action :authorized, only: [:create]
 
-  def index 
-    @users = User.all
-    render json: @users
-  end
   
 
   # GET /users/1 or /users/1.json
@@ -20,11 +16,10 @@ class UsersController < ApplicationController
 
       if @user.valid?
         @token = encode_token(user_id: @user.id)
-        render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
+        render json: { user: UserSerializer.new(@user), jwt: token }, status: :created
       else
-        render json { error: 'Failed to create your account. Try again!'}
+        render json: { error: 'Failed to create your account. Try again!'}
       end
-    end
   end
 
 
@@ -41,6 +36,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :categories, :bookmarks, :id)
+      params.require(:user).permit(:name, :email, :password, :categories, :bookmarks, :id, :jwt)
     end
 end

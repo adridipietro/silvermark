@@ -50,6 +50,15 @@ export default class Navbar extends Component {
                 }}
             >SIGNUP</NavLink>
             <NavLink
+                to="/logout"
+                exact
+                style={link}
+                activeStyle={{
+                background: 'black',
+                color: 'white'
+                }}
+            >LOGOUT</NavLink>
+            <NavLink
                 to="/categories"
                 exact
                 style={link}

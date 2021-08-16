@@ -5,20 +5,16 @@ import {
     FILTER_BY_CATEGORY
 } from '../actions/types'
 
-const INITIAL_STATE = {
-    name: '',
-    bookmarks: [],
-    user_id: null
-}
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = {categories: []}, action) => {
     switch (action.type) {
         case GET_CATEGORIES:
-            return {...state}
+            return {categories: action.payload}
         case CREATE_CATEGORY:
-            return {...state}
+            return {categories: action.payload}
         case DELETE_CATEGORY:
-            return {...state}
+            const categories = state.filter(category => category.id != action.payload)
+            return {cateories: categories}
         case FILTER_BY_CATEGORY:
             return {...state}
         default:

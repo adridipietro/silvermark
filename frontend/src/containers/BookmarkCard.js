@@ -4,24 +4,24 @@ import Button from "@material-ui/core/Button"
 import DeleteIcon from "@material-ui/icons/Delete"
 import EditIcon from "@material-ui/icons/Edit"
 import FavoriteIcon from "@material-ui/icons/Favorite"
+import { deleteBookmark, editBookmark, favoriteBookmark } from '../actions/index'
 
 
 const BookmarkCard = (props) => {
-    const [favorite, setFavorite] = useState(props.favorite)
-    
-    const handleFavorite = (favorite) => {
-        setFavorite(prevState => !prevState)
+    const handleFavorite = () => {
+        favoriteBookmark(props.id)
     }
 
 
 
     const handleEdit= () => {
         <EditForm />
-        props.editItem(props.id)
+        editBookmark(props.id)
     }
 
     const handleDelete = () => {
-       props.deleteItem(props.id)
+        //debugger
+       deleteBookmark(props.id)
     
     }
 
@@ -34,7 +34,7 @@ const BookmarkCard = (props) => {
                 <p className="bookmark-web-url" >{props.web_url}</p>
                 <Button 
                     id={props.id}
-                    onClick={handleFavorite}
+                    onClick={handleFavorite()}
                     className="favorite-button" 
                     startIcon={<FavoriteIcon/>}>
                 </Button><br></br>
@@ -42,14 +42,14 @@ const BookmarkCard = (props) => {
                     id={props.id}
                     size="small"
                     startIcon={<EditIcon />}
-                    onClick={handleEdit}
+                    onClick={handleEdit()}
                     className="edit-button" >
                 </Button><br></br>
                 <Button
                     id={props.id}
                     size="small"
                     startIcon={<DeleteIcon />}
-                    onClick={handleDelete}
+                    onClick={handleDelete()}
                     className="delete-button">
                 </Button><br></br>
         </div>

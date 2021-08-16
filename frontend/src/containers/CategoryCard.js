@@ -1,12 +1,13 @@
 import React from 'react'
 import Button from "@material-ui/core/Button"
 import DeleteIcon from "@material-ui/icons/Delete"
+import { deleteCategory } from '../actions/index'
 
-export default function CategoryCard(props) {
+const CategoryCard = (props) => {
 
 
     const handleDelete = () => {
-        props.deleteCategory(props.id)
+        deleteCategory(props.id)
     
     }
 
@@ -22,7 +23,7 @@ export default function CategoryCard(props) {
                 <Button
                     id={props.id}
                     startIcon={<DeleteIcon />}
-                    onClick={handleDelete}
+                    onClick={handleDelete()}
                     className="delete-button">
                 </Button><br></br>
                   
@@ -30,5 +31,6 @@ export default function CategoryCard(props) {
 
     )
             
- 
 }
+
+export default CategoryCard

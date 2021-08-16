@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from './Navbar'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 // importing BrowserRouter from react-router-dom, creating alias Router.
 // react-router-dom is a node package
@@ -6,48 +7,39 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import Login from './Login'
 import Signup from './Signup'
+import Logout from './Logout'
+import BookmarkForm from './BookmarkForm'
+import Bookmarks from '../containers/Bookmarks'
+import Categories from '../containers/Categories'
 import {connect} from 'react-redux'
+import { getBookmarks, createBookmark, deleteBookmark, editBookmark, favoriteBookmark } from '../actions/index'
+import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
 
 
 
-class  App extends React.Component {
-  state = {
-    isLoggedIn: false,
-    user = {}
-  }
-
+class App extends React.Component {
   componentDidMount(){
-    this.loginStatus()
-    return this.props.loggedInState ? this.redirect() : null
+    this.props.getBookmarks()
+    this.props.getCategories()
   }
 
-  loginStatus = () => {
-    fetch("http://localhost:3000/login", { user })
-    .then(response => {
-      if (response.data.logged_in){
-        this.props.loginUser(response)
-      } else {
-        this.props.logoutUser()
-      }
-    })
-  }
 
-  redirect = () => {
-    this.props.history.push('/')
-  }
-
+ 
   render() {
     return (
       <div className="App">
         <Router>
             <Navbar/>
             <Switch>
+              <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} /> }/>
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
+              <Route exact path="/" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} editBookmark={this.props.editBookmark} favoriteBookmark={this.props.favoriteBookmark} />}/>
+              <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark}/>}/>
+              <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser}/>}/>
             </Switch>
         </Router>
-        
       </div>
     ) 
   }
@@ -56,8 +48,9 @@ class  App extends React.Component {
 
 const mapStateToProps = (currentState) => {
   return {
-    bookmarks: currentState.bookmarks,
-    categories: currentState.categories
+    bookmarks: currentState.bookmarks.bookmarks,
+    categories: currentState.categories.categories,
+    users: currentState.users.users
   }
 }
 
@@ -71,11 +64,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     createBookmark: (bookmark) => dispatch(createBookmark(bookmark)),
     deleteBookmark: (id) => dispatch(deleteBookmark(id)),
-    getBookmarks: (bookmarks) => dispatch(getBookmarks(bookmarks)),
+    getBookmarks: () => dispatch(getBookmarks()),
     favoriteBookmark: (id) => dispatch(favoriteBookmark(id)),
+    editBookmark: (id) => dispatch(editBookmark(id)),
     createCategory: (category) => dispatch(createCategory(category)),
     deleteCategory: (id) => dispatch(deleteCategory(id)),
-    getCategories: (categories) => dispatch(getCategories(categories))
+    getCategories: (categories) => dispatch(getCategories(categories)),
+    loginUser: (user) => dispatch(loginUser(user)),
+    signupUser: (user) => dispatch(signupUser(user)),
+    logoutUser: (user) => dispatch(logoutUser(user))
   }
 }
 

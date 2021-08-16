@@ -3,11 +3,11 @@ class AuthController < ApplicationController
     
     
     def create
-        @user = User.find_by(email: params[:email])
+        user = User.find_by(email: params[:email])
       
-        if @user && @user.authenticate(params[:user][:password])
-          token = encode_token({user_id: @user.id})
-          render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
+        if user && user.authenticate(params[:user][:password])
+          token = encode_token({user_id: user.id})
+          render json: { user: UserSerializer.new(user), jwt: token }, status: :accepted
         else
             render json: {message: 'Verify credentials and try again or signup.']
             render :new

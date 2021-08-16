@@ -21,7 +21,7 @@ export function getBookmarks(){
         fetch("http://localhost:3000/bookmarks")
         .then(resp => resp.json())
         .then(json => {
-            dispatch(json)
+            dispatch({type: GET_BOOKMARKS, payload: json })
         })
     }
 }

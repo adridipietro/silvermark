@@ -5,14 +5,14 @@ import {
     LOGOUT_USER
 } from '../actions/types'
 
-const INITIAL_STATE = {user: {}}
+const INITIAL_STATE = {user: []}
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case SIGNUP_USER:
             return{...state}
         case GET_USERS:
-            return {users: action.payload}
+            return {...state, users: action.payload}
         case LOGIN_USER:
             return {}
         case LOGOUT_USER:
