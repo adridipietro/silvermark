@@ -1,7 +1,8 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { signupUser } from '../actions/types'
+import { signupUser } from '../actions/index'
+import { connect } from 'react-redux'
 
 class Signup extends React.Component {
     state = {
@@ -18,13 +19,12 @@ class Signup extends React.Component {
       // fetch call to api
       // method, headers, body
       e.preventDefault()
-      e.preventDefault()
-        this.props.signupUser(this.state.name, this.state.email, this.state.password)
-        this.setState({
+      this.props.signupUser(this.state.name, this.state.email, this.state.password)
+      this.setState({
           name: '',
           email: '',
           password: ''
-        })
+      })
   }
 
 
@@ -58,4 +58,17 @@ class Signup extends React.Component {
       }
 
 }
-export default Signup
+
+const mapState = (currentState) => {
+  return{
+    user: currentState.users.user
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    signupUser: (user) => dispatch(signupUser(user))
+  }
+}
+
+export default connect(mapState, mapDispatch)(Signup)

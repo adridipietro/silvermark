@@ -12,7 +12,7 @@ export default (state = {bookmarks: []}, action) => {
         case GET_BOOKMARKS:
             return {bookmarks: action.payload}
         case CREATE_BOOKMARK:
-            return {...state, bookmarks: state.bookmarks.concat(action.payload)}
+            return {...state, bookmarks: state.concat(action.payload)}
         case EDIT_BOOKMARK:
             const updatedBookmarks = state.map(bookmark => {
                 if (bookmark.id === action.id){
@@ -30,8 +30,7 @@ export default (state = {bookmarks: []}, action) => {
                 }
             })
         case DELETE_BOOKMARK:
-            const newBookmarks = state.bookmarks.filter(bookmark => bookmark.id != action.payload)
-            return { bookmarks: newBookmarks }
+            return { ...state, bookmarks: state.bookmarks.filter(bookmark => bookmark.id !== action.payload.id) }
         default:
             return state
     }

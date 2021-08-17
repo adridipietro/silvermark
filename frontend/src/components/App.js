@@ -14,7 +14,7 @@ import Categories from '../containers/Categories'
 import {connect} from 'react-redux'
 import { getBookmarks, createBookmark, deleteBookmark, editBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory, filterByCategory } from '../actions/index'
-import { signupUser, loginUser, logoutUser } from '../actions/index'
+
 
 
 
@@ -51,8 +51,7 @@ class App extends React.Component {
 const mapStateToProps = (currentState) => {
   return {
     bookmarks: currentState.bookmarks.bookmarks,
-    categories: currentState.categories.categories,
-    users: currentState.users.users
+    categories: currentState.categories.categories
   }
 }
 
@@ -72,10 +71,8 @@ const mapDispatchToProps = (dispatch) => {
     createCategory: (category) => dispatch(createCategory(category)),
     filterByCategory: (id) => dispatch(filterByCategory(id)),
     deleteCategory: (id) => dispatch(deleteCategory(id)),
-    getCategories: (categories) => dispatch(getCategories(categories)),
-    loginUser: (user) => dispatch(loginUser(user)),
-    signupUser: (user) => dispatch(signupUser(user)),
-    logoutUser: (user) => dispatch(logoutUser(user))
+    getCategories: (categories) => dispatch(getCategories(categories))
+
   }
 }
 

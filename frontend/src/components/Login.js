@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { loginUser } from '../actions/index'
+import { connect } from 'react-redux'
 
 
 class Login extends React.Component {
-    state ={
+    state = {
       email: '',
       password: ''
     }
@@ -54,4 +55,18 @@ class Login extends React.Component {
 
 } 
 
-export default Login
+const mapState = (currentState) => {
+  return {
+    user: currentState.users.user
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    loginUser: (user) => dispatch(loginUser(user))
+    
+  }
+}
+
+
+export default connect(mapState, mapDispatch)(Login)

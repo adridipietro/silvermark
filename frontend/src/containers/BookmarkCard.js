@@ -14,12 +14,13 @@ const BookmarkCard = (props) => {
 
 
 
-    const handleEdit= (id) => {
+    const handleEdit= () => {
         <EditForm />
         editBookmark(props.id)
     }
 
-    const handleDelete = (id) => {
+    const handleDelete = () => {
+        debugger
        deleteBookmark(props.id)
     
     }

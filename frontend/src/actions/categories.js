@@ -41,7 +41,7 @@ export function getCategories(){
 
 export function filterByCategory(id){
     return (dispatch, getState) => {
-        let category = getState().categories.categories.find(category => category.id === id)
+        let category = getState().categories.find(category => category.id === id)
             const data = {
                 name: category.name,
                 bookmarks: category.bookmarks,

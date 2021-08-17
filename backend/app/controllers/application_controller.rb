@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  skip_before_action :verify_authenticity_token
+    
     def encode_token(payload)
     # don't forget to hide your secret in an environment variable
       JWT.encode(payload, ENV['secret'])
@@ -13,7 +15,7 @@ class ApplicationController < ActionController::Base
       if auth_header
         token = auth_header.split(' ')[1]
         begin
-          JWT.decode(token, 'secret', true, algorithm: 'HS256')
+          JWT.decode(token, ENV['secret'], true, algorithm: 'HS256')
         rescue JWT::DecodeError
           nil
         end

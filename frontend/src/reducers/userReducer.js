@@ -5,18 +5,34 @@ import {
     LOGOUT_USER
 } from '../actions/types'
 
-const INITIAL_STATE = {user: []}
+const INITIAL_STATE = {
+    user: {
+        token: null, 
+        name: '', 
+        email: '',
+        password: ''
+    }
+}
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case SIGNUP_USER:
-            return{...state}
+            return{
+                token: action.payload.token, 
+                name: action.payload.name,
+                password: action.payload.password,
+                email: action.payload.email
+            }
         case GET_USERS:
             return {...state, users: action.payload}
         case LOGIN_USER:
-            return {}
+            return {
+                token: action.payload.token, 
+                password: action.payload.password,
+                email: action.payload.email
+            }
         case LOGOUT_USER:
-            return{}
+            return{ ...state, user: state.users.filter(user => user.id !== action.payload.id)}
         default:
             return state
     }

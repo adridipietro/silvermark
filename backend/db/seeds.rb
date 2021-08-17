@@ -12,8 +12,8 @@
 users = User.create!([
     {
         name: "Adri",
-        email: "mary@gmail.com",
-        password_digest: "password!"
+        email: "adri@gmail.com",
+        password: "password!"
     }
 ])
 
