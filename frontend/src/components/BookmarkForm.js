@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import PropTypes from 'prop-types'
+import { createBookmark } from '../actions/index'
 
 export default class BookmarkForm extends React.Component {
     
@@ -18,22 +19,6 @@ export default class BookmarkForm extends React.Component {
     }
 
 
-    submittedBookmark = (bookmark) => {
-        // fetch call to api
-        // method, headers, body
-        const dataObject = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(bookmark)
-        }
-        fetch('http://localhost:3000/bookmarks', dataObject)
-        .then(response => response.json())
-        .then(json => this.props.createBookmark(json))
-        //debugger
-    }
 
     
 
@@ -42,7 +27,7 @@ export default class BookmarkForm extends React.Component {
         // clear form
         // add to page, update state
         e.preventDefault()
-        this.props.createBookmark({...this.state})
+        createBookmark({...this.state})
         this.setState({
             headline: '',
             web_url: '',
@@ -65,7 +50,7 @@ export default class BookmarkForm extends React.Component {
                 .then(resp => resp.json())
                 .then(json => {
                     this.setState({ categories: json})
-                })
+            })
 
     }
 

@@ -37,8 +37,13 @@ Bookmarks.propTypes = {
     bookmarks: PropTypes.array
 }
 
+// calling the propTypes property on our component 
+//and pass it an object that specifies the props object's expected type
+
 Bookmarks.defaultProps = {
     bookmarks: []
 }
+// a React component property
+// allows you to set default values for the props arg. 
 
 export default Bookmarks

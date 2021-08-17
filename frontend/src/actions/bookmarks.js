@@ -67,7 +67,7 @@ export function favoriteBookmark(id){
 
 export function editBookmark(id) {
     return(dispatch, getState) => {
-        let bookmark = getState().bookmarks.find(bookmark => bookmark.id === id)
+        let bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
         const data = {
             headline: bookmark.headline,
             description: bookmark.description,

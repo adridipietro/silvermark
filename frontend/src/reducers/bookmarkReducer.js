@@ -12,21 +12,26 @@ export default (state = {bookmarks: []}, action) => {
         case GET_BOOKMARKS:
             return {bookmarks: action.payload}
         case CREATE_BOOKMARK:
-            return {bookmarks: action.payload}
+            return {...state, bookmarks: state.bookmarks.concat(action.payload)}
         case EDIT_BOOKMARK:
-            return state.findById(bookmark => String(bookmark.id) === String(action.payload.id))
+            const updatedBookmarks = state.map(bookmark => {
+                if (bookmark.id === action.id){
+                    return {...bookmark, ...action.payload}
+                }
+                return bookmark
+            })
+            return updatedBookmarks
         case FAVORITE_BOOKMARK:
-            const index = state.bookmarks.findIndex(bookmark => String(bookmark.id) === String(action.payload.id))
-            return !!index || index === 0 ? (
-                {...state, bookmarks: [
-                    ...state.bookmarks.slice(0, index), 
-                    action.payload,
-                    ...state.bookmarks.slice(index + 1)
-                ]} 
-            ): state
+            return state.map(bookmark => {
+                if (bookmark.id !== action.payload){
+                    return {
+                        ...bookmark, favorite: !bookmark.favorite
+                    }
+                }
+            })
         case DELETE_BOOKMARK:
             const newBookmarks = state.bookmarks.filter(bookmark => bookmark.id != action.payload)
-            return {bookmarks: newBookmarks}
+            return { bookmarks: newBookmarks }
         default:
             return state
     }

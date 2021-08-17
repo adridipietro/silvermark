@@ -41,6 +41,7 @@ class App extends React.Component {
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser}/>}/>
             </Switch>
         </Router>
+
       </div>
     ) 
   }

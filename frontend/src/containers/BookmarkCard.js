@@ -33,7 +33,7 @@ const BookmarkCard = (props) => {
                 <p className="bookmark-web-url" >{props.web_url}</p>
                 <Button 
                     id={props.id}
-                    onClick={handleFavorite}
+                    onClick={handleFavorite()}
                     className="favorite-button" 
                     startIcon={<FavoriteIcon/>}>
                 </Button><br></br>

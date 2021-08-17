@@ -24,3 +24,9 @@ AUGUST 6
 - render category select []
 - render edit + update functionality []
 - fix delete functionality [x]
+
+
+17 AUGUST
+- JWT AUTH []
+- RENDER CATEGORIES FOR SELECT []
+- 
