@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'current_user/index'
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
     sign_out: 'logout',
@@ -12,10 +11,15 @@ Rails.application.routes.draw do
   }
   resources :categories
   resources :users
-  get 'home/index'
   resources :bookmarks
-  root 'home#index'
+  
+  #get 'home/index'
+  #root 'home#index'
 
-  get '/current_user', to: 'current_user#index'
+  post '/login', :to => 'auth#create'
+  post'/signup', :to => 'users#create'
+  delete '/logout', :to => 'users#destroy'
+
+  #get '/current_user', to: 'current_user#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

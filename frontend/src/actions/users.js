@@ -64,6 +64,17 @@ export function loginUser(email, password){
 
 export function logoutUser(){
     return(dispatch)=> {
-        dispatch({type: LOGOUT_USER, payload: null})
+        const dataObject = {
+            method: "DELETE",
+            headers: {
+                "Accepts": "application/json",
+                "Content-Type": "application/json"
+            }
+        }
+        fetch("http://localhost:3000/logout", dataObject)
+        .then(resp => resp.json())
+        .then(json => {
+            return dispatch({type: LOGOUT_USER, payload: null})
+        })
     }
 }

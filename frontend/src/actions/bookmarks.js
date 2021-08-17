@@ -1,14 +1,15 @@
 import { CREATE_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK } from './types'
 
-export function createBookmark(bookmark){
+export function createBookmark(headline, description, web_url, favorite, token){
     return (dispatch) => {
         const dataObject = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accepts": "application/json"
+                "Accepts": "application/json",
+                Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(bookmark)
+            body: JSON.stringify({bookmark: {headline, description, web_url, favorite, token}})
         }
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
@@ -26,13 +27,14 @@ export function getBookmarks(){
     }
 }
 
-export function deleteBookmark(id){
+export function deleteBookmark(id, token){
     return(dispatch)=> {
         fetch(`http://localhost:3000/bookmarks/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
-                "Accepts": 'application/json'
+                "Accepts": 'application/json',
+                Authorization: `Bearer ${token}`
             }
         })
         .then(response => response.json())
@@ -40,7 +42,7 @@ export function deleteBookmark(id){
     }
 }
 
-export function favoriteBookmark(id){
+export function favoriteBookmark(id, token){
         return(dispatch, getState) => {
             const bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
             const data = {
@@ -54,7 +56,8 @@ export function favoriteBookmark(id){
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accepts": "application/json"
+                    "Accepts": "application/json",
+                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(data)
             }
@@ -65,7 +68,7 @@ export function favoriteBookmark(id){
 
 }
 
-export function editBookmark(id) {
+export function editBookmark(id, token) {
     return(dispatch, getState) => {
         let bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
         const data = {
@@ -79,7 +82,8 @@ export function editBookmark(id) {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
-                "Accepts": "application/json"
+                "Accepts": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(data)
         }
