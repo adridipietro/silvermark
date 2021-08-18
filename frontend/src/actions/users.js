@@ -72,7 +72,7 @@ export function loginUser(email, password){
     }
 }
 
-export function logoutUser(){
+export function logoutUser() {
     return(dispatch)=> {
         const dataObject = {
             method: "DELETE",
@@ -83,7 +83,7 @@ export function logoutUser(){
         }
         fetch("http://localhost:3000/logout", dataObject)
         .then(resp => resp.json())
-        .then(json => {
+        .then(() => {
             return dispatch({type: LOGOUT_USER, payload: null})
         })
         .catch(error => {

@@ -20,7 +20,7 @@ import { getCategories, createCategory, deleteCategory, filterByCategory } from 
 
 class App extends React.Component {
   componentDidMount(){
-    debugger
+
     this.props.getBookmarks()
     this.props.getCategories()
   }
