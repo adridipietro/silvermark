@@ -2,4 +2,4 @@ export { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark, editBoo
 
 export { getCategories, createCategory, deleteCategory, filterByCategory } from './categories'
 
-export { signupUser, loginUser, logoutUser } from './users'
+export { signupUser, loginUser, logoutUser, storeToken, getUsers } from './users'

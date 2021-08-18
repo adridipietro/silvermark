@@ -2,7 +2,8 @@ import {
     SIGNUP_USER, 
     GET_USERS,
     LOGIN_USER,
-    LOGOUT_USER
+    LOGOUT_USER,
+    STORE_TOKEN
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -10,14 +11,15 @@ const INITIAL_STATE = {
         token: null, 
         name: '', 
         email: '',
-        password: ''
+        password: '',
+        id: ''
     }
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case SIGNUP_USER:
-            return{
+            return {
                 token: action.payload.token, 
                 name: action.payload.name,
                 password: action.payload.password,
@@ -32,7 +34,16 @@ export default (state = INITIAL_STATE, action) => {
                 email: action.payload.email
             }
         case LOGOUT_USER:
-            return{ ...state, user: state.users.filter(user => user.id !== action.payload.id)}
+            return { ...state, user: state.users.filter(user => user.id !== action.payload.id)}
+
+        case STORE_TOKEN:
+            return {
+                token: action.payload.token,
+                name: action.payload.name,
+                id: action.payload.id,
+                email: action.payload.email,
+                password: action.payload.password,
+            }
         default:
             return state
     }

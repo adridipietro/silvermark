@@ -1,4 +1,4 @@
-import { SIGNUP_USER, GET_USERS, LOGIN_USER, LOGOUT_USER } from './types'
+import {  GET_USERS, LOGIN_USER, LOGOUT_USER, STORE_TOKEN } from './types'
 
 
 export function signupUser(name, email, password){
@@ -19,7 +19,7 @@ export function signupUser(name, email, password){
             localStorage.setItem('name', json.name)
             localStorage.setItem('email', json.email)
             localStorage.setItem('password', json.password)
-            return dispatch({type: SIGNUP_USER, payload: json})
+            return dispatch(storeToken(json))
         })
     }
 }
@@ -76,5 +76,12 @@ export function logoutUser(){
         .then(json => {
             return dispatch({type: LOGOUT_USER, payload: null})
         })
+    }
+}
+
+export function storeToken(token){
+    return {
+        type: STORE_TOKEN,
+        payload: token
     }
 }

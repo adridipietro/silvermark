@@ -5,6 +5,7 @@ export const SIGNUP_USER = 'SIGNUP_USER'
 export const GET_USERS = 'GET_USERS'
 export const LOGIN_USER = 'LOGIN_USER'
 export const LOGOUT_USER = 'LOGOUT_USER'
+export const STORE_TOKEN = 'STORE_TOKEN'
 
 
 export const CREATE_BOOKMARK = 'CREATE_BOOKMARK'
