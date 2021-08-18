@@ -19,12 +19,8 @@ class Signup extends React.Component {
       // fetch call to api
       // method, headers, body
       e.preventDefault()
-      this.props.signupUser(this.state.name, this.state.email, this.state.password)
-      this.setState({
-          name: '',
-          email: '',
-          password: ''
-      })
+      const { name, email, password } = this.state
+      this.props.signupUser({name, email, password})
   }
 
 
@@ -67,7 +63,7 @@ const mapState = (currentState) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    signupUser: (user) => dispatch(signupUser(user))
+    signupUser: (name, email, password) => dispatch(signupUser(name, email, password))
   }
 }
 

@@ -20,11 +20,9 @@ class Login extends React.Component {
         // fetch call to api
         // method, headers, body
         e.preventDefault()
-        this.props.loginUser(this.state.email, this.state.password)
-        this.setState({
-          email: '',
-          password: ''
-        })
+        const { email, password } = this.state
+        this.props.loginUser({ email, password })
+        
     }
 
     
@@ -36,7 +34,7 @@ class Login extends React.Component {
     }
     
    render() {
-     const {email, password} = this.state
+     const { email, password } = this.state
      return (
          <div className="login-form">
            <h1>Login</h1>
@@ -63,7 +61,7 @@ const mapState = (currentState) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loginUser: (user) => dispatch(loginUser(user))
+    loginUser: (email, password) => dispatch(loginUser(email, password))
     
   }
 }
