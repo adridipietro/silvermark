@@ -2,6 +2,12 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
+
+  def create 
+    super
+    byebug
+  end
+  
   private
 
   def respond_with(resource, _opts = {})

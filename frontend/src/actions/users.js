@@ -8,7 +8,8 @@ export function signupUser(name, email, password){
             method: "POST",
             headers: {
                 "Accepts": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": '*'
             },
             body: JSON.stringify({user: {name, email, password}})
         }
