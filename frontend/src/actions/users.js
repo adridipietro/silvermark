@@ -1,4 +1,5 @@
-import {  GET_USERS, LOGIN_USER, LOGOUT_USER, STORE_TOKEN } from './types'
+import {  GET_USERS, LOGIN_USER, LOGOUT_USER, STORE_TOKEN, ERROR } from './types'
+
 
 
 export function signupUser(name, email, password){
@@ -21,6 +22,9 @@ export function signupUser(name, email, password){
             localStorage.setItem('password', json.password)
             return dispatch(storeToken(json))
         })
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -37,6 +41,9 @@ export function getUsers(){
         fetch("http://localhost:3000/users", dataObject)
         .then(resp => resp.json())
         .then(json => dispatch({type: GET_USERS, payload: json}))
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -59,6 +66,9 @@ export function loginUser(email, password){
             localStorage.setItem('password', json.password)
             return dispatch({type: LOGIN_USER, payload: json})
         })
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -76,6 +86,9 @@ export function logoutUser(){
         .then(json => {
             return dispatch({type: LOGOUT_USER, payload: null})
         })
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -83,5 +96,12 @@ export function storeToken(token){
     return {
         type: STORE_TOKEN,
         payload: token
+    }
+}
+
+export function error(error){
+    return {
+        type: ERROR,
+        payload: error
     }
 }

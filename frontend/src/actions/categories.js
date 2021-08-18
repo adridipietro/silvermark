@@ -1,4 +1,4 @@
-import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, FILTER_BY_CATEGORY } from './types'
+import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, FILTER_BY_CATEGORY, ERROR } from './types'
 
 
 export function createCategory(category){
@@ -14,6 +14,9 @@ export function createCategory(category){
         fetch("http://localhost:3000/categories", dataObject)
         .then(resp => resp.json())
         .then(json => dispatch({type: CREATE_CATEGORY, payload: json}))
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -28,6 +31,9 @@ export function deleteCategory(id){
         })
         .then(response => response.json())
         .then(json => dispatch({type: DELETE_CATEGORY, payload: json}))
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -36,6 +42,9 @@ export function getCategories(){
         fetch("http://localhost:3000/categories")
         .then(resp => resp.json())
         .then(json => dispatch({type: GET_CATEGORIES, payload: json}))
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -58,5 +67,8 @@ export function filterByCategory(id){
         fetch(`http://localhost:3000/categories/${id}`, dataObject)
         .then(resp => resp.json())
         .then(json => dispatch({type: FILTER_BY_CATEGORY, payload: json}))
+        .catch(error => {
+            return dispatch({type: ERROR, payload: error})
+        })
     }
 }

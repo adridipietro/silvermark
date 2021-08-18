@@ -1,4 +1,5 @@
-import { CREATE_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK } from './types'
+import { CREATE_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR } from './types'
+
 
 export function createBookmark(headline, description, web_url, favorite, token){
     return (dispatch) => {
@@ -14,6 +15,9 @@ export function createBookmark(headline, description, web_url, favorite, token){
         fetch('http://localhost:3000/bookmarks', dataObject)
         .then(response => response.json())
         .then(json => dispatch({type: CREATE_BOOKMARK, payload: json}))
+        .catch(error => {
+            dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -23,6 +27,9 @@ export function getBookmarks(){
         .then(resp => resp.json())
         .then(json => {
             dispatch({type: GET_BOOKMARKS, payload: json })
+        })
+        .catch(error => {
+            dispatch({type: ERROR, payload: error})
         })
     }
 }
@@ -39,6 +46,9 @@ export function deleteBookmark(id, token){
         })
         .then(response => response.json())
         .then(json => dispatch({type: DELETE_BOOKMARK, payload: json}))
+        .catch(error => {
+            dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -64,6 +74,9 @@ export function favoriteBookmark(id, token){
             fetch(`http://localhost:3000/bookmarks/${id}`, dataObject)
             .then(response => response.json())
             .then(json => dispatch({type: FAVORITE_BOOKMARK, payload: json}))
+            .catch(error => {
+                dispatch({type: ERROR, payload: error})
+            })
         }
 
 }
@@ -90,6 +103,9 @@ export function editBookmark(id, token) {
         fetch(`http://localhost:3000/bookmarks/${id}`, dataObject)
         .then(response => response.json())
         .then(json => dispatch({type: EDIT_BOOKMARK, payload: json}))
+        .catch(error => {
+            dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
