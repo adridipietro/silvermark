@@ -17,72 +17,79 @@ const link = {
 
   
 export default class Navbar extends Component {
+
+    state = {
+        loggedIn: false
+    }
     
 
     render() {
         return (
             <div className="navbar">
-                <NavLink
-                    to="/"
-                    className="nav-link"
-                    exact
-                    style={link}
-                    activeStyle={{
-                    background: 'black',
-                    color: 'white'
-                    }}
-                >HOME</NavLink>
-                <NavLink
-                    to="/login"
-                    className="nav-link"
-                    exact
-                    style={link}
-                    activeStyle={{
-                    background: 'black',
-                    color: 'white'
-                    }} 
-                    
-                >LOGIN</NavLink>
-                <NavLink
-                    to="/signup"
-                    className="nav-link"
-                    exact
-                    style={link}
-                    activeStyle={{
-                    background: 'black',
-                    color: 'white'
-                    }}
-                >SIGNUP</NavLink>
-                <NavLink
-                    to="/logout"
-                    className="nav-link"
-                    exact
-                    style={link}
-                    activeStyle={{
-                    background: 'black',
-                    color: 'white'
-                    }}
-                >LOGOUT</NavLink>
-                <NavLink
-                    to="/bookmarks"
-                    className="nav-link"
-                    exact
-                    style={link}
-                    activeStyle={{
-                    background: 'black',
-                    color: 'white'
-                    }}
-                >BOOKMARKS</NavLink>
-                <NavLink
-                    to="/categories"
-                    className="nav-link"
-                    exact
-                    style={link}
-                    activeStyle={{
-                    background: 'black',
-                    color: 'white'
-                    }}
-                >CATEGORIES</NavLink>
+                {!this.state.loggedIn ?
+                <React.Fragment>
+                    <NavLink
+                        to="/logout" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >LOGOUT</NavLink>
+                    <NavLink to="/bookmarks" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >BOOKMARKS</NavLink>
+                    <NavLink to="/categories" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >CATEGORIES</NavLink>
+                    <NavLink to="/about" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >ABOUT US</NavLink>
+                </React.Fragment>
+               : 
+               <React.Fragment>
+                   <NavLink to="/" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >HOME</NavLink>
+                    <NavLink to="/about" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >ABOUT US</NavLink>
+                   <NavLink to="/login" exact className="nav-link"
+                       style={link}
+                       activeStyle={{
+                       background: 'black',
+                       color: 'white'
+                       }} 
+                   >LOGIN</NavLink>
+                   <NavLink to="/signup" exact className="nav-link"
+                       style={link}
+                       activeStyle={{
+                       background: 'black',
+                       color: 'white'
+                       }}
+                   >SIGNUP</NavLink>
+               </React.Fragment>
+               }
             </div>
 
             

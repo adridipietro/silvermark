@@ -26,7 +26,7 @@ class Login extends React.Component {
         e.preventDefault()
         const { email, password } = this.state
         this.props.loginUser({ email, password })
-        this.props.history.push('/')
+        this.props.history.push('/bookmarks')
         
     }
 
