@@ -10,6 +10,7 @@ import Signup from './Signup'
 import Logout from './Logout'
 import BookmarkForm from './BookmarkForm'
 import Bookmarks from '../containers/Bookmarks'
+import Home from '.../containers/Home'
 import Categories from '../containers/Categories'
 import {connect} from 'react-redux'
 import history from '../history'
@@ -35,10 +36,11 @@ class App extends React.Component {
         <Router history={history}>
             <Navbar/>
             <Switch>
+              <Route exact path='/' component={Home}/>
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} filterByCategory={this.props.filterByCategory} {...routeProps} /> }/>
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} editBookmark={this.props.editBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps} />}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} editBookmark={this.props.editBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps} />}/>
               <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark} {...routeProps}/>}/>
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
             </Switch>

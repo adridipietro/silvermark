@@ -12,7 +12,7 @@
 users = User.create!([
     {
         name: "Adri",
-        email: "adri@gmail.com",
+        email: "adriana@gmail.com",
         password: "password!"
     }
 ])

@@ -3,9 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
-  def create 
-    super
-  end
+  
 
   private
 
@@ -13,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       render json: {
         status: {code: 200, message: 'Signed up sucessfully.'},
-        data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
+        data: resource
       }
     else
       render json: {

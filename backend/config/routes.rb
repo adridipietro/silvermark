@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users, path: '', path_names: {
-    login: 'login',
-    logout: 'logout',
+    sign_in: 'login',
+    sign_out: 'logout',
     registration: 'signup'
   },
   controllers: {
@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   }
   resources :categories
   resources :bookmarks
+
+  get '/current_user', to: 'current_user#index'
   
   #post '/signup', :to => 'users/registrations#create'
 

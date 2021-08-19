@@ -16,9 +16,9 @@ class Signup extends React.Component {
       handleSubmit = (e) =>{
           e.preventDefault()
           const { name, email, password } = this.state
-          //debugger
+          debugger
           this.props.signupUser({ name, email, password })
-          //this.props.history.push('/')
+          this.props.history.push('/')
           
       }
 
@@ -51,16 +51,10 @@ class Signup extends React.Component {
 
 }
 
-const mapState = (currentState) => {
-  return{
-    user: currentState.users.user
-  }
-}
-
-const mapDispatch = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    signupUser: (name, email, password) => dispatch(signupUser(name, email, password))
-  }
+    signupUser: (data) => dispatch(signupUser(data))
+  };
 }
 
-export default connect(mapState, mapDispatch)(Signup)
+export default connect(null, mapDispatchToProps)(Signup)

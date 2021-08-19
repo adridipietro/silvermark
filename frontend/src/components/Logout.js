@@ -8,7 +8,8 @@ const Logout = () => {
     const history = useHistory()
     
     const handleClick = () => {
-        logoutUser().then(() => history.push('/'))
+        logoutUser()
+        history.push('/')
     }
     return (
         <div className="logout-confirmation">
