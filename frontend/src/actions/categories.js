@@ -1,13 +1,14 @@
 import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, FILTER_BY_CATEGORY, ERROR } from './types'
 
 
-export function createCategory(category){
+export function createCategory(category, token){
     return (dispatch) => {
         const dataObject = {
             method: "POST",
             headers: {
                 "Accepts": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(category)
         }
@@ -20,13 +21,14 @@ export function createCategory(category){
     }
 }
 
-export function deleteCategory(id){
+export function deleteCategory(id, token){
     return(dispatch)=> {
         fetch(`http://localhost:3000/categories/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
-                "Accepts": 'application/json'
+                "Accepts": 'application/json',
+                Authorization: `Bearer ${token}`
             }
         })
         .then(response => response.json())
@@ -48,7 +50,7 @@ export function getCategories(){
     }
 }
 
-export function filterByCategory(id){
+export function filterByCategory(id, token){
     return (dispatch, getState) => {
         let category = getState().categories.find(category => category.id === id)
             const data = {
@@ -60,7 +62,8 @@ export function filterByCategory(id){
             method: "POST",
             headers: {
                 "Accepts": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(data)
         }

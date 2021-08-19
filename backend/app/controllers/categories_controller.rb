@@ -3,7 +3,6 @@ class CategoriesController < ApplicationController
 
   
   def index
-      byebug
       @categories = Category.all
       render json: @categories
   end

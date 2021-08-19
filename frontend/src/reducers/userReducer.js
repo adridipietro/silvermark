@@ -1,12 +1,11 @@
 import {
     SIGNUP_USER, 
-    GET_USERS,
     LOGIN_USER,
     LOGOUT_USER,
     STORE_TOKEN
 } from '../actions/types'
 
-const INITIAL_STATE = {
+/* const INITIAL_STATE = {
     user: {
         token: null, 
         name: '', 
@@ -14,9 +13,9 @@ const INITIAL_STATE = {
         password: '',
         id: ''
     }
-}
+} */
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = {user: []}, action) => {
     switch(action.type){
         case SIGNUP_USER:
             return {
@@ -25,8 +24,6 @@ export default (state = INITIAL_STATE, action) => {
                 password: action.payload.password,
                 email: action.payload.email
             }
-        case GET_USERS:
-            return {...state, users: action.payload}
         case LOGIN_USER:
             return {
                 token: action.payload.token, 

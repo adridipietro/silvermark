@@ -1,4 +1,4 @@
-import {  GET_USERS, LOGIN_USER, LOGOUT_USER, STORE_TOKEN, ERROR } from './types'
+import {  SIGNUP_USER, LOGIN_USER, LOGOUT_USER, STORE_TOKEN, ERROR } from './types'
 
 
 
@@ -8,45 +8,23 @@ export function signupUser(name, email, password){
             method: "POST",
             headers: {
                 "Accepts": "application/json",
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": '*'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({user: {name, email, password}})
         }
         fetch("http://localhost:3000/signup", dataObject)
-        .then(resp => resp.json())
-        .then(json => {
-            localStorage.setItem('token', json.token)
-            localStorage.setItem('id', json.id)
-            localStorage.setItem('name', json.name)
-            localStorage.setItem('email', json.email)
-            localStorage.setItem('password', json.password)
-            return dispatch(storeToken(json))
-        })
-        .catch(error => {
-            return dispatch({type: ERROR, payload: error})
+        .then(async (resp) => {
+            if (resp.ok) {
+                localStorage.setItem('token', json.token)
+                const json = await resp
+                    .json()
+                return dispatch({ type: SIGNUP_USER, payload: json })
+               
+            } 
         })
     }
 }
 
-
-export function getUsers(){
-    return(dispatch) => {
-        const dataObject = {
-            method: "GET",
-            headers: {
-                "Accepts": "application/json",
-                "Content-Type": "application/json"
-            }
-        }
-        fetch("http://localhost:3000/users", dataObject)
-        .then(resp => resp.json())
-        .then(json => dispatch({type: GET_USERS, payload: json}))
-        .catch(error => {
-            return dispatch({type: ERROR, payload: error})
-        })
-    }
-}
 
 export function loginUser(email, password){
     return(dispatch) => {

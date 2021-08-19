@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { signupUser } from '../actions/index'
 import { connect } from 'react-redux'
+import history from '../history';
 
 class Signup extends React.Component {
     state = {
@@ -12,44 +13,39 @@ class Signup extends React.Component {
     }
 
 
-    handleSubmit = (e) =>{
-      // prevent default
-      // clear the form
-      // assign the state to var
-      // fetch call to api
-      // method, headers, body
-      e.preventDefault()
-      const { name, email, password } = this.state
-      this.props.signupUser({name, email, password})
-  }
+      handleSubmit = (e) =>{
+          e.preventDefault()
+          const { name, email, password } = this.state
+          //debugger
+          this.props.signupUser({ name, email, password })
+          //this.props.history.push('/')
+          
+      }
 
 
-  handleChange = (e) => {
-    //debugger
-    this.setState({[e.target.name]: e.target.value})
-    // html name attribute as a key
-    // uses the key to tell what part of state we are going to update
-  }
+      handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+      }
 
-    render() {
-        let { name, email, password } = this.state
-          return (
-              <div className="signup-form">
-                <h1>Signup</h1>
-                <form onSubmit={this.handleSubmit}>
-                  <div>
-                    <TextField type="text" name="name" placeholder="Name" onChange={this.handleChange} value={name}/>
-                  </div>
-                  <div>
-                    <TextField type="text" name="email" placeholder="Email" onChange={this.handleChange} value={email}/>
-                  </div>
-                  <div>
-                    <TextField type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} />
-                  </div><br></br>
-                  <Button type="submit">Signup</Button>
-                </form>
-              </div>
-          )
+      render () {
+        const { name, email, password } = this.state
+        return (
+            <div className="signup-form">
+              <h1>Signup</h1>
+              <form onSubmit={this.handleSubmit}>
+                <div>
+                  <TextField type="text" name="name" placeholder="Name" onChange={this.handleChange} value={name}/>
+                </div>
+                <div>
+                  <TextField type="text" name="email" placeholder="Email" onChange={this.handleChange} value={email}/>
+                </div>
+                <div>
+                  <TextField type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} />
+                </div><br></br>
+                <Button type="submit">Signup</Button>
+              </form>
+            </div>
+        )
 
       }
 

@@ -5,9 +5,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create 
     super
-    byebug
   end
-  
+
   private
 
   def respond_with(resource, _opts = {})

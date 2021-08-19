@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {  Router, Route, Switch } from 'react-router-dom'
 // importing BrowserRouter from react-router-dom, creating alias Router.
 // react-router-dom is a node package
 // when the URL matches the specified path, render that component
@@ -12,6 +12,7 @@ import BookmarkForm from './BookmarkForm'
 import Bookmarks from '../containers/Bookmarks'
 import Categories from '../containers/Categories'
 import {connect} from 'react-redux'
+import history from '../history'
 import { getBookmarks, createBookmark, deleteBookmark, editBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory, filterByCategory } from '../actions/index'
 
@@ -19,8 +20,8 @@ import { getCategories, createCategory, deleteCategory, filterByCategory } from 
 
 
 class App extends React.Component {
+  
   componentDidMount(){
-
     this.props.getBookmarks()
     this.props.getCategories()
   }
@@ -31,7 +32,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Router>
+        <Router history={history}>
             <Navbar/>
             <Switch>
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} filterByCategory={this.props.filterByCategory} {...routeProps} /> }/>

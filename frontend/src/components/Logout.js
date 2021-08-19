@@ -2,10 +2,13 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 import { logoutUser } from '../actions/index'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const Logout = () => {
+    const history = useHistory()
+    
     const handleClick = () => {
-        logoutUser()
+        logoutUser().then(() => history.push('/'))
     }
     return (
         <div className="logout-confirmation">

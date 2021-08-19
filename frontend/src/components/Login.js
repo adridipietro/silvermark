@@ -3,6 +3,8 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { loginUser } from '../actions/index'
 import { connect } from 'react-redux'
+import history from '../history'
+
 
 
 class Login extends React.Component {
@@ -10,6 +12,8 @@ class Login extends React.Component {
       email: '',
       password: ''
     }
+
+
 
     
 
@@ -22,15 +26,13 @@ class Login extends React.Component {
         e.preventDefault()
         const { email, password } = this.state
         this.props.loginUser({ email, password })
+        //this.props.history.push('/')
         
     }
 
     
     handleChange = (e) => {
-      //debugger
       this.setState({[e.target.name]: e.target.value})
-      // html name attribute as a key
-      // uses the key to tell what part of state we are going to update
     }
     
    render() {

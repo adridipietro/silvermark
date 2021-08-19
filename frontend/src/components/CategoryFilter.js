@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes  from 'prop-types'
+import { filterByCategory } from '../actions/index'
 
 
 const CategoryFilter = (props) => {
@@ -12,7 +13,8 @@ const CategoryFilter = (props) => {
 
 
     const handleChange = () => {
-        console.log('hi')
+        const { categories } = this.props
+        filterByCategory({categories})
     }
 
     return (

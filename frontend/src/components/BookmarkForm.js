@@ -3,19 +3,19 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import PropTypes from 'prop-types'
 import { createBookmark } from '../actions/index'
+import { connect } from 'react-redux'
 
-export default class BookmarkForm extends React.Component {
+class BookmarkForm extends React.Component {
     
     state = {
+        bookmark: {
             headline: '',
             description: '',
             web_url: '',
             favorite: false,
-            category_id: null,
-            categories: []
-    
+            category_id: null
+        }
     }
 
 
@@ -23,11 +23,8 @@ export default class BookmarkForm extends React.Component {
     
 
     handleSubmit = (e) => {
-        // prevent default
-        // clear form
-        // add to page, update state
         e.preventDefault()
-        createBookmark({...this.state})
+        this.props.createBookmark()
         this.setState({
             headline: '',
             web_url: '',
@@ -41,16 +38,16 @@ export default class BookmarkForm extends React.Component {
 
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
-        // html name attribute as a key
-        // uses the key to tell what part of state we are going to update
     }
 
-    fetchCategoriesForSelect = () => {
-            fetch('http://localhost:3000/categories')
-                .then(resp => resp.json())
-                .then(json => {
-                    this.setState({ categories: json})
-            })
+    fetchCategoriesForSelect = (e) => {
+        if (e.target.id === "category-input"){
+            return this.props.categories.map(category => {
+                debugger
+                return <MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>
+            }) 
+        }
+
 
     }
 
@@ -58,20 +55,21 @@ export default class BookmarkForm extends React.Component {
 
 
     render() {
-        const { headline, description, web_url} = this.state
+        const { headline, description, web_url, category_id } = this.state
         return (
             <form className="bookmark-form" onSubmit={this.handleSubmit}  >
                 <TextField id="headline-input" type="text" name="headline"   placeholder="headline" defaultValue={headline} onChange={this.handleChange}/><br></br>
                 <TextField id="description-input" type="text" name="description"  placeholder="description"  defaultValue={description} onChange={this.handleChange}/><br></br>
                 <TextField id="web-url-input" type="text" name="web_url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
-                <Select id="category-input" >
-                    {this.state.categories.map(category => <MenuItem key={category.id}>{category.name}</MenuItem>)}
-                </Select><br></br>
+                <Select id="category-input" label="Category"value={category_id} onClick={this.fetchCategoriesForSelect} onChange={this.handleChange}></Select>
+                <br></br>
                 <Button type="submit" className="submit-button" >Submit</Button><br></br>
             </form>
         )
     }
 }
 
+
+export default connect(null, { createBookmark })(BookmarkForm)
 
 // controlled forms: a form whose input (or elements) are controlled by React's state; control the value through state
