@@ -17,6 +17,12 @@ div.navbar {
 
 }
 
+.MuiListItem-container{
+  position: center;
+  max-width: auto;
+
+}
+
 select:hover{
   color: black
 }
@@ -40,6 +46,11 @@ select {
 }
 
 
+.categories-container{
+  padding: 1em;
+  margin: 1rem 2rem;
+}
+
 
 .bookmark-card {
   text-align: center;
@@ -51,15 +62,7 @@ select {
   margin: 1rem 2rem;
 }
 
-.category-card {
-  text-align: center;
-  border: grey solid 1px;
-  padding: 1rem;
-  width: 17rem;
-  height: 20rem;
-  display: inline-grid;
-  margin: 1rem 2rem;
-}
+
 
 span.MuiButton-label:focus {
   background-color: black

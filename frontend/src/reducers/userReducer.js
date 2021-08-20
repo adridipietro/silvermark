@@ -5,17 +5,11 @@ import {
     STORE_TOKEN
 } from '../actions/types'
 
-/* const INITIAL_STATE = {
-    user: {
-        token: null, 
-        name: '', 
-        email: '',
-        password: '',
-        id: ''
-    }
-} */
+const INITIAL_STATE = {
+    loggedIn: false
+} 
 
-export default (state = {user: []}, action) => {
+export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case SIGNUP_USER:
             return {
@@ -31,7 +25,11 @@ export default (state = {user: []}, action) => {
                 email: action.payload.email
             }
         case LOGOUT_USER:
-            return { ...state, user: state.users.filter(user => user.id !== action.payload.id)}
+            return { 
+                ...state, 
+                user: state.users.filter(user => parseInt(user.id) !== action.payload.id),
+                loggedIn: false
+            }
 
         case STORE_TOKEN:
             return {

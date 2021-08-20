@@ -10,11 +10,11 @@ import {
 export default (state = {bookmarks: []}, action) => {
     switch (action.type) {
         case GET_BOOKMARKS:
-            return {bookmarks: action.payload}
+            return {...state, bookmarks: action.payload}
         case CREATE_BOOKMARK:
-            return {...state, bookmarks: state.concat(action.payload)}
+            return {...state, bookmarks: [...state.bookmarks, action.payload]}
         case EDIT_BOOKMARK:
-            const updatedBookmarks = state.map(bookmark => {
+            const updatedBookmarks = state.bookmarks.map(bookmark => {
                 if (bookmark.id === action.id){
                     return {...bookmark, ...action.payload}
                 }
@@ -22,7 +22,7 @@ export default (state = {bookmarks: []}, action) => {
             })
             return updatedBookmarks
         case FAVORITE_BOOKMARK:
-            return state.map(bookmark => {
+            return state.bookmarks.map(bookmark => {
                 if (bookmark.id !== action.payload){
                     return {
                         ...bookmark, favorite: !bookmark.favorite
@@ -30,7 +30,8 @@ export default (state = {bookmarks: []}, action) => {
                 }
             })
         case DELETE_BOOKMARK:
-            return { ...state, bookmarks: state.bookmarks.filter(bookmark => bookmark.id !== action.payload.id) }
+            const removeDeleteBookmark = state.bookmarks.filter(bookmark => bookmark.id !== action.payload.id) 
+            return {bookmarks: removeDeleteBookmark}
         default:
             return state
     }

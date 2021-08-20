@@ -5,7 +5,7 @@ import { filterByCategory } from '../actions/index'
 
 const CategoryFilter = (props) => {
     
-    const renderCategoriesForSelect = (categories) => {
+    const renderCategoriesForSelect = () => {
         return props.categories.map(category => {
            return <option key={category.id} value={category.name}>{category.name}</option>
         })
@@ -20,7 +20,7 @@ const CategoryFilter = (props) => {
     return (
         <div className="category-select">
             <select className="select-input" placeholder="FILTER" label="FILTER" onChange={handleChange}>
-                {renderCategoriesForSelect()}
+                {renderCategoriesForSelect}
             </select>
         </div>
     )

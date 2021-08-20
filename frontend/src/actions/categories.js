@@ -6,18 +6,27 @@ export function createCategory(category, token){
         const dataObject = {
             method: "POST",
             headers: {
-                "Accepts": "application/json",
                 "Content-Type": "application/json",
+                "Accepts": "application/json",
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(category)
+            body: JSON.stringify({
+                ...category
+            })
         }
-        fetch("http://localhost:3000/categories", dataObject)
-        .then(resp => resp.json())
-        .then(json => dispatch({type: CREATE_CATEGORY, payload: json}))
-        .catch(error => {
-            return dispatch({type: ERROR, payload: error})
+        fetch('http://localhost:3000/categories', dataObject)
+        .then(response => {
+            if (response.ok) {
+               response.json().then(json => {
+                    localStorage.setItem('token', json.token)
+                    dispatch({type: CREATE_CATEGORY, payload: json})
+               })
+            }
         })
+        .catch(error => {
+            dispatch({type: ERROR, payload: error})
+        })
+
     }
 }
 

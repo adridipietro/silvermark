@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
-import {  Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 // importing BrowserRouter from react-router-dom, creating alias Router.
 // react-router-dom is a node package
 // when the URL matches the specified path, render that component
@@ -17,18 +17,18 @@ import history from '../history'
 import AboutUs from '../containers/AboutUs'
 import { getBookmarks, createBookmark, deleteBookmark, editBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory, filterByCategory } from '../actions/index'
+import { signupUser, loginUser, logoutUser } from '../actions/index'
 
 
 
 
 class App extends React.Component {
-  state = {
-    loggedIn: false
-  }
+  
   
   componentDidMount(){
-    this.props.getBookmarks()
-    this.props.getCategories()
+      this.props.getBookmarks()
+      this.props.getCategories()
+    
   }
 
   
@@ -38,7 +38,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router history={history}>
-            <Navbar {...this.state.loggedIn}/>
+            <Navbar />
             <Switch>
               <Route exact path='/' render={routeProps => <Home {...routeProps}/>}/>
               <Route exact path='/about' render={routeProps => <AboutUs {...routeProps}/>} />
@@ -46,7 +46,7 @@ class App extends React.Component {
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
               <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} editBookmark={this.props.editBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps} />}/>
-              <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark} {...routeProps}/>}/>
+              <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark} categories={this.props.categories} {...routeProps}/>}/>
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
             </Switch>
         </Router>
@@ -60,7 +60,8 @@ class App extends React.Component {
 const mapStateToProps = (currentState) => {
   return {
     bookmarks: currentState.bookmarks.bookmarks,
-    categories: currentState.categories.categories
+    categories: currentState.categories.categories,
+    users: currentState.users.user
   }
 }
 
@@ -80,8 +81,10 @@ const mapDispatchToProps = (dispatch) => {
     createCategory: (category) => dispatch(createCategory(category)),
     filterByCategory: (id) => dispatch(filterByCategory(id)),
     deleteCategory: (id) => dispatch(deleteCategory(id)),
-    getCategories: (categories) => dispatch(getCategories(categories))
-
+    getCategories: (categories) => dispatch(getCategories(categories)),
+    signupUser: (user) => dispatch(signupUser(user)),
+    loginUser: (user) => dispatch(loginUser(user)),
+    logoutUser: () => dispatch(logoutUser())
   }
 }
 

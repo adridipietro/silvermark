@@ -19,14 +19,14 @@ const link = {
 export default class Navbar extends Component {
 
     state = {
-        loggedIn: false
+        loggedIn: true
     }
     
 
     render() {
         return (
             <div className="navbar">
-                {!this.state.loggedIn ?
+                {this.state.loggedIn === true  ?
                 <React.Fragment>
                     <NavLink
                         to="/logout" exact className="nav-link"

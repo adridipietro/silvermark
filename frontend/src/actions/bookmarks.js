@@ -1,23 +1,29 @@
 import { CREATE_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR } from './types'
 
 
-export function createBookmark(headline, description, web_url, favorite, token){
+export function createBookmark(bookmark){
     return (dispatch) => {
-        const dataObject = {
-            method: "POST",
+        fetch('http://localhost:3000/bookmarks', {
+            method: "post",
             headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json",
-                Authorization: `Bearer ${token}`
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({bookmark: {headline, description, web_url, favorite, token}})
-        }
-        fetch('http://localhost:3000/bookmarks', dataObject)
-        .then(response => response.json())
-        .then(json => dispatch({type: CREATE_BOOKMARK, payload: json}))
+            body: JSON.stringify({
+                ...bookmark
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+               response.json().then(json => {
+                   debugger
+                    dispatch({type: CREATE_BOOKMARK, payload: json})
+               })
+            }
+        })
         .catch(error => {
             dispatch({type: ERROR, payload: error})
         })
+
     }
 }
 
@@ -34,25 +40,24 @@ export function getBookmarks(){
     }
 }
 
-export function deleteBookmark(id, token){
+export function deleteBookmark(id) {
     return(dispatch)=> {
         fetch(`http://localhost:3000/bookmarks/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
-                "Accepts": 'application/json',
-                Authorization: `Bearer ${token}`
+                "Accepts": 'application/json'
             }
         })
         .then(response => response.json())
-        .then(json => dispatch({type: DELETE_BOOKMARK, payload: json}))
+        .then(id => {debugger})
         .catch(error => {
             dispatch({type: ERROR, payload: error})
         })
     }
 }
 
-export function favoriteBookmark(id, token){
+export function favoriteBookmark(id){
         return(dispatch, getState) => {
             const bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
             const data = {
@@ -67,7 +72,6 @@ export function favoriteBookmark(id, token){
                 headers: {
                     "Content-Type": "application/json",
                     "Accepts": "application/json",
-                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(data)
             }

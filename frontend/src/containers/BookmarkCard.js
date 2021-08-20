@@ -4,24 +4,32 @@ import Button from "@material-ui/core/Button"
 import DeleteIcon from "@material-ui/icons/Delete"
 import EditIcon from "@material-ui/icons/Edit"
 import FavoriteIcon from "@material-ui/icons/Favorite"
+import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { deleteBookmark, editBookmark, favoriteBookmark } from '../actions/index'
 
 
 const BookmarkCard = (props) => {
+   // debugger
+    const history = useHistory()
+
+
     const handleFavorite = () => {
-        favoriteBookmark(props.id)
+        favoriteBookmark()
+        history.push('/bookmarks')
     }
 
 
 
     const handleEdit= () => {
         <EditForm />
-        editBookmark(props.id)
+        editBookmark()
     }
 
     const handleDelete = () => {
-        debugger
-       deleteBookmark(props.id)
+        //debugger
+       deleteBookmark()
+       history.push('/bookmarks')
     
     }
 
@@ -34,7 +42,7 @@ const BookmarkCard = (props) => {
                 <p className="bookmark-web-url" >{props.web_url}</p>
                 <Button 
                     id={props.id}
-                    onClick={handleFavorite()}
+                    onClick={handleFavorite}
                     className="favorite-button" 
                     startIcon={<FavoriteIcon/>}>
                 </Button><br></br>
@@ -61,10 +69,12 @@ const BookmarkCard = (props) => {
 
 
     
-    
-
-
-
-
-    
-export default BookmarkCard
+const mapDispatchToProps = (dispatch) => {
+    return {
+      deleteBookmark: (id) => dispatch(deleteBookmark(id)),
+      favoriteBookmark: (id) => dispatch(favoriteBookmark(id)),
+      editBookmark: (id) => dispatch(editBookmark(id))
+    };
+  }
+  
+export default connect(null, mapDispatchToProps)(BookmarkCard)

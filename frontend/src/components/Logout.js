@@ -19,11 +19,7 @@ const Logout = () => {
     )
 }
 
-const mapState = (currentState) => {
-    return {
-      user: currentState.users.user
-    }
-}
+
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -31,4 +27,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapState, mapDispatchToProps)(Logout)
+export default connect(null, mapDispatchToProps)(Logout)

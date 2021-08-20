@@ -20,8 +20,7 @@ export function signupUser(data){
             if (resp.ok) {
                 resp.json().then(json => {
                     localStorage.setItem('token', json.token)
-
-                     dispatch({ type: SIGNUP_USER, payload: json })
+                    dispatch({ type: SIGNUP_USER, payload: json })
                 })
                
             } 

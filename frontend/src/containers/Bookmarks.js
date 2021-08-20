@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // fetching a list of our bookmarks from our api
 import BookmarkCard from './BookmarkCard'
 import BookmarkForm from '../components/BookmarkForm'
@@ -6,6 +6,11 @@ import PropTypes  from 'prop-types'
 
 
 const Bookmarks = (props) => {
+    const bookmarks = props.bookmarks
+
+    useEffect(() => {
+        return bookmarks
+    })
   
     
     const renderBookmarkCollection = () => {
