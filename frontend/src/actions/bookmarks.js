@@ -1,12 +1,13 @@
-import { CREATE_BOOKMARK, GET_BOOKMARKS, EDIT_BOOKMARK, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR } from './types'
+import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR } from './types'
 
 
-export function createBookmark(bookmark){
+export function createBookmark(bookmark, token){
     return (dispatch) => {
         fetch('http://localhost:3000/bookmarks', {
             method: "post",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 ...bookmark
@@ -15,7 +16,6 @@ export function createBookmark(bookmark){
         .then(response => {
             if (response.ok) {
                response.json().then(json => {
-                   debugger
                     dispatch({type: CREATE_BOOKMARK, payload: json})
                })
             }
@@ -27,12 +27,20 @@ export function createBookmark(bookmark){
     }
 }
 
-export function getBookmarks(){
+export function getBookmarks(token){
     return(dispatch) => {
-        fetch("http://localhost:3000/bookmarks")
-        .then(resp => resp.json())
-        .then(json => {
-            dispatch({type: GET_BOOKMARKS, payload: json })
+        fetch("http://localhost:3000/bookmarks", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+               response.json().then(json => {
+                    dispatch({type: GET_BOOKMARKS, payload: json})
+               })
+            }
         })
         .catch(error => {
             dispatch({type: ERROR, payload: error})
@@ -47,10 +55,16 @@ export function deleteBookmark(id) {
             headers: {
                 "Content-Type": 'application/json',
                 "Accepts": 'application/json'
+            },
+            body: JSON.stringify(id)
+        })
+        .then(response => {
+            if (response.ok) {
+               response.json().then(() => {
+                    dispatch({type: DELETE_BOOKMARK, payload: null})
+               })
             }
         })
-        .then(response => response.json())
-        .then(id => {debugger})
         .catch(error => {
             dispatch({type: ERROR, payload: error})
         })
@@ -71,13 +85,18 @@ export function favoriteBookmark(id){
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accepts": "application/json",
+                    "Accepts": "application/json"
                 },
                 body: JSON.stringify(data)
             }
             fetch(`http://localhost:3000/bookmarks/${id}`, dataObject)
-            .then(response => response.json())
-            .then(json => dispatch({type: FAVORITE_BOOKMARK, payload: json}))
+            .then(response => {
+                if (response.ok) {
+                   response.json().then(json => {
+                        dispatch({type: FAVORITE_BOOKMARK, payload: json})
+                   })
+                }
+            })
             .catch(error => {
                 dispatch({type: ERROR, payload: error})
             })
@@ -85,7 +104,7 @@ export function favoriteBookmark(id){
 
 }
 
-export function editBookmark(id, token) {
+/* export function editBookmark(id, token) {
     return(dispatch, getState) => {
         let bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
         const data = {
@@ -111,5 +130,5 @@ export function editBookmark(id, token) {
             dispatch({type: ERROR, payload: error})
         })
     }
-}
+} */
 

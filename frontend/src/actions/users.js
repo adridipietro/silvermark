@@ -56,22 +56,25 @@ export function loginUser(data){
     }
 }
 
-export function logoutUser() {
+export function logoutUser(token) {
     return(dispatch)=> {
         const dataObject = {
             method: "DELETE",
             headers: {
                 "Accepts": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             }
         }
         fetch("http://localhost:3000/logout", dataObject)
-        .then(resp => resp.json())
-        .then(() => {
-            return dispatch({type: LOGOUT_USER, payload: null})
-        })
-        .catch(error => {
-            return dispatch({type: ERROR, payload: error})
+        .then(resp => {
+            //debugger
+            if (resp.ok) {
+                resp.json().then(json => {
+                    dispatch({ type: LOGOUT_USER, payload: json })
+                })
+               
+            } 
         })
     }
 }

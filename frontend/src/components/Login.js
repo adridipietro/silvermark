@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { loginUser } from '../actions/index'
@@ -14,18 +14,10 @@ class Login extends React.Component {
     }
 
 
-
-    
-
      handleSubmit = (e) =>{
-        // prevent default
-        // clear the form
-        // assign the state to var
-        // fetch call to api
-        // method, headers, body
         e.preventDefault()
-        const { email, password } = this.state
-        this.props.loginUser({ email, password })
+        let credentials  = this.state
+        this.props.loginUser(credentials)
         this.props.history.push('/bookmarks')
         
     }
@@ -55,18 +47,14 @@ class Login extends React.Component {
 
 } 
 
-const mapState = (currentState) => {
-  return {
-    user: currentState.users.user
-  }
-}
+
 
 const mapDispatch = (dispatch) => {
   return {
-    loginUser: (data) => dispatch(loginUser(data))
+    loginUser: (credentials) => dispatch(loginUser(credentials))
     
   }
 }
 
 
-export default connect(mapState, mapDispatch)(Login)
+export default connect(null, mapDispatch)(Login)

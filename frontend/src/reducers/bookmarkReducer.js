@@ -1,6 +1,5 @@
 import {
     CREATE_BOOKMARK,
-    EDIT_BOOKMARK,
     GET_BOOKMARKS,
     FAVORITE_BOOKMARK,
     DELETE_BOOKMARK
@@ -12,15 +11,15 @@ export default (state = {bookmarks: []}, action) => {
         case GET_BOOKMARKS:
             return {...state, bookmarks: action.payload}
         case CREATE_BOOKMARK:
-            return {...state, bookmarks: [...state.bookmarks, action.payload]}
-        case EDIT_BOOKMARK:
+            return {...state, bookmarks: action.bookmarks}
+        /* case EDIT_BOOKMARK:
             const updatedBookmarks = state.bookmarks.map(bookmark => {
                 if (bookmark.id === action.id){
                     return {...bookmark, ...action.payload}
                 }
                 return bookmark
             })
-            return updatedBookmarks
+            return updatedBookmarks */
         case FAVORITE_BOOKMARK:
             return state.bookmarks.map(bookmark => {
                 if (bookmark.id !== action.payload){
