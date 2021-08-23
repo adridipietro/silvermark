@@ -1,19 +1,19 @@
 import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR } from './types'
 
 
-export function createBookmark(bookmark, token){
+export function createBookmark(bookmark){
     return (dispatch) => {
         fetch('http://localhost:3000/bookmarks', {
             method: "post",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 ...bookmark
             })
         })
         .then(response => {
+            debugger
             if (response.ok) {
                response.json().then(json => {
                     dispatch({type: CREATE_BOOKMARK, payload: json})

@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react'
-// fetching a list of our bookmarks from our api
+import React from 'react'
 import BookmarkCard from './BookmarkCard'
 import BookmarkForm from '../components/BookmarkForm'
-import PropTypes  from 'prop-types'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem' 
+import { connect } from 'react-redux'
+import { filterByCategory } from '../actions'
 
 
 const Bookmarks = (props) => {
-    const bookmarks = props.bookmarks
-
-    useEffect(() => {
-        return bookmarks
-    })
   
     
     const renderBookmarkCollection = () => {
@@ -21,11 +18,20 @@ const Bookmarks = (props) => {
     }
     
 
-
     return (
         <div className="bookmarks-container">
             <br></br>
             <BookmarkForm />
+            <form className="filter-category">
+                    <p>FILTER BY CATEGORY</p>
+                    <Select id="category-input" value={props.categories} onChange={filterByCategory()}>
+                        {props.categories.map(category => {
+                            return (
+                                <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>
+                            )
+                        })}
+                    </Select>
+                </form>
             <br></br>
             {renderBookmarkCollection()}      
         </div>
@@ -38,17 +44,19 @@ const Bookmarks = (props) => {
 
 }
 
-Bookmarks.propTypes = {
-    bookmarks: PropTypes.array
+const mapStateToProps = (currentState) => {
+    return {
+      bookmarks: currentState.bookmarks.bookmarks,
+      categories: currentState.categories.categories
+    }
 }
 
-// calling the propTypes property on our component 
-//and pass it an object that specifies the props object's expected type
-
-Bookmarks.defaultProps = {
-    bookmarks: []
+const mapDispatchToProps = (dispatch) => {
+    return {
+        filterByCategory: (id) => dispatch(filterByCategory(id))
+    }
 }
-// a React component property
-// allows you to set default values for the props arg. 
 
-export default Bookmarks
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Bookmarks)

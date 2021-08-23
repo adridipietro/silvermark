@@ -80,7 +80,7 @@ const mapDispatchToProps = (dispatch) => {
     createCategory: (category) => dispatch(createCategory(category)),
     filterByCategory: (id) => dispatch(filterByCategory(id)),
     deleteCategory: (id) => dispatch(deleteCategory(id)),
-    getCategories: (categories) => dispatch(getCategories(categories)),
+    getCategories: () => dispatch(getCategories()),
     signupUser: (user) => dispatch(signupUser(user)),
     loginUser: (user) => dispatch(loginUser(user)),
     logoutUser: () => dispatch(logoutUser())

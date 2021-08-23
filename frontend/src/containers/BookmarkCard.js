@@ -74,6 +74,6 @@ const mapDispatchToProps = (dispatch) => {
       deleteBookmark: (id) => dispatch(deleteBookmark(id)),
       favoriteBookmark: (id) => dispatch(favoriteBookmark(id))
     }
-  }
+}
   
 export default connect(null, mapDispatchToProps)(BookmarkCard)
