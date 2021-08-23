@@ -28,6 +28,7 @@ class CategoryForm extends React.Component {
         const { name } = this.state
         return (
             <div>
+                <p>ADD CATEGORY</p>
                 <form className="category-form" onSubmit={this.handleSubmit}>
                     <TextField id="name-input" type="text" name="name" placeholder="new category" defaultValue={name} onChange={this.handleChange}/>
                     <Button type="submit" className="submit-button">Submit</Button>

@@ -11,7 +11,6 @@ import Logout from './Logout'
 import BookmarkForm from './BookmarkForm'
 import Bookmarks from '../containers/Bookmarks'
 import Home from '../containers/Home'
-import Categories from '../containers/Categories'
 import {connect} from 'react-redux'
 import history from '../history'
 import AboutUs from '../containers/AboutUs'
@@ -42,11 +41,10 @@ class App extends React.Component {
             <Switch>
               <Route exact path='/' render={routeProps => <Home {...routeProps}/>}/>
               <Route exact path='/about' render={routeProps => <AboutUs {...routeProps}/>} />
-              <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} filterByCategory={this.props.filterByCategory} {...routeProps} /> }/>
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} {...routeProps} />}/>
-              <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark} categories={this.props.categories} {...routeProps}/>}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark}categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} filterByCategory={this.props.filterByCategory} {...routeProps} />}/>
+{/*               <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark} categories={this.props.categories} {...routeProps}/>}/> */}
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
             </Switch>
         </Router>

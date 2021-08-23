@@ -1,6 +1,7 @@
 import React from 'react'
 import BookmarkCard from './BookmarkCard'
 import BookmarkForm from '../components/BookmarkForm'
+import CategoryForm from '../components/CategoryForm'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem' 
 import { connect } from 'react-redux'
@@ -22,6 +23,7 @@ const Bookmarks = (props) => {
         <div className="bookmarks-container">
             <br></br>
             <BookmarkForm />
+            <CategoryForm/>
             <form className="filter-category">
                     <p>FILTER BY CATEGORY</p>
                     <Select id="category-input" value={props.categories} onChange={filterByCategory()}>
