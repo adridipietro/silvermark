@@ -5,6 +5,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite"
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { deleteBookmark, favoriteBookmark } from '../actions/index'
+import { Link } from 'react-router-dom'
 
 
 const BookmarkCard = (props) => {
@@ -22,13 +23,20 @@ const BookmarkCard = (props) => {
     
     }
 
+    const openInNewTab = (url) => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+      }
+
+
+
    
 
     return (
         <div className="bookmark-card" id={`bookmark-${props.id}`}>
             <h2 className="bookmark-headline">{props.headline}</h2>
                 <p className="bookmark-description">{props.description}</p>
-                <p className="bookmark-web-url" >{props.web_url}</p>
+                <Link className="bookmark-web-url" onClick={() => openInNewTab("http://" + `${props.web_url}`)}>{props.web_url}</Link>
                 <Button 
                     id={props.id}
                     onClick={handleFavorite}
