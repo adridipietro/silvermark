@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-// NavLink updates browser URL and renders the Route Component
-import { getCategories } from '../actions/index'
+
 
 
 

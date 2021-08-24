@@ -28,7 +28,7 @@ const Bookmarks = (props) => {
   
       return (
           <>
-          <div className="general-container">
+          <div className="forms-container">
               <br></br>
               <BookmarkForm />
               <CategoryForm/>

@@ -1,9 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
 import { Router, Route, Switch } from 'react-router-dom'
-// importing BrowserRouter from react-router-dom, creating alias Router.
-// react-router-dom is a node package
-// when the URL matches the specified path, render that component
 import './App.css'
 import Login from './Login'
 import Signup from './Signup'
@@ -17,6 +14,8 @@ import AboutUs from '../containers/AboutUs'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
+import Button from '@material-ui/core/Button'
+
 
 
 
@@ -28,6 +27,8 @@ class App extends React.Component {
       this.props.getCategories()
     
   }
+
+
  
   render() {
     return (
@@ -44,7 +45,6 @@ class App extends React.Component {
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
             </Switch>
         </Router>
-
       </div>
     ) 
   }
