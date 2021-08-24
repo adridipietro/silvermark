@@ -30,7 +30,7 @@ class CategoryForm extends React.Component {
             <div>
                 <p>ADD CATEGORY</p>
                 <form className="category-form" onSubmit={this.handleSubmit}>
-                    <TextField id="name-input" type="text" name="name" placeholder="new category" defaultValue={name} onChange={this.handleChange}/>
+                    <TextField id="name-input" type="text" name="name" placeholder="new category" defaultValue={name} onChange={this.handleChange}/><br></br>
                     <Button type="submit" className="submit-button">Submit</Button>
                 </form>
                 

@@ -27,7 +27,8 @@ const Bookmarks = (props) => {
       
   
       return (
-          <div className="bookmarks-container">
+          <>
+          <div className="general-container">
               <br></br>
               <BookmarkForm />
               <CategoryForm/>
@@ -41,9 +42,12 @@ const Bookmarks = (props) => {
                           })}
                       </Select>
                   </form>
-              <br></br>
-              {renderBookmarkCollection()}      
+              <br></br>    
           </div>
+          <div className="bookmark-collection-container">
+            {renderBookmarkCollection()}  
+          </div>
+          </>
       )
   
   }
