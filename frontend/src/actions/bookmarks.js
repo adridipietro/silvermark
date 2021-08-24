@@ -104,31 +104,5 @@ export function favoriteBookmark(id){
 
 }
 
-/* export function editBookmark(id, token) {
-    return(dispatch, getState) => {
-        let bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
-        const data = {
-            headline: bookmark.headline,
-            description: bookmark.description,
-            web_url: bookmark.web_url,
-            favorite: bookmark.favorite,
-            id: bookmark.id
-        }
-        const dataObject = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(data)
-        }
-        fetch(`http://localhost:3000/bookmarks/${id}`, dataObject)
-        .then(response => response.json())
-        .then(json => dispatch({type: EDIT_BOOKMARK, payload: json}))
-        .catch(error => {
-            dispatch({type: ERROR, payload: error})
-        })
-    }
-} */
+
 

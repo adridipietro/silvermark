@@ -1,8 +1,6 @@
 import React from 'react'
-//import EditForm from '../components/EditForm'
 import Button from "@material-ui/core/Button"
 import DeleteIcon from "@material-ui/icons/Delete"
-//import EditIcon from "@material-ui/icons/Edit"
 import FavoriteIcon from "@material-ui/icons/Favorite"
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -10,7 +8,6 @@ import { deleteBookmark, favoriteBookmark } from '../actions/index'
 
 
 const BookmarkCard = (props) => {
-   // debugger
     const history = useHistory()
 
 
@@ -19,15 +16,7 @@ const BookmarkCard = (props) => {
         history.push('/bookmarks')
     }
 
-
-
-    /* const handleEdit= () => {
-        <EditForm />
-        editBookmark()
-    } */
-
     const handleDelete = () => {
-        //debugger
        deleteBookmark()
        history.push('/bookmarks')
     
@@ -46,13 +35,6 @@ const BookmarkCard = (props) => {
                     className="favorite-button" 
                     startIcon={<FavoriteIcon/>}>
                 </Button><br></br>
-                {/* <Button 
-                    id={props.id}
-                    size="small"
-                    startIcon={<EditIcon />}
-                    onClick={handleEdit}
-                    className="edit-button" >
-                </Button><br></br> */}
                 <Button
                     id={props.id}
                     size="small"
@@ -63,8 +45,6 @@ const BookmarkCard = (props) => {
         </div>
 
     )
-    // make web url clickable link 
-
 }
 
 

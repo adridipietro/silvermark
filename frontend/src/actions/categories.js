@@ -1,4 +1,4 @@
-import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, FILTER_BY_CATEGORY, ERROR } from './types'
+import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, ERROR } from './types'
 
 
 export function createCategory(category, token){
@@ -59,28 +59,3 @@ export function getCategories(){
     }
 }
 
-export function filterByCategory(id, token){
-    return (dispatch, getState) => {
-        let category = getState().categories.find(category => category.id === id)
-            const data = {
-                name: category.name,
-                bookmarks: category.bookmarks,
-                id: category.id
-            }
-        const dataObject = {
-            method: "POST",
-            headers: {
-                "Accepts": "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(data)
-        }
-        fetch(`http://localhost:3000/categories/${id}`, dataObject)
-        .then(resp => resp.json())
-        .then(json => dispatch({type: FILTER_BY_CATEGORY, payload: json}))
-        .catch(error => {
-            return dispatch({type: ERROR, payload: error})
-        })
-    }
-}

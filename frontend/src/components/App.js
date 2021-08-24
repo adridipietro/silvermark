@@ -15,7 +15,7 @@ import {connect} from 'react-redux'
 import history from '../history'
 import AboutUs from '../containers/AboutUs'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
-import { getCategories, createCategory, deleteCategory, filterByCategory } from '../actions/index'
+import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
 
 
@@ -43,7 +43,7 @@ class App extends React.Component {
               <Route exact path='/about' render={routeProps => <AboutUs {...routeProps}/>} />
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark}categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} filterByCategory={this.props.filterByCategory} {...routeProps} />}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} />}/>
 {/*               <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark} categories={this.props.categories} {...routeProps}/>}/> */}
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
             </Switch>
@@ -76,7 +76,6 @@ const mapDispatchToProps = (dispatch) => {
     getBookmarks: () => dispatch(getBookmarks()),
     favoriteBookmark: (id) => dispatch(favoriteBookmark(id)),
     createCategory: (category) => dispatch(createCategory(category)),
-    filterByCategory: (id) => dispatch(filterByCategory(id)),
     deleteCategory: (id) => dispatch(deleteCategory(id)),
     getCategories: () => dispatch(getCategories()),
     signupUser: (user) => dispatch(signupUser(user)),
