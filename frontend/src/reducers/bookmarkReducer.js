@@ -9,17 +9,9 @@ import {
 export default (state = {bookmarks: []}, action) => {
     switch (action.type) {
         case GET_BOOKMARKS:
-            return {...state, bookmarks: action.payload}
+            return {bookmarks: action.payload}
         case CREATE_BOOKMARK:
-            return {...state, bookmarks: action.bookmarks}
-        /* case EDIT_BOOKMARK:
-            const updatedBookmarks = state.bookmarks.map(bookmark => {
-                if (bookmark.id === action.id){
-                    return {...bookmark, ...action.payload}
-                }
-                return bookmark
-            })
-            return updatedBookmarks */
+            return {...state, bookmarks: [...state.bookmarks]}
         case FAVORITE_BOOKMARK:
             return state.bookmarks.map(bookmark => {
                 if (bookmark.id !== action.payload){

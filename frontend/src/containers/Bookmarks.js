@@ -9,28 +9,20 @@ import { connect } from 'react-redux'
 
 
 const Bookmarks = (props) => {
-    const [filter, setFilter] = useState('')
+    const [categoryId, setCategoryId] = useState('')
 
-    const handleSubmit = (e) => {
-        const filter = e.target.value
-        setFilter(filter)
-    }
-  
+   
       
       const renderBookmarkCollection = () => {
-        return props.bookmarks.map(bookmark => {
-          return <BookmarkCard key={bookmark.id} {...bookmark}/>
-        })
+            return props.bookmarks.map(bookmark => {
+                return <BookmarkCard key={bookmark.id} {...bookmark}/>
+            })
       }
   
       const filterByCategory = (e) => {
-          setFilter(props.bookmarks.map((bookmark) => {
-              if (bookmark.category_id === filter) {
-                  return <BookmarkCard key={bookmark.id} category_id={bookmark.category_id} {...bookmark}/> 
-              } else {
-                  return null 
-              }
-          }))
+        debugger
+        setCategoryId(e.target.value)
+        return props.bookmarks.filter(bookmark => bookmark.category_id === categoryId)
       }
       
   
@@ -41,7 +33,7 @@ const Bookmarks = (props) => {
               <CategoryForm/>
               <form className="filter-category">
                       <p>FILTER BY CATEGORY</p>
-                      <Select id="category-input" value={props.categories} onChange={(e) => handleSubmit(e)}>
+                      <Select id="category-input" value={props.categories} onChange={filterByCategory}>
                           {props.categories.map(category => {
                               return (
                                   <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>

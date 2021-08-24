@@ -1,7 +1,7 @@
 
 class BookmarksController < ApplicationController
-  before_action :set_bookmark, only: [:show, :update, :destroy ]
-  #before_action :authenticate_user!
+  before_action :set_bookmark, only: [:show, :destroy]
+
 
 
   # GET /bookmarks or /bookmarks.json
@@ -30,16 +30,6 @@ class BookmarksController < ApplicationController
 
   end
 
-  # PATCH/PUT /bookmarks/1 or /bookmarks/1.json
-  def update
-    @bookmark = Bookmark.find_by(id: params[:id])
-
-      if @bookmark.update(bookmark_params)
-        render json: BookmarkSerializer.new(@bookmark).serialized_json
-      else
-        render json: {error: @bookmark.errors.messages}, status: 422
-      end
-  end
 
   # DELETE /bookmarks/1 or /bookmarks/1.json
   def destroy

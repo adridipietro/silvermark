@@ -26,7 +26,7 @@ export default class Navbar extends Component {
     render() {
         return (
             <div className="navbar">
-                {this.state.loggedIn ?
+                {!!this.state.loggedIn ?
                 <React.Fragment>
                     <NavLink
                         to="/logout" exact className="nav-link"

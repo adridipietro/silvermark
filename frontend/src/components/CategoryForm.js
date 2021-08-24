@@ -3,8 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { createCategory } from '../actions/index'
 import { connect } from 'react-redux'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem' 
+
 
 
 
@@ -19,7 +18,8 @@ class CategoryForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.createCategory()
+        let data = this.state
+        this.props.createCategory(data)
 
     }
 
@@ -41,10 +41,11 @@ class CategoryForm extends React.Component {
     
 }
 
-const mapState = (currentState) => {
+const mapDispatch = (dispatch) => {
     return {
-        categories: currentState.categories.categories
+      createCategory: (data) => dispatch(createCategory(data))
+      
     }
 }
 
-export default connect(mapState, { createCategory })(CategoryForm)
+export default connect(null, mapDispatch)(CategoryForm)

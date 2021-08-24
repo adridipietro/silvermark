@@ -23,15 +23,11 @@ import { signupUser, loginUser, logoutUser } from '../actions/index'
 
 class App extends React.Component {
   
-  
   componentDidMount(){
       this.props.getBookmarks()
       this.props.getCategories()
     
   }
-
-  
-
  
   render() {
     return (

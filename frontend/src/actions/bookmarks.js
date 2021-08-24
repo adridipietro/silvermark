@@ -1,4 +1,5 @@
 import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR } from './types'
+import { getToken } from './users'
 
 
 export function createBookmark(bookmark){
@@ -6,11 +7,10 @@ export function createBookmark(bookmark){
         fetch('http://localhost:3000/bookmarks', {
             method: "post",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: getToken()
             },
-            body: JSON.stringify({
-                ...bookmark
-            })
+            body: JSON.stringify(bookmark)
         })
         .then(response => {
             debugger

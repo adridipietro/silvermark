@@ -1,4 +1,4 @@
-import {  SIGNUP_USER, LOGIN_USER, LOGOUT_USER, STORE_TOKEN, ERROR } from './types'
+import {  SIGNUP_USER, LOGIN_USER, LOGOUT_USER, ERROR } from './types'
 
 
 
@@ -16,7 +16,6 @@ export function signupUser(data){
             })
         })
         .then(resp => {
-            //debugger
             if (resp.ok) {
                 resp.json().then(json => {
                     localStorage.setItem('token', json.token)
@@ -43,12 +42,10 @@ export function loginUser(data){
             })
         })
         .then(resp => {
-            //debugger
             if (resp.ok) {
                 resp.json().then(json => {
                     localStorage.setItem('token', json.token)
-
-                     dispatch({ type: LOGIN_USER, payload: json })
+                    dispatch({ type: LOGIN_USER, payload: json })
                 })
                
             } 
@@ -56,34 +53,37 @@ export function loginUser(data){
     }
 }
 
-export function logoutUser(token) {
+export function logoutUser() {
     return(dispatch)=> {
         const dataObject = {
             method: "DELETE",
             headers: {
                 "Accepts": "application/json",
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
+                Authorization: localStorage.removeItem('token')
             }
         }
         fetch("http://localhost:3000/logout", dataObject)
         .then(resp => {
             //debugger
             if (resp.ok) {
-                resp.json().then(json => {
-                    dispatch({ type: LOGOUT_USER, payload: json })
+                dispatch({ type: LOGOUT_USER })
+            } else {
+                return resp.json().then((json) => {
+                    dispatch({type: ERROR})
+                    return Promise.reject(json)
                 })
-               
-            } 
+            }
         })
     }
 }
 
 export function storeToken(token){
-    return {
-        type: STORE_TOKEN,
-        payload: token
-    }
+    return localStorage.setitem('token', token)
+}
+
+export function getToken() {
+    return localStorage.getItem('token')
 }
 
 export function error(error){

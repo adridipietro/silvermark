@@ -3,9 +3,6 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { loginUser } from '../actions/index'
 import { connect } from 'react-redux'
-import history from '../history'
-
-
 
 class Login extends React.Component {
     state = {
