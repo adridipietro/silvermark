@@ -5,24 +5,27 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem' 
 import { createBookmark } from '../actions/index'
 import { connect } from 'react-redux'
+import InputLabel from '@material-ui/core/InputLabel'
 
 
 
 
 class BookmarkForm extends React.Component {
     state = {
+        bookmark: {
             headline: '',
             description: '',
             web_url: '',
             favorite: false,
             category_id: null
+        }
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.createBookmark()
-     
-       
+        let bookmark = this.state
+        this.props.createBookmark(bookmark)
+        document.querySelector(".bookmark-form").reset()
     }
 
 
@@ -31,7 +34,6 @@ class BookmarkForm extends React.Component {
     }
 
     handleSelectChange = (e) => {
-        //debugger
         this.setState({
             category_id: e.target.value
         })
@@ -49,7 +51,8 @@ class BookmarkForm extends React.Component {
                     <TextField id="headline-input" type="text" name="headline"   placeholder="headline" defaultValue={headline} onChange={this.handleChange}/><br></br>
                     <TextField id="description-input" type="text" name="description"  placeholder="description"  defaultValue={description} onChange={this.handleChange}/><br></br>
                     <TextField id="web-url-input" type="text" name="web_url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
-                        <Select id="category-input" value={this.props.categories} onChange={this.handleSelectChange}>
+                    <InputLabel id="demo-simple-select-autowidth-label">category</InputLabel>
+                        <Select labelId="demo-simple-select-autowidth-label" id="category-input" value={this.props.categories} onChange={this.handleSelectChange}>
                         <MenuItem value="" disabled>category</MenuItem>
                             {this.props.categories.map(category => {
                                 return <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>

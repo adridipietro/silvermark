@@ -1,6 +1,6 @@
 
 class BookmarksController < ApplicationController
-  before_action :set_bookmark, only: [:show, :destroy]
+  before_action :set_bookmark, only: [:show,  :destroy]
 
 
 
@@ -19,6 +19,9 @@ class BookmarksController < ApplicationController
   # POST /bookmarks or /bookmarks.json
   def create
     @bookmark = Bookmark.new(bookmark_params)
+    @user.bookmark = User.find_by_id(current_user.id)
+    @user.categories[category_id].bookmark << @bookmark
+    byebug
       if @bookmark.save
         render json: @bookmark, status: :created
       else
@@ -41,6 +44,6 @@ class BookmarksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bookmark_params
-      params.require(:bookmark).permit(:headline, :web_url, :description, :favorite, :category_id, :id)
+      params.require(:bookmark).permit(:headline, :web_url, :description, :category_id, :id)
     end
 end

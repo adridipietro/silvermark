@@ -13,13 +13,13 @@ const BookmarkCard = (props) => {
 
 
     const handleFavorite = () => {
-        favoriteBookmark(props.id)
+        props.favoriteBookmark(props.id)
         history.push('/bookmarks')
     }
 
     const handleDelete = () => {
-        debugger
-       deleteBookmark(props.id)
+       props.deleteBookmark(props.id)
+       document.querySelector(`#bookmark-${props.id}`).remove()
        history.push('/bookmarks')
     
     }
@@ -28,8 +28,6 @@ const BookmarkCard = (props) => {
         const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
       }
-
-
 
    
 

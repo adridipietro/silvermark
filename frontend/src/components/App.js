@@ -40,7 +40,7 @@ class App extends React.Component {
               <Route exact path='/about' render={routeProps => <AboutUs {...routeProps}/>} />
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} />}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} createBookmark={this.props.createBookmark} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} />}/>
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
             </Switch>
         </Router>
@@ -54,7 +54,7 @@ const mapStateToProps = (currentState) => {
   return {
     bookmarks: currentState.bookmarks.bookmarks,
     categories: currentState.categories.categories,
-    users: currentState.users.user
+    users: currentState.users
   }
 }
 

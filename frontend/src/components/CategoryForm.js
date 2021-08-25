@@ -20,6 +20,8 @@ class CategoryForm extends React.Component {
         e.preventDefault()
         let data = this.state
         this.props.createCategory(data)
+        document.querySelector(".category-form").reset()
+
 
     }
 

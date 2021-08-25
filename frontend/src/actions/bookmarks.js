@@ -2,37 +2,36 @@ import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERR
 import { getToken } from './users'
 
 
-export function createBookmark(bookmark){
+export function createBookmark(data){
     return (dispatch) => {
         fetch('http://localhost:3000/bookmarks', {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
-                "accepts": "application/json",
                 Authorization: getToken()
             },
-            body: JSON.stringify(bookmark)
+            body: JSON.stringify(data)
         })
         .then(response => {
             if (response.ok) {
-               response.json().then((json) => {
+               response.json().then(json => {
                     dispatch({type: CREATE_BOOKMARK, payload: json})
                })
+            } else {
+                console.log(response)
+                debugger
             }
         })
-        .catch(error => {
-            dispatch({type: ERROR, payload: error})
-        })
+        
 
     }
 }
 
-export function getBookmarks(token){
+export function getBookmarks(){
     return(dispatch) => {
         fetch("http://localhost:3000/bookmarks", {
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
+                "Content-Type": "application/json"
             }
         })
         .then(response => {
