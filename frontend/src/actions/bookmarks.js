@@ -1,9 +1,10 @@
-import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR } from './types'
+import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR, LOADING_BOOKMARKS } from './types'
 import { getToken } from './users'
 
 
 export function createBookmark(data){
     return (dispatch) => {
+        dispatch({ type: LOADING_BOOKMARKS})
         fetch('http://localhost:3000/bookmarks', {
             method: "post",
             headers: {
@@ -29,6 +30,7 @@ export function createBookmark(data){
 
 export function getBookmarks(){
     return(dispatch) => {
+        dispatch({type: LOADING_BOOKMARKS })
         fetch("http://localhost:3000/bookmarks", {
             headers: {
                 "Content-Type": "application/json"

@@ -1,9 +1,10 @@
-import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, ERROR } from './types'
+import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, ERROR, LOADING_CATEGORIES } from './types'
 import { getToken } from './users'
 
 
 export function createCategory(data){
     return (dispatch) => {
+        dispatch({ type: LOADING_CATEGORIES})
         fetch(`http://localhost:3000/categories/`, {
             method: "post",
             headers: {
@@ -51,6 +52,7 @@ export function deleteCategory(id){
 
 export function getCategories(){
     return(dispatch) => {
+        dispatch({type: LOADING_CATEGORIES})
         fetch("http://localhost:3000/categories")
         .then(resp => {
             if(resp.ok){

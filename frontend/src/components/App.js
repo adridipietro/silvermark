@@ -1,17 +1,19 @@
 import React from 'react'
-import Navbar from './Navbar'
 import { Router, Route, Switch } from 'react-router-dom'
 import '../App.css'
+
+import Navbar from './Navbar'
 import Login from './Login'
 import Signup from './Signup'
 import Logout from './Logout'
-//import BookmarkForm from './BookmarkForm'
 import Bookmarks from '../containers/Bookmarks'
-import Home from '../containers/Home'
-import { connect } from 'react-redux'
-import history from '../history'
 import AboutUs from '../containers/AboutUs'
 import Categories from '../containers/Categories'
+import Home from '../containers/Home'
+
+import { connect } from 'react-redux'
+import history from '../history'
+
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
@@ -52,11 +54,12 @@ class App extends React.Component {
 }
 
 
-const mapStateToProps = (currentState) => {
+const mapStateToProps = (state) => {
   return {
-    bookmarks: currentState.bookmarks.bookmarks,
-    categories: currentState.categories.categories,
-    users: currentState.users.users
+    bookmarks: state.bookmarks.bookmarks,
+    categories: state.categories.categories,
+    users: state.users.currentUser,
+    loading: state.loading
   }
 }
 
