@@ -19,11 +19,8 @@ class BookmarksController < ApplicationController
   # POST /bookmarks or /bookmarks.json
   def create
     @bookmark = Bookmark.new(bookmark_params)
-
       if @bookmark.save
-        render json: {
-          data: resource
-        }
+        render json: @bookmark, status: :created
       else
         render json: {error: @bookmark.errors.messages}, status: 422
       end

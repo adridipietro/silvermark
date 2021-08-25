@@ -44,11 +44,13 @@ export function loginUser(data){
         .then(resp => {
             if (resp.ok) {
                 resp.json().then(json => {
-                    localStorage.setItem('token', json.token)
+                    setToken(resp.headers.get("Authorization"))
                     dispatch({ type: LOGIN_USER, payload: json })
                 })
                
-            } 
+            } else {
+             return resp.json().then((json) => Promise.reject(json))
+            }
         })
     }
 }
@@ -78,13 +80,18 @@ export function logoutUser() {
     }
 }
 
-export function storeToken(token){
-    return localStorage.setitem('token', token)
-}
-
+export function setToken(token) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
+  }
 export function getToken() {
-    return localStorage.getItem('token')
-}
+    let now = new Date(Date.now()).getTime();
+    let thirtyMinutes = 1000 * 60 * 30;
+    let timeSinceLastLogin = now - localStorage.getItem("lastLoginTime");
+    if (timeSinceLastLogin < thirtyMinutes) {
+      return localStorage.getItem("token");
+    }
+  }
 
 export function error(error){
     return {

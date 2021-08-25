@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :destroy ]
+  before_action :set_category, only: [:show, :update, :destroy ]
 
 
 
@@ -16,23 +16,24 @@ class CategoriesController < ApplicationController
     
     
       # POST /categories or /categories.json
-  def create
+    def create
+      #byebug
         @category = Category.new(category_params)
-    
+        @category.user = User.find_by_id(current_user.id)
         if @category.save
-          render json: {
-            data: resource
-          }
+          render json: @category, status: :created
         else
           render json: {error: @category.errors.messages}, status: 422
         end
-  end
+        
+    end
+
     
     
       # DELETE /categories/1 or /categories/1.json
-      def destroy
-        @category.destroy
-      end
+  def destroy
+      @category.destroy
+  end
     
       private
         # Use callbacks to share common setup or constraints between actions.

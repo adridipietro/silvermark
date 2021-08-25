@@ -5,11 +5,13 @@ import CategoryForm from '../components/CategoryForm'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem' 
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 
 
 const Bookmarks = (props) => {
     const [categoryId, setCategoryId] = useState('')
+    const history = useHistory()
 
    
       
@@ -22,9 +24,15 @@ const Bookmarks = (props) => {
       const filterByCategory = (e) => {
         debugger
         setCategoryId(e.target.value)
-        return props.bookmarks.filter(bookmark => bookmark.category_id === categoryId)
+        history.push(`/categories/${e.target.value}`)
+        return props.bookmarks.map(bookmark => {
+            if (bookmark.category_id === categoryId) {
+                return <BookmarkCard key={bookmark.id} {...bookmark}/>
+            }
+        })
       }
       
+     
   
       return (
           <>
@@ -35,6 +43,7 @@ const Bookmarks = (props) => {
               <form className="filter-category">
                       <p>FILTER BY CATEGORY</p>
                       <Select id="category-input" value={props.categories} onChange={filterByCategory}>
+                      <MenuItem value="" disabled>category</MenuItem>
                           {props.categories.map(category => {
                               return (
                                   <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>

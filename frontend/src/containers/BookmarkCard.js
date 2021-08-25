@@ -13,12 +13,13 @@ const BookmarkCard = (props) => {
 
 
     const handleFavorite = () => {
-        favoriteBookmark()
+        favoriteBookmark(props.id)
         history.push('/bookmarks')
     }
 
     const handleDelete = () => {
-       deleteBookmark()
+        debugger
+       deleteBookmark(props.id)
        history.push('/bookmarks')
     
     }

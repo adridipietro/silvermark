@@ -4,21 +4,21 @@ import { getToken } from './users'
 
 export function createCategory(data){
     return (dispatch) => {
-        fetch('http://localhost:3000/categories', {
+        fetch(`http://localhost:3000/categories/`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
-                "accepts": "application/json",
                 Authorization: getToken()
             },
             body: JSON.stringify(data)
         })
         .then(response => {
             if (response.ok) {
-               response.json().then((json) => {
+               response.json().then(json => {
                     dispatch({type: CREATE_CATEGORY, payload: json})
                })
             } else {
+                console.log(response)
                 debugger
             }
         })

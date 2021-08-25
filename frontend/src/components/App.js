@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import { Router, Route, Switch } from 'react-router-dom'
-import './App.css'
+import '../App.css'
 import Login from './Login'
 import Signup from './Signup'
 import Logout from './Logout'
@@ -14,7 +14,7 @@ import AboutUs from '../containers/AboutUs'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
-import Button from '@material-ui/core/Button'
+
 
 
 
@@ -41,7 +41,6 @@ class App extends React.Component {
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
               <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} />}/>
-{/*               <Route exact path="/bookmarks/new" render={routeProps => <BookmarkForm createBookmark={this.props.createBookmark} categories={this.props.categories} {...routeProps}/>}/> */}
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
             </Switch>
         </Router>

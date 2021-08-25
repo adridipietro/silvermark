@@ -8,14 +8,14 @@ export function createBookmark(bookmark){
             method: "post",
             headers: {
                 "Content-Type": "application/json",
+                "accepts": "application/json",
                 Authorization: getToken()
             },
             body: JSON.stringify(bookmark)
         })
         .then(response => {
-            debugger
             if (response.ok) {
-               response.json().then(json => {
+               response.json().then((json) => {
                     dispatch({type: CREATE_BOOKMARK, payload: json})
                })
             }
