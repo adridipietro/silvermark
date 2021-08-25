@@ -17,7 +17,7 @@ const Bookmarks = (props) => {
       
       const renderBookmarkCollection = () => {
             return props.bookmarks.map(bookmark => {
-                return <BookmarkCard key={bookmark.id} {...bookmark}/>
+                return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
             })
       }
   
@@ -27,7 +27,7 @@ const Bookmarks = (props) => {
         history.push(`/categories/${e.target.value}`)
         return props.bookmarks.map(bookmark => {
             if (bookmark.category_id === categoryId) {
-                return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
+                return <BookmarkCard key={bookmark.id} {...bookmark}/>
             }
         })
       }

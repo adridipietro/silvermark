@@ -42,6 +42,13 @@ export default class Navbar extends Component {
                         color: 'white'
                         }}
                     >BOOKMARKS</NavLink>
+                    <NavLink to="/categories" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >CATEGORIES</NavLink>
                     <NavLink to="/about" exact className="nav-link"
                         style={link}
                         activeStyle={{

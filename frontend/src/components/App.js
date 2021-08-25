@@ -5,12 +5,13 @@ import '../App.css'
 import Login from './Login'
 import Signup from './Signup'
 import Logout from './Logout'
-import BookmarkForm from './BookmarkForm'
+//import BookmarkForm from './BookmarkForm'
 import Bookmarks from '../containers/Bookmarks'
 import Home from '../containers/Home'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import history from '../history'
 import AboutUs from '../containers/AboutUs'
+import Categories from '../containers/Categories'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
@@ -40,8 +41,9 @@ class App extends React.Component {
               <Route exact path='/about' render={routeProps => <AboutUs {...routeProps}/>} />
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} createBookmark={this.props.createBookmark} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} deleteCategory={this.props.deleteCategory} createCategory={this.props.createCategory} {...routeProps} />}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} createBookmark={this.props.createBookmark} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
+              <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} {...routeProps} /> }/>
             </Switch>
         </Router>
       </div>
@@ -54,7 +56,7 @@ const mapStateToProps = (currentState) => {
   return {
     bookmarks: currentState.bookmarks.bookmarks,
     categories: currentState.categories.categories,
-    users: currentState.users
+    users: currentState.users.users
   }
 }
 
