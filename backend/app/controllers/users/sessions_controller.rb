@@ -13,7 +13,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
-   byebug
     if current_user
       render json: {
         status: 200,

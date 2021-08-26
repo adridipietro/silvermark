@@ -6,8 +6,7 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem' 
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getBookmarks } from '../actions'
-import { getCategories } from '../actions'
+
 
 
 const Bookmarks = (props) => {
@@ -67,15 +66,9 @@ const mapStateToProps = (currentState) => {
     }
 }
 
-const mapDispatchToState = (dispatch) => {
-    return {
-        getCategories: () => dispatch(getCategories()),
-        getBookmarks: () => dispatch(getBookmarks())
-    }
-}
 
 
 
 
 
-export default connect(mapStateToProps, mapDispatchToState)(Bookmarks)
+export default connect(mapStateToProps, null)(Bookmarks)

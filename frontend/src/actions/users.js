@@ -80,7 +80,7 @@ export function logoutUser() {
 
 export function setToken(token) {
     localStorage.setItem("token", token);
-    //localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
+    localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
   }
 export function getToken() {
     let now = new Date(Date.now()).getTime();

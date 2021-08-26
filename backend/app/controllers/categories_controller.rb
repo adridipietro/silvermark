@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
     def create
       #byebug
         @category = Category.new(category_params)
-        @category.user = User.find_by_id(current_user.id)
+        @category.user = User.find_by_id(params[:userId])
         if @category.save
           render json: @category, status: :created
         else

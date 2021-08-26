@@ -21,8 +21,7 @@ class BookmarkForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        let bookmark = this.state
-        this.props.createBookmark(bookmark)
+        this.props.createBookmark(this.state)
         document.querySelector(".bookmark-form").reset()
     }
 
