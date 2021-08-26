@@ -6,7 +6,6 @@ import CategoryCard from './CategoryCard'
 
 const Categories = (props)  => {
 
-
     const renderCategoryCollection = () => {
         return props.categories.map(category => {
             return <CategoryCard key={category.id} deleteCategory={props.deleteCategory} {...category} />

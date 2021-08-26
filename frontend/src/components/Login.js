@@ -15,7 +15,7 @@ class Login extends React.Component {
         e.preventDefault()
         let credentials  = this.state
         this.props.loginUser(credentials)
-        this.props.history.push('/bookmarks')
+        this.props.history.push('/about')
         
     }
 

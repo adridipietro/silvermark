@@ -7,21 +7,21 @@ import {
 } from '../actions/types'
 
 
-export default (state = {bookmarks: [], requesting: false}, action) => {
+export default (state = {bookmarks: [], loading: false}, action) => {
     switch (action.type) {
         case LOADING_BOOKMARKS:
             return {
                 ...state, 
                 bookmarks: [...state.bookmarks],
-                requesting: true
+                loading: true
             }
         case GET_BOOKMARKS:
-            return {bookmarks: action.payload, requesting: false}
+            return {bookmarks: action.payload, loading: false}
         case CREATE_BOOKMARK:
             return {
                 ...state, 
                 bookmarks: [...state.bookmarks, action.payload],
-                requesting: false 
+                loading: false 
             }
         case FAVORITE_BOOKMARK:
             return state.bookmarks.map(bookmark => {

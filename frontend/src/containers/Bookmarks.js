@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import BookmarkCard from './BookmarkCard'
 import BookmarkForm from '../components/BookmarkForm'
 import CategoryForm from '../components/CategoryForm'
@@ -6,23 +6,22 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem' 
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-
+import { getBookmarks } from '../actions'
+import { getCategories } from '../actions'
 
 
 const Bookmarks = (props) => {
     const [categoryId, setCategoryId] = useState('')
     const history = useHistory()
 
-   
       
-      const renderBookmarkCollection = () => {
-            return props.bookmarks.map(bookmark => {
-                return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
-            })
-      }
+    const renderBookmarkCollection = () => {
+        return props.bookmarks.map(bookmark => {
+            return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
+        })
+    }
   
-      const filterByCategory = (e) => {
-        debugger
+    const filterByCategory = (e) => {
         setCategoryId(e.target.value)
         history.push(`/categories/${e.target.value}`)
         return props.bookmarks.map(bookmark => {
@@ -34,8 +33,8 @@ const Bookmarks = (props) => {
       
      
   
-      return (
-          <>
+    return (
+        <>
           <div className="forms-container">
               <br></br>
               <BookmarkForm />
@@ -56,10 +55,10 @@ const Bookmarks = (props) => {
           <div className="bookmark-collection-container">
             {renderBookmarkCollection()}  
           </div>
-          </>
-      )
+        </>
+    )
   
-  }
+}
 
 const mapStateToProps = (currentState) => {
     return {
@@ -68,8 +67,15 @@ const mapStateToProps = (currentState) => {
     }
 }
 
+const mapDispatchToState = (dispatch) => {
+    return {
+        getCategories: () => dispatch(getCategories()),
+        getBookmarks: () => dispatch(getBookmarks())
+    }
+}
 
 
 
 
-export default connect(mapStateToProps, null)(Bookmarks)
+
+export default connect(mapStateToProps, mapDispatchToState)(Bookmarks)

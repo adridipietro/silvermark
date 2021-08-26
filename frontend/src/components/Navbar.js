@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
-
-
 
 
 const link = {
@@ -15,17 +13,11 @@ const link = {
   }
 
   
-export default class Navbar extends Component {
+const Navbar = (props) => {
 
-    state = {
-        loggedIn: true
-    }
-    
-
-    render() {
         return (
             <div className="navbar">
-                {!!this.state.loggedIn ?
+                {!props.currentUser ?
                 <React.Fragment>
                     <NavLink
                         to="/logout" exact className="nav-link"
@@ -94,5 +86,6 @@ export default class Navbar extends Component {
             
         )
         
-    }
 }
+
+export default Navbar

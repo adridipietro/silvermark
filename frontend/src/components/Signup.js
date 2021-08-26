@@ -18,7 +18,7 @@ class Signup extends React.Component {
           const { name, email, password } = this.state
           debugger
           this.props.signupUser({ name, email, password })
-          this.props.history.push('/')
+          this.props.history.push('/about')
           
       }
 

@@ -7,7 +7,7 @@ export function signupUser(data){
         fetch("http://localhost:3000/signup", {
             method: "post",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 user: {
@@ -18,7 +18,7 @@ export function signupUser(data){
         .then(resp => {
             if (resp.ok) {
                 resp.json().then(json => {
-                    localStorage.setItem('token', json.token)
+                    setToken(resp.headers.get("Authorization"))
                     dispatch({ type: SIGNUP_USER, payload: json })
                 })
                
@@ -33,7 +33,7 @@ export function loginUser(data){
         fetch("http://localhost:3000/login", {
             method: "post",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 user: {
@@ -56,24 +56,22 @@ export function loginUser(data){
 }
 
 export function logoutUser() {
-    return(dispatch)=> {
-        const dataObject = {
-            method: "DELETE",
-            headers: {
-                "Accepts": "application/json",
-                "Content-Type": "application/json",
-                Authorization: localStorage.removeItem('token')
-            }
-        }
-        fetch("http://localhost:3000/logout", dataObject)
+    return (dispatch) => {
+        return fetch("http://localhost:3000/logout", {
+          method: "DELETE",
+          headers: {
+            "accepts": "application/json",
+            "Content-Type": "application/json",
+            Authorization: getToken()
+          }
+        })
         .then(resp => {
-            //debugger
             if (resp.ok) {
                 dispatch({ type: LOGOUT_USER })
             } else {
-                return resp.json().then((json) => {
+                return resp.json().then((errors) => {
                     dispatch({type: ERROR})
-                    return Promise.reject(json)
+                    return Promise.reject(errors)
                 })
             }
         })
@@ -82,14 +80,14 @@ export function logoutUser() {
 
 export function setToken(token) {
     localStorage.setItem("token", token);
-    localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
+    //localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
   }
 export function getToken() {
     let now = new Date(Date.now()).getTime();
     let thirtyMinutes = 1000 * 60 * 30;
     let timeSinceLastLogin = now - localStorage.getItem("lastLoginTime");
     if (timeSinceLastLogin < thirtyMinutes) {
-      return localStorage.getItem("token");
+      return localStorage.getItem("token")
     }
   }
 

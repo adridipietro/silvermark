@@ -1,3 +1,4 @@
+import { getToken } from '../actions'
 import {
     SIGNUP_USER, 
     LOGIN_USER,
@@ -6,8 +7,10 @@ import {
 } from '../actions/types'
 
 const INITIAL_STATE = {
-    loggedIn: false,
-    currentUser: {}
+    loggedIn: getToken() ? true : false,
+    currentUser: {},
+    token: getToken(),
+    loading: false
 } 
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,19 +19,21 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                 loggedIn: true,
-                currentUser: action.payload
+                currentUser: action.payload,
+                loading: false
             }
         case LOGIN_USER:
             return {
                 ...state, 
                 loggedIn: true,
-                currentUser: action.payload
+                currentUser: action.payload,
+                loading: false
             }
         case LOGOUT_USER:
             return { 
-                ...state, 
-                user: state.users.filter(user => user.id !== action.payload.id),
-                loggedIn: false
+                currentUser: {},
+                loggedIn: false,
+                loading: false
             }
 
         case STORE_TOKEN:

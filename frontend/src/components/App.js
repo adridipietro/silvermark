@@ -25,13 +25,6 @@ import { signupUser, loginUser, logoutUser } from '../actions/index'
 
 class App extends React.Component {
   
-  componentDidMount(){
-      this.props.getBookmarks()
-      this.props.getCategories()
-    
-  }
-
-
  
   render() {
     return (
@@ -39,11 +32,11 @@ class App extends React.Component {
         <Router history={history}>
             <Navbar />
             <Switch>
-              <Route exact path='/' render={routeProps => <Home {...routeProps}/>}/>
-              <Route exact path='/about' render={routeProps => <AboutUs {...routeProps}/>} />
+              <Route exact path='/' render={() => <Home />}/>
+              <Route exact path='/about' render={() => <AboutUs/>} />
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} createBookmark={this.props.createBookmark} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} getBookmarks={this.props.getBookmarks} createBookmark={this.props.createBookmark} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} {...routeProps} /> }/>
             </Switch>
@@ -59,7 +52,7 @@ const mapStateToProps = (state) => {
     bookmarks: state.bookmarks.bookmarks,
     categories: state.categories.categories,
     users: state.users.currentUser,
-    loading: state.loading
+    requesting: state.requesting
   }
 }
 

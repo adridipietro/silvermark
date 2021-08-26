@@ -53,14 +53,22 @@ export function deleteCategory(id){
 export function getCategories(){
     return(dispatch) => {
         dispatch({type: LOADING_CATEGORIES})
-        fetch("http://localhost:3000/categories")
+        fetch("http://localhost:3000/categories", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: getToken()
+            }
+        })
         .then(resp => {
             if(resp.ok){
                 resp.json().then(json => {
                     dispatch({type: GET_CATEGORIES, payload: json})
                 })
             } else {
-                return resp.json().then(json => Promise.reject(json))
+                return resp.json().then((json) => {
+                    dispatch({type: ERROR})
+                    Promise.reject(json)
+                })
             }
         })
     }

@@ -7,18 +7,18 @@ import {
 } from '../actions/types'
 
 
-export default (state = {categories: [], requesting: false}, action) => {
+export default (state = {categories: [], loading: false}, action) => {
     switch (action.type) {
         case LOADING_CATEGORIES:
             return {
                 ...state, 
                 categories: [...state.categories],
-                requesting: true
+                loading: true
             }
         case GET_CATEGORIES:
-            return {categories: action.payload, requesting: false}
+            return {categories: action.payload, loading: false}
         case CREATE_CATEGORY:
-            return {...state, categories: [...state.categories, action.payload], requesting: false }
+            return {...state, categories: [...state.categories, action.payload], loading: false }
         case DELETE_CATEGORY:
             const removeDeletedCategory = state.categories.filter(category => category.id != action.payload)
             return {categories: removeDeletedCategory}

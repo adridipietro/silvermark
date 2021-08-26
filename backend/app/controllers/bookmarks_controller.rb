@@ -21,7 +21,7 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new(bookmark_params)
     @user.bookmark = User.find_by_id(current_user.id)
     @user.categories[category_id].bookmark << @bookmark
-    byebug
+    #byebug
       if @bookmark.save
         render json: @bookmark, status: :created
       else

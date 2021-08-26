@@ -4,11 +4,12 @@ import { logoutUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-const Logout = ({ logoutUser }) => {
+const Logout = (props) => {
     const history = useHistory()
     
     const handleClick = () => {
-        logoutUser() 
+        debugger
+        props.logoutUser() 
         history.push('/')
         
     }

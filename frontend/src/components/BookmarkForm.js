@@ -12,13 +12,11 @@ import InputLabel from '@material-ui/core/InputLabel'
 
 class BookmarkForm extends React.Component {
     state = {
-        bookmark: {
-            headline: '',
-            description: '',
-            web_url: '',
-            favorite: false,
-            category_id: null
-        }
+        headline: '',
+        description: '',
+        web_url: '',
+        favorite: false,
+        category_id: null
     }
 
     handleSubmit = (e) => {
