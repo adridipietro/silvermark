@@ -12,15 +12,21 @@ import InputLabel from '@material-ui/core/InputLabel'
 
 class BookmarkForm extends React.Component {
     state = {
-        headline: '',
-        description: '',
-        web_url: '',
-        favorite: false,
-        category_id: null
+        bookmark : {
+
+            headline: '',
+            description: '',
+            web_url: '',
+            favorite: false,
+            category_id: null,
+            user_id: null
+        }
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
+        let data = this.state.bookmark
+        data.user_id = this.props.currentUser.data.id
         this.props.createBookmark(this.state)
         document.querySelector(".bookmark-form").reset()
     }
@@ -32,7 +38,7 @@ class BookmarkForm extends React.Component {
 
     handleSelectChange = (e) => {
         this.setState({
-            category_id: e.target.value
+            [this.state.bookmark.category_id]: e.target.value
         })
     }
 
@@ -65,9 +71,11 @@ class BookmarkForm extends React.Component {
 
 const mapState = (currentState) => {
     return {
-        categories: currentState.categories.categories
+        categories: currentState.categories.categories,
+        currentUser: currentState.users.currentUser
     }
 }
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

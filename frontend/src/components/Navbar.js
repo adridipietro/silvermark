@@ -13,12 +13,13 @@ const link = {
   }
 
   
-const Navbar = (props) => {
+const Navbar = () => {
 
+
+    
         return (
             <div className="navbar">
-                {!props.currentUser ?
-                <React.Fragment>
+                
                     <NavLink
                         to="/logout" exact className="nav-link"
                         style={link}
@@ -48,9 +49,6 @@ const Navbar = (props) => {
                         color: 'white'
                         }}
                     >ABOUT US</NavLink>
-                </React.Fragment>
-               : 
-               <React.Fragment>
                    <NavLink to="/" exact className="nav-link"
                         style={link}
                         activeStyle={{
@@ -58,13 +56,6 @@ const Navbar = (props) => {
                         color: 'white'
                         }}
                     >HOME</NavLink>
-                    <NavLink to="/about" exact className="nav-link"
-                        style={link}
-                        activeStyle={{
-                        background: 'black',
-                        color: 'white'
-                        }}
-                    >ABOUT US</NavLink>
                    <NavLink to="/login" exact className="nav-link"
                        style={link}
                        activeStyle={{
@@ -79,8 +70,6 @@ const Navbar = (props) => {
                        color: 'white'
                        }}
                    >SIGNUP</NavLink>
-               </React.Fragment>
-               }
             </div>
 
             

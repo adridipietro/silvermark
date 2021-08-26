@@ -12,7 +12,7 @@ class User < ApplicationRecord
     
     
     has_many :categories, dependent: :destroy
-    has_many :bookmarks, through: :categories
+    has_many :bookmarks, dependent: :destroy
 
     validates :name, presence: { message: "Name must be given" }
     validates :email, presence: { message: "Email must be given" }, uniqueness: true

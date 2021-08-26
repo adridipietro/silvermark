@@ -17,6 +17,7 @@ import history from '../history'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
+//import FilteredBookmarks from '../containers/FilteredBookmarks'
 
 
 
@@ -44,6 +45,7 @@ class App extends React.Component {
               <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} getBookmarks={this.props.getBookmarks} createBookmark={this.props.createBookmark} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} {...routeProps} /> }/>
+
             </Switch>
         </Router>
       </div>
@@ -56,7 +58,7 @@ const mapStateToProps = (state) => {
   return {
     bookmarks: state.bookmarks.bookmarks,
     categories: state.categories.categories,
-    users: state.users.currentUser,
+    users: state.users,
     requesting: state.requesting
   }
 }

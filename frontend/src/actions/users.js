@@ -2,7 +2,7 @@ import {  SIGNUP_USER, LOGIN_USER, LOGOUT_USER, ERROR } from './types'
 
 
 
-export function signupUser(data){
+export function signupUser(data, state){
     return (dispatch) => {
         fetch("http://localhost:3000/signup", {
             method: "post",
@@ -20,6 +20,7 @@ export function signupUser(data){
                 resp.json().then(json => {
                     setToken(resp.headers.get("Authorization"))
                     dispatch({ type: SIGNUP_USER, payload: json })
+                    saveState(state)
                 })
                
             } 
@@ -28,7 +29,7 @@ export function signupUser(data){
 }
 
 
-export function loginUser(data){
+export function loginUser(data, state){
     return (dispatch) => {
         fetch("http://localhost:3000/login", {
             method: "post",
@@ -46,6 +47,7 @@ export function loginUser(data){
                 resp.json().then(json => {
                     setToken(resp.headers.get("Authorization"))
                     dispatch({ type: LOGIN_USER, payload: json })
+                    saveState(state)
                 })
                
             } else {
@@ -90,6 +92,11 @@ export function getToken() {
       return localStorage.getItem("token")
     }
   }
+
+export function saveState(state) {
+    const serializedState = JSON.stringify(state)
+    localStorage.setItem('state', serializedState)
+}
 
 export function error(error){
     return {
