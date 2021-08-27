@@ -15,7 +15,7 @@ class Login extends React.Component {
         e.preventDefault()
         let credentials  = this.state
         this.props.loginUser(credentials)
-        this.props.history.push('/about')
+        this.props.history.push('/bookmarks')
         
     }
 
@@ -26,6 +26,7 @@ class Login extends React.Component {
     
    render() {
      const { email, password } = this.state
+
      return (
          <div className="login-form">
            <h1>Login</h1>
@@ -44,6 +45,13 @@ class Login extends React.Component {
 
 } 
 
+const mapStateToProps = (state) => {
+  const { loggedIn } = state.users
+  return {
+    loggedIn
+  }
+}
+
 
 
 const mapDispatch = (dispatch) => {
@@ -54,4 +62,4 @@ const mapDispatch = (dispatch) => {
 }
 
 
-export default connect(null, mapDispatch)(Login)
+export default connect(mapStateToProps, mapDispatch)(Login)

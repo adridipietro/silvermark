@@ -17,7 +17,7 @@ import history from '../history'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
-//import FilteredBookmarks from '../containers/FilteredBookmarks'
+
 
 
 

@@ -20,7 +20,9 @@ export function createBookmark(data){
                })
             } else {
                 console.log(response)
-                debugger
+                return response.json().then((json) => {
+                    return Promise.reject(json)
+                })
             }
         })
         

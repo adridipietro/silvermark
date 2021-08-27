@@ -68,8 +68,8 @@ const CategoryCard = (props) => {
 
                       />
                       <ListItemSecondaryAction>
-                        <IconButton edge="end" aria-label="delete">
-                          <DeleteIcon onClick={handleDelete}/>
+                        <IconButton edge="end" aria-label="delete" onClick={handleDelete}>
+                          <DeleteIcon />
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>

@@ -3,10 +3,12 @@ import {
     SIGNUP_USER, 
     LOGIN_USER,
     LOGOUT_USER,
-    STORE_TOKEN
+    ERROR,
+    AUTHENTICATED
 } from '../actions/types'
 
 const INITIAL_STATE = {
+    authChecked: false,
     loggedIn: getToken() ? true : false,
     currentUser: {},
     token: getToken(),
@@ -15,6 +17,15 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
+        case AUTHENTICATED:
+            if (action.payload["currentUser"]){
+                return {
+                    ...state,
+                    authChecked: true,
+                    loggedIn: true,
+                    currentUser: [...state, action.payload.currentUser],
+                }  
+            } 
         case SIGNUP_USER:
             return {
                 ...state, 
@@ -35,11 +46,11 @@ export default (state = INITIAL_STATE, action) => {
                 loggedIn: false,
                 loading: false
             }
-
-        case STORE_TOKEN:
+        case ERROR:
             return {
-                token: action.payload.token,
+                message: "Sorry, something went wrong."
             }
+
         default:
             return state
     }

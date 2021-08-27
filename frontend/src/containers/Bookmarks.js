@@ -5,14 +5,14 @@ import CategoryForm from '../components/CategoryForm'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem' 
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import FilteredBookmarks from './FilteredBookmarks'
+//import { useHistory } from 'react-router-dom'
+
 
 
 
 const Bookmarks = (props) => {
     const [categoryId, setCategoryId] = useState('')
-    const history = useHistory()
+    //const history = useHistory()
 
       
     const renderBookmarkCollection = () => {
@@ -23,7 +23,7 @@ const Bookmarks = (props) => {
   
     const filterByCategory = (e) => {
         setCategoryId(e.target.value)
-        history.push(`/categories/${e.target.value}`)
+        document.querySelector('.bookmark-collection-container').remove()
         return props.bookmarks.map(bookmark => {
             if (bookmark.category_id === categoryId) {
                 return <BookmarkCard key={bookmark.id} {...bookmark}/>
@@ -54,6 +54,7 @@ const Bookmarks = (props) => {
           </div>
           <div className="bookmark-collection-container">
             {renderBookmarkCollection()}  
+            
           </div>
         </>
     )

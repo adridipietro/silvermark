@@ -1,8 +1,28 @@
-import {  SIGNUP_USER, LOGIN_USER, LOGOUT_USER, ERROR } from './types'
+import {  SIGNUP_USER, LOGIN_USER, LOGOUT_USER, ERROR, AUTHENTICATED } from './types'
 
 
+export const checkAuth = () => {
+    return (dispatch) => {
+      return fetch("http://localhost:3000/current_user", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: getToken()
+        }
+      }).then(resp => {
+        if (resp.ok) {
+          return resp.json().then(json => {
+              dispatch({ type: AUTHENTICATED, payload: json})
+          })
+        } else {
+            return resp.json().then((json) => Promise.reject(json))
+        }
+      })
+    }
+  }
 
-export function signupUser(data, state){
+
+export function signupUser(data){
     return (dispatch) => {
         fetch("http://localhost:3000/signup", {
             method: "post",
@@ -20,16 +40,17 @@ export function signupUser(data, state){
                 resp.json().then(json => {
                     setToken(resp.headers.get("Authorization"))
                     dispatch({ type: SIGNUP_USER, payload: json })
-                    saveState(state)
+                   
                 })
-               
-            } 
+            } else {
+                return resp.json().then((json) => Promise.reject(json))
+            }
         })
     }
 }
 
 
-export function loginUser(data, state){
+export function loginUser(data){
     return (dispatch) => {
         fetch("http://localhost:3000/login", {
             method: "post",
@@ -47,7 +68,7 @@ export function loginUser(data, state){
                 resp.json().then(json => {
                     setToken(resp.headers.get("Authorization"))
                     dispatch({ type: LOGIN_USER, payload: json })
-                    saveState(state)
+                   
                 })
                
             } else {
@@ -93,10 +114,10 @@ export function getToken() {
     }
   }
 
-export function saveState(state) {
+/* export function saveState(state) {
     const serializedState = JSON.stringify(state)
     localStorage.setItem('state', serializedState)
-}
+} */
 
 export function error(error){
     return {
