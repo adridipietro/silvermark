@@ -20,10 +20,6 @@ import { signupUser, loginUser, logoutUser } from '../actions/index'
 
 
 
-
-
-
-
 class App extends React.Component {
 
   componentDidMount(){
@@ -63,11 +59,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-// mSTP selects the part of the data from the store to be connected to App Component
-// mSTP reutrns a plain object containing the data from the store
-// called every time Redux store state changes
-// first arg = the entire store state
-// key:value pairs => each field becomes a prop for app component
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -84,13 +75,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// mDTP dispatches actions to the store
-// first arg: dispatch => a function of the store; the only way to trigger a state change
-// we return each action function with dispatch inside
-// we pass to dispatch the action and its args
-// we bind on each component mount
-// mDTP returns a plain object
-// each field becomes a separate prop for app component
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
-// connect() accesses the store for us

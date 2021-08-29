@@ -83,8 +83,8 @@ export function logoutUser() {
         return fetch("http://localhost:3000/logout", {
           method: "DELETE",
           headers: {
-            "accepts": "application/json",
-            "Content-Type": "application/json",
+            'accepts': 'application/json',
+            'Content-Type': 'application/json',
             Authorization: getToken()
           }
         })
@@ -102,22 +102,13 @@ export function logoutUser() {
 }
 
 export function setToken(token) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
-  }
-export function getToken() {
-    let now = new Date(Date.now()).getTime();
-    let thirtyMinutes = 1000 * 60 * 30;
-    let timeSinceLastLogin = now - localStorage.getItem("lastLoginTime");
-    if (timeSinceLastLogin < thirtyMinutes) {
-      return localStorage.getItem("token")
-    }
-  }
+    localStorage.setItem("token", token)
+}
 
-/* export function saveState(state) {
-    const serializedState = JSON.stringify(state)
-    localStorage.setItem('state', serializedState)
-} */
+export function getToken() {
+    return localStorage.getItem("token")
+}
+
 
 export function error(error){
     return {

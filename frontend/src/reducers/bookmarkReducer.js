@@ -24,13 +24,19 @@ export default (state = {bookmarks: [], loading: false}, action) => {
                 loading: false 
             }
         case FAVORITE_BOOKMARK:
-            return state.bookmarks.map(bookmark => {
-                if (bookmark.id !== action.payload){
+            return {
+                ...state,
+                bookmarks: state.bookmarks.map(bookmark => {
+                    if (bookmark.id !== action.payload){
+                        return bookmark
+                    }
                     return {
-                        ...bookmark, favorite: !bookmark.favorite
+                        ...bookmark,
+                        favorite: !bookmark.favorite
                     }
                 }
-            })
+            )
+        }
         case DELETE_BOOKMARK:
             const removeDeletedBookmark = state.bookmarks.filter(bookmark => bookmark.id !== action.payload) 
             return {bookmarks: removeDeletedBookmark}

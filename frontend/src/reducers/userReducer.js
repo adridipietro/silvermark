@@ -12,7 +12,8 @@ const INITIAL_STATE = {
     loggedIn: getToken() ? true : false,
     currentUser: {},
     token: getToken(),
-    loading: false
+    loading: false,
+    message: ''
 } 
 
 export default (state = INITIAL_STATE, action) => {

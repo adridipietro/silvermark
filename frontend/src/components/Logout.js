@@ -8,7 +8,7 @@ const Logout = (props) => {
     const history = useHistory()
     
     const handleClick = () => {
-        debugger
+        //debugger
         props.logoutUser() 
         history.push('/')
         
