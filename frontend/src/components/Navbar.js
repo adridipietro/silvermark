@@ -23,7 +23,8 @@ const Navbar = () => {
 
         return (
             <div className="navbar">
-                
+                { checkAuth() ? 
+                <React.Fragment>
                     <NavLink
                         to="/logout" exact className="nav-link"
                         style={link}
@@ -60,6 +61,9 @@ const Navbar = () => {
                         color: 'white'
                         }}
                     >HOME</NavLink>
+                </React.Fragment>
+                :
+                <React.Fragment>
                    <NavLink to="/login" exact className="nav-link"
                        style={link}
                        activeStyle={{
@@ -74,6 +78,15 @@ const Navbar = () => {
                        color: 'white'
                        }}
                    >SIGNUP</NavLink>
+                   <NavLink to="/about" exact className="nav-link"
+                        style={link}
+                        activeStyle={{
+                        background: 'black',
+                        color: 'white'
+                        }}
+                    >ABOUT US</NavLink>
+                </React.Fragment>
+                }
             </div>
 
             

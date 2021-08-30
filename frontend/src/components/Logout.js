@@ -8,13 +8,16 @@ const Logout = (props) => {
     const history = useHistory()
     
     const handleClick = () => {
-        //debugger
         props.logoutUser() 
         history.push('/')
         
     }
     return (
+        <div className="logout-container">
+            <br></br>
+            <p>Are you sure you want to logout?</p>
             <Button type="submit" value="Logout" onClick={handleClick}>Logout</Button>
+        </div>
     )
 }
 

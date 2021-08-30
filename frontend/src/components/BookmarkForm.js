@@ -13,7 +13,6 @@ import InputLabel from '@material-ui/core/InputLabel'
 class BookmarkForm extends React.Component {
     state = {
         bookmark: {
-
             headline: '',
             description: '',
             web_url: '',
@@ -31,14 +30,12 @@ class BookmarkForm extends React.Component {
 
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
-        //debugger
     }
 
     handleSelectChange = (e) => {
         this.setState({
             category_id: e.target.value
         })
-        //debugger
     }
 
 

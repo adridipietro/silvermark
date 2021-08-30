@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+
 
 class Users::RegistrationsController < Devise::RegistrationsController
   include Devise::Controllers::Helpers 
@@ -7,10 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     
     devise_parameter_sanitizer.for(:user).push(:name, :username, :password)
   end
-  # def create
-  #   byebug
-  # end
-  
+
 
   private
 

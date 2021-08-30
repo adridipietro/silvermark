@@ -85,7 +85,8 @@ export function logoutUser() {
           headers: {
             'accepts': 'application/json',
             'Content-Type': 'application/json',
-            Authorization: getToken()
+            Authorization: getToken(),
+            'Access-Control-Allow-Origin': '*'
           }
         })
         .then(resp => {
