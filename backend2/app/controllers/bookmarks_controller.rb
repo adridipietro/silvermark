@@ -20,7 +20,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks or /bookmarks.json
   def create
     
-    @bookmark = Bookmark.new(headline: params[:headline], description: params[:description],web_url: params[:web_url], category_id: params[:category_id])
+    @bookmark = Bookmark.new(headline: params[:headline], description: params[:description], web_url: params[:web_url], category_id: params[:category_id])
     @bookmark.user = User.find_by_id(current_user.id)
       if @bookmark.save
         render json: @bookmark, status: :created

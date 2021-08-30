@@ -20,7 +20,6 @@ class CategoryForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         let data = this.state
-        data.userId = this.props.currentUser.data.id
         this.props.createCategory(data)
         document.querySelector(".category-form").reset()
     }

@@ -17,6 +17,7 @@ import history from '../history'
 import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
+import { checkAuth } from '../actions/users'
 
 
 
@@ -25,6 +26,7 @@ class App extends React.Component {
   componentDidMount(){
     this.props.getBookmarks()
     this.props.getCategories()
+    this.props.checkAuth()
   }
   
  
@@ -71,7 +73,8 @@ const mapDispatchToProps = (dispatch) => {
     getCategories: () => dispatch(getCategories()),
     signupUser: (user) => dispatch(signupUser(user)),
     loginUser: (user) => dispatch(loginUser(user)),
-    logoutUser: () => dispatch(logoutUser())
+    logoutUser: () => dispatch(logoutUser()),
+    checkAuth: () => dispatch(checkAuth())
   }
 }
 

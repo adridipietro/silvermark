@@ -16,7 +16,7 @@ class Signup extends React.Component {
       handleSubmit = (e) =>{
           e.preventDefault()
           const { name, email, password } = this.state
-          debugger
+          //debugger
           this.props.signupUser({ name, email, password })
           this.props.history.push('/about')
           

@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
                     ...state,
                     authChecked: true,
                     loggedIn: true,
-                    currentUser: [...state, action.payload.currentUser],
+                    currentUser: [...state, action.payload],
                 }  
             } 
         case SIGNUP_USER:

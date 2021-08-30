@@ -1,5 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useEffect } from 'react';
+import { connect } from "react-redux";
+import { checkAuth } from '../actions/users'
 
 
 const link = {
@@ -14,6 +17,9 @@ const link = {
 
   
 const Navbar = () => {
+    useEffect(() => {
+        checkAuth()
+    })
 
         return (
             <div className="navbar">
@@ -75,4 +81,20 @@ const Navbar = () => {
         
 }
 
-export default Navbar
+const mapStateToProps = (state) => {
+    return {
+        authChecked: state.users.authChecked,
+        loggedIn: state.users.loggedIn,
+        currentUser: state.users.currentUser
+
+    }
+  }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      checkAuth: () => dispatch(checkAuth())
+    }
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
