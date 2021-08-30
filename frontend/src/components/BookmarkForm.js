@@ -12,20 +12,18 @@ import InputLabel from '@material-ui/core/InputLabel'
 
 class BookmarkForm extends React.Component {
     state = {
-        bookmark : {
-
             headline: '',
             description: '',
             web_url: '',
             favorite: false,
             category_id: null,
-            user_id: null
-        }
+            user_id: null,
+            selectedValue: ''
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        let data = this.state.bookmark
+        let data = this.state
         data.user_id = this.props.currentUser.data.id
         this.props.createBookmark(this.state)
         document.querySelector(".bookmark-form").reset()
@@ -34,19 +32,21 @@ class BookmarkForm extends React.Component {
 
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
+        debugger
     }
 
     handleSelectChange = (e) => {
         this.setState({
-            [this.state.bookmark.category_id]: e.target.value
+            [e.target.selectedValue]: e.target.value
         })
+        debugger
     }
 
 
 
 
     render() {
-        const { headline, description, web_url } = this.state
+        const { headline, description, web_url, category_id } = this.state
         return (
             <>
                 <p>ADD BOOKMARK</p>
@@ -55,12 +55,12 @@ class BookmarkForm extends React.Component {
                     <TextField id="description-input" type="text" name="description"  placeholder="description"  defaultValue={description} onChange={this.handleChange}/><br></br>
                     <TextField id="web-url-input" type="text" name="web_url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
                     <InputLabel id="demo-simple-select-autowidth-label">category</InputLabel>
-                        <Select labelId="demo-simple-select-autowidth-label" id="category-input" value={this.props.categories} onChange={this.handleSelectChange}>
-                        <MenuItem value="" disabled>category</MenuItem>
+                        <select id="category-input" value={this.state.selectedValue} onChange={this.handleChange} >
+                        <option value="" disabled>category</option>
                             {this.props.categories.map(category => {
-                                return <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>
+                                return <option key={category.id} name={category.name} value={category_id} selected={this.selectedValue == category_id}>{category.name}</option>
                             })}
-                        </Select>
+                        </select>
                         <br></br>
                     <Button type="submit" className="submit-button" >Submit</Button><br></br>
                 </form>
