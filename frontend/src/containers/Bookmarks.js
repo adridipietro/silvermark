@@ -23,10 +23,13 @@ const Bookmarks = (props) => {
   
     const filterByCategory = (e) => {
         setCategoryId(e.target.value)
-        document.querySelector('.bookmark-collection-container').remove()
+        debugger
+        //document.querySelector('.bookmark-collection-container').remove()
         if (categoryId) {
             props.bookmarks.map(bookmark => {
-                return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
+                if (categoryId == bookmark.category_id){
+                    return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
+                }
             })
         }
       }

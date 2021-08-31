@@ -11,6 +11,7 @@ import AboutUs from '../containers/AboutUs'
 import Categories from '../containers/Categories'
 import Home from '../containers/Home'
 
+
 import { connect } from 'react-redux'
 import history from '../history'
 
