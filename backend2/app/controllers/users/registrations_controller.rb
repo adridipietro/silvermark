@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   def configure_permitted_parameters
     
-    devise_parameter_sanitizer.for(:user).push(:name, :username, :password)
+    devise_parameter_sanitizer.for(:user).push(:name, :email, :password)
   end
 
 

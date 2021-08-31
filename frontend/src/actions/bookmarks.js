@@ -1,4 +1,5 @@
-import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR, LOADING_BOOKMARKS } from './types'
+
+import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR, LOADING_BOOKMARKS, UPDATE_QUERY } from './types'
 import { getToken } from './users'
 
 
@@ -58,13 +59,14 @@ export function deleteBookmark(id) {
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
-                "Accepts": 'application/json'
+                Accepts: 'application/json'
             },
             body: JSON.stringify(id)
         })
         .then(response => {
             if (response.ok) {
                response.json().then(() => {
+                    getToken(response.headers.get("Authorization"))
                     dispatch({type: DELETE_BOOKMARK, payload: null})
                })
             }
@@ -75,21 +77,35 @@ export function deleteBookmark(id) {
     }
 }
 
-export function favoriteBookmark(id){
+export function updateQuery(query) {
+    return (dispatch) => {
+        dispatch({type: 'UPDATE_QUERY', payload: query})
+    }
+}
+
+export function favoriteBookmark(id, favorite){
         return(dispatch, getState) => {
             const bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
-            const dataObject = {
+            const data = {
+                headline: bookmark.headline,
+                web_url: bookmark.web_url,
+                description: bookmark.description,
+                id: id, 
+                favorite: favorite
+            }
+            const configObject = {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accepts": "application/json"
+                    Accepts: 'application/json'
                 },
-                body: JSON.stringify({favorite: !bookmark.favorite})
+                body: JSON.stringify(data)
             }
-            fetch(`http://localhost:3000/bookmarks/${id}`, dataObject)
+            fetch(`http://localhost:3000/bookmarks/${id}`, configObject)
             .then(response => {
                 if (response.ok) {
                    response.json().then(json => {
+                        getToken(response.headers.get("Authorization"))
                         dispatch({type: FAVORITE_BOOKMARK, payload: json})
                    })
                 }

@@ -10,12 +10,12 @@ import Bookmarks from '../containers/Bookmarks'
 import AboutUs from '../containers/AboutUs'
 import Categories from '../containers/Categories'
 import Home from '../containers/Home'
-
+import BookmarkCard from '../containers/BookmarkCard'
 
 import { connect } from 'react-redux'
 import history from '../history'
 
-import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark } from '../actions/index'
+import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark, updateQuery } from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
 import { signupUser, loginUser, logoutUser } from '../actions/index'
 import { checkAuth } from '../actions/users'
@@ -41,10 +41,11 @@ class App extends React.Component {
               <Route exact path='/about' render={() => <AboutUs/>} />
               <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
               <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} getBookmarks={this.props.getBookmarks} createBookmark={this.props.createBookmark} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} getBookmarks={this.props.getBookmarks} createBookmark={this.props.createBookmark} query={this.props.query} updateQuery={this.props.updateQuery} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
               <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} {...routeProps} /> }/>
-
+              <Route exact path='/bookmarks/:id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>}/>
+              <Route exact path='/bookmarks/:category_id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} query={this.props.query} updateQuery={this.props.updateQuery} {...routeProps}/>}/>
             </Switch>
         </Router>
       </div>
@@ -68,14 +69,15 @@ const mapDispatchToProps = (dispatch) => {
     createBookmark: (bookmark) => dispatch(createBookmark(bookmark)),
     deleteBookmark: (id) => dispatch(deleteBookmark(id)),
     getBookmarks: () => dispatch(getBookmarks()),
-    favoriteBookmark: (id) => dispatch(favoriteBookmark(id)),
+    favoriteBookmark: (id, favorite) => dispatch(favoriteBookmark(id, favorite)),
     createCategory: (category) => dispatch(createCategory(category)),
     deleteCategory: (id) => dispatch(deleteCategory(id)),
     getCategories: () => dispatch(getCategories()),
     signupUser: (user) => dispatch(signupUser(user)),
     loginUser: (user) => dispatch(loginUser(user)),
     logoutUser: () => dispatch(logoutUser()),
-    checkAuth: () => dispatch(checkAuth())
+    checkAuth: () => dispatch(checkAuth()),
+    updateQuery: (query) => dispatch(updateQuery(query))
   }
 }
 

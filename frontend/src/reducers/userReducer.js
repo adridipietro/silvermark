@@ -32,14 +32,16 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                 loggedIn: true,
                 currentUser: action.payload,
-                loading: false
+                loading: false,
+                authChecked: true
             }
         case LOGIN_USER:
             return {
                 ...state, 
                 loggedIn: true,
                 currentUser: action.payload,
-                loading: false
+                loading: false,
+                authChecked: true
             }
         case LOGOUT_USER:
             return { 

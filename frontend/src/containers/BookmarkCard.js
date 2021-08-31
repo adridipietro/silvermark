@@ -13,6 +13,7 @@ const BookmarkCard = (props) => {
 
 
     const handleFavorite = () => {
+        debugger
         props.favoriteBookmark(props.id)
         history.push('/bookmarks')
     }

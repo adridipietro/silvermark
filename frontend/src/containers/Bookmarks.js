@@ -2,62 +2,49 @@ import React, { useState, useEffect } from 'react'
 import BookmarkCard from './BookmarkCard'
 import BookmarkForm from '../components/BookmarkForm'
 import CategoryForm from '../components/CategoryForm'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem' 
+import FilterBar from '../components/FilterBar'
 import { connect } from 'react-redux'
-//import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 
 
 
 const Bookmarks = (props) => {
-    const [categoryId, setCategoryId] = useState('')
-    //const history = useHistory()
+    //debugger
 
-      
-    const renderBookmarkCollection = () => {
-        return props.bookmarks.map(bookmark => {
-            return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
-        })
-    }
-  
-    const filterByCategory = (e) => {
-        setCategoryId(e.target.value)
-        debugger
-        //document.querySelector('.bookmark-collection-container').remove()
-        if (categoryId) {
-            props.bookmarks.map(bookmark => {
-                if (categoryId == bookmark.category_id){
-                    return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
-                }
+    const renderBookmarkCollection = (props, query) => {
+        if (!query) {
+            return props.bookmarks.map(bookmark => {
+                return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
+            })
+        } else if (query){
+            return filterByCategory(props, query).map(bookmark => {
+                return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
             })
         }
+    }
+  
+    const filterByCategory = (props, query) => {
+       return props.bookmarks.filter(bookmark => {
+           return bookmark.headline.includes(query)
+       })
       }
       
-     
+     const query = useSelector(state => state.bookmarks.query)
   
     return (
         <>
           <div className="forms-container">
               <br></br>
               <BookmarkForm />
+              <br></br>
               <CategoryForm/>
-              <form className="filter-category">
-                      <p>FILTER BY CATEGORY</p>
-                      <Select id="category-input" value={props.categories} onChange={filterByCategory}>
-                      <MenuItem value="" disabled>category</MenuItem>
-                          {props.categories.map(category => {
-                              return (
-                                  <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>
-                              )
-                          })}
-                      </Select>
-                  </form>
+              <br></br>
+              <FilterBar/>
               <br></br>    
           </div>
           <div className="bookmark-collection-container">
-            {renderBookmarkCollection()}  
-            
+            {renderBookmarkCollection(props, query)}  
           </div>
         </>
     )

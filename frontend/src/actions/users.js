@@ -12,6 +12,7 @@ export const checkAuth = () => {
       }).then(resp => {
         if (resp.ok) {
           return resp.json().then(json => {
+              setToken(resp.headers.get("Authorization"))
               dispatch({ type: AUTHENTICATED, payload: json})
           })
         } else {
@@ -83,15 +84,15 @@ export function logoutUser() {
         return fetch("http://localhost:3000/logout", {
           method: "DELETE",
           headers: {
-            'accepts': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: getToken(),
-            'Access-Control-Allow-Origin': '*'
+            Authorization: getToken()
           }
         })
         .then(resp => {
             if (resp.ok) {
-                dispatch({ type: LOGOUT_USER })
+                //getToken(resp.headers.get("Authorization"))
+                return dispatch({ type: LOGOUT_USER })
             } else {
                 return resp.json().then((errors) => {
                     dispatch({type: ERROR})

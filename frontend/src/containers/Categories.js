@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CategoryCard from './CategoryCard'
+import CategoryForm from '../components/CategoryForm'
 
 
 
@@ -15,6 +16,7 @@ const Categories = (props)  => {
 
     return (
         <div className="categories-container">
+            <CategoryForm/>
             <br></br>
             {renderCategoryCollection()}
         </div>
