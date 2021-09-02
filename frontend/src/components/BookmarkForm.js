@@ -50,8 +50,7 @@ class BookmarkForm extends React.Component {
                     <TextField id="headline-input" type="text" name="headline"   placeholder="headline" defaultValue={headline} onChange={this.handleChange}/><br></br>
                     <TextField id="description-input" type="text" name="description"  placeholder="description"  defaultValue={description} onChange={this.handleChange}/><br></br>
                     <TextField id="web-url-input" type="text" name="web_url"  placeholder="url" defaultValue={web_url}  onChange={this.handleChange}/><br></br>
-                    <InputLabel id="demo-simple-select-autowidth-label">category</InputLabel>
-                    <Select labelId="demo-simple-select-autowidth-label" id="category-input" value={this.props.categories} onChange={this.handleSelectChange}>
+                    <Select labelId="demo-simple-select-autowidth-label" id="category-input" value="category" onChange={this.handleSelectChange}>
                         <MenuItem value="" disabled>category</MenuItem>
                             {this.props.categories.map(category => {
                                 return <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>
@@ -67,8 +66,7 @@ class BookmarkForm extends React.Component {
 
 const mapState = (currentState) => {
     return {
-        categories: currentState.categories.categories,
-        currentUser: currentState.users.currentUser
+        categories: currentState.categories.categories
     }
 }
 

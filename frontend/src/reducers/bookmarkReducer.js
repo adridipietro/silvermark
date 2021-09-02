@@ -4,11 +4,11 @@ import {
     FAVORITE_BOOKMARK,
     DELETE_BOOKMARK,
     LOADING_BOOKMARKS,
-    UPDATE_QUERY
+    FILTER_CATEGORY
 } from '../actions/types'
 
 
-export default (state = {bookmarks: [], query: '', loading: false}, action) => {
+export default (state = {bookmarks: [], loading: false}, action) => {
     switch (action.type) {
         case LOADING_BOOKMARKS:
             return {
@@ -25,21 +25,23 @@ export default (state = {bookmarks: [], query: '', loading: false}, action) => {
                 loading: false 
             }
         case FAVORITE_BOOKMARK:
-            const index = state.bookmarks.find(bookmark => bookmark.id === action.payload.id)
-            return !! index || index === 0 ? (
-                {...state, 
-                    bookmarks: [...state.bookmarks.slice(0, index), 
-                    action.payload,
-                    ...state.bookmarks.slice(index + 1)
-                ], loading: false} 
-            ): state
+            return state.bookmarks.map(bookmark => {
+                if (bookmark.id !== action.payload.id){
+                    return bookmark
+                }
+                return {
+                    ...bookmark,
+                    favorite: !bookmark.favorite
+                }
+            })
         case DELETE_BOOKMARK:
             const removeDeletedBookmark = state.bookmarks.filter(bookmark => bookmark.id !== action.payload) 
             return {bookmarks: removeDeletedBookmark, loading: false}
-        case 'UPDATE_QUERY':
+        case FILTER_CATEGORY:
+            const filteredResults = state.bookmarks.filter(bookmark => bookmark.category_id == action.payload )
             return {
                 ...state, 
-                query: action.query
+                bookmarks: filteredResults
             }
         default:
             return state

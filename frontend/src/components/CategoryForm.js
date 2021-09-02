@@ -9,8 +9,7 @@ import { connect } from 'react-redux'
 
 class CategoryForm extends React.Component {
     state = {
-        name: '',
-        userId: ''
+        name: ''
     }
 
     handleChange = (e) => {
@@ -42,11 +41,6 @@ class CategoryForm extends React.Component {
     
 }
 
-const mapStateToProps = (state) => {
-    return {
-        currentUser: state.users.currentUser
-    }
-}
 
 const mapDispatch = (dispatch) => {
     return {
@@ -55,4 +49,4 @@ const mapDispatch = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatch)(CategoryForm)
+export default connect(null, mapDispatch)(CategoryForm)

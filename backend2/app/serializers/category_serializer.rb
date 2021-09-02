@@ -1,6 +1,5 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :name, :user_id
+  attributes :id, :name
   
   has_many :bookmarks
-  belongs_to :user 
 end

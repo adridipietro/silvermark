@@ -1,6 +1,4 @@
-
-import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR, LOADING_BOOKMARKS, UPDATE_QUERY } from './types'
-import { getToken } from './users'
+import { CREATE_BOOKMARK, GET_BOOKMARKS, DELETE_BOOKMARK, FAVORITE_BOOKMARK, ERROR, LOADING_BOOKMARKS, FILTER_CATEGORY} from './types'
 
 
 export function createBookmark(data){
@@ -9,8 +7,7 @@ export function createBookmark(data){
         fetch('http://localhost:3000/bookmarks', {
             method: "post",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: getToken()
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         })
@@ -26,8 +23,9 @@ export function createBookmark(data){
                 })
             }
         })
-        
-
+        .catch(error => {
+            dispatch({type: ERROR, payload: error})
+        })
     }
 }
 
@@ -36,8 +34,7 @@ export function getBookmarks(){
         dispatch({type: LOADING_BOOKMARKS })
         fetch("http://localhost:3000/bookmarks", {
             headers: {
-                "Content-Type": "application/json",
-                Authorization: getToken()
+                "Content-Type": "application/json"
             }
         })
         .then(response => {
@@ -45,6 +42,10 @@ export function getBookmarks(){
                response.json().then(json => {
                     dispatch({type: GET_BOOKMARKS, payload: json})
                })
+            } else {
+                return response.json().then((json) => {
+                    return Promise.reject(json)
+                })
             }
         })
         .catch(error => {
@@ -59,16 +60,21 @@ export function deleteBookmark(id) {
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
-                Accepts: 'application/json'
+                "Accepts": 'application/json',
             },
             body: JSON.stringify(id)
         })
         .then(response => {
             if (response.ok) {
                response.json().then(() => {
-                    getToken(response.headers.get("Authorization"))
+                    response.header("Access-Control-Allow-Origin", "*")
                     dispatch({type: DELETE_BOOKMARK, payload: null})
                })
+            } else {
+                console.log(response)
+                return response.json().then((json) => {
+                    return Promise.reject(json)
+                })
             }
         })
         .catch(error => {
@@ -77,9 +83,9 @@ export function deleteBookmark(id) {
     }
 }
 
-export function updateQuery(query) {
+export function filterCategory(id) {
     return (dispatch) => {
-        dispatch({type: 'UPDATE_QUERY', payload: query})
+        dispatch({type: FILTER_CATEGORY, payload: id})
     }
 }
 
@@ -97,7 +103,8 @@ export function favoriteBookmark(id, favorite){
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    Accepts: 'application/json'
+                    Accepts: 'application/json',
+                
                 },
                 body: JSON.stringify(data)
             }
@@ -105,16 +112,20 @@ export function favoriteBookmark(id, favorite){
             .then(response => {
                 if (response.ok) {
                    response.json().then(json => {
-                        getToken(response.headers.get("Authorization"))
+                        response.header("Access-Control-Allow-Origin", "*")
                         dispatch({type: FAVORITE_BOOKMARK, payload: json})
                    })
+                } else {
+                    console.log(response)
+                    return response.json().then((json) => {
+                        return Promise.reject(json)
+                    })
                 }
             })
             .catch(error => {
                 dispatch({type: ERROR, payload: error})
             })
         }
-
 }
 
 

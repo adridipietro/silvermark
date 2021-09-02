@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import Button from '@material-ui/core/Button'
 import { logoutUser } from '../actions/index'
 import { connect } from 'react-redux'
@@ -30,3 +30,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(Logout)
+ */

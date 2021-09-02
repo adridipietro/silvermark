@@ -1,14 +1,12 @@
 
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show,  :destroy]
-  include Devise::Controllers::Helpers 
-
-
+  
 
   # GET /bookmarks or /bookmarks.json
   def index
-    @bookmarks = Bookmark.all.most_recent
-    render json: @bookmarks
+    bookmarks = Bookmark.all.most_recent
+    render json: bookmarks
   end
 
   # GET /bookmarks/1 or /bookmarks/1.json
@@ -21,13 +19,21 @@ class BookmarksController < ApplicationController
   def create
     
     @bookmark = Bookmark.new(headline: params[:headline], description: params[:description], web_url: params[:web_url], category_id: params[:category_id])
-    @bookmark.user = User.find_by_id(current_user.id)
       if @bookmark.save
         render json: @bookmark, status: :created
       else
         render json: {error: @bookmark.errors.messages}, status: 422
       end
 
+  end
+
+  def update
+    #byebug
+    if @bookmark.update(bookmark_params)
+      render json: @bookmark
+    else
+      render json: @bookmark.errors, status: :unprocessable_entity
+    end
   end
 
 
@@ -39,7 +45,6 @@ class BookmarksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bookmark
-      
       @bookmark = Bookmark.find(params[:id])
     end
 
@@ -47,4 +52,6 @@ class BookmarksController < ApplicationController
     def bookmark_params
       params.require(:bookmark).permit!
     end
+
+
 end

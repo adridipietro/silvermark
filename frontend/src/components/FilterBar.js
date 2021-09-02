@@ -2,31 +2,37 @@ import React from 'react'
 import { MenuItem, Select } from '@material-ui/core'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
-import {updateQuery} from '../actions/index'
+import {filterCategory} from '../actions/index'
 
 
 
 class FilterBar extends React.Component {
 
     state = {
-        query: ''
+        category_id: null
     }
 
-    handleClick = () => {
-        let query = this.state
-        this.props.updateQuery(query)
+  
+    handleSubmit = (e) => {
+        e.preventDefault()
+        this.props.filterCategory(this.state)
+        document.querySelector(".filter-category").reset()
+        this.props.history.push(`/categories/${this.state}`)
     }
 
     handleChange = (e) => {
-        this.setState({query: e.target.value})
+        debugger
+        this.setState({
+            category_id: e.target.value
+        })
     }
 
     render() {
         return (
-            <form className="filter-category" onClick={() => this.handleClick(this.state.query, this.props.updateQuery)}>
+            <form className="filter-category" onClick={() => this.handleClick}>
                 <p>FILTER BY CATEGORY</p>
                 <Select id="category-input" onChange={this.handleChange}>
-                    <MenuItem value="" disabled>category</MenuItem>
+                    <MenuItem value="null" disabled>category</MenuItem>
                         {this.props.categories.map(category => {
                             return (
                                 <MenuItem key={category.id} name={category.name} value={category.id}>{category.name}</MenuItem>
@@ -49,7 +55,7 @@ const mapStateToProps = (currentState) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      updateQuery: (query) => dispatch(updateQuery(query))
+      filterCategory: (id) => dispatch(filterCategory(id))
     }
  }
 

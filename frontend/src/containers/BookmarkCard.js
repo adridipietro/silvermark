@@ -13,7 +13,6 @@ const BookmarkCard = (props) => {
 
 
     const handleFavorite = () => {
-        debugger
         props.favoriteBookmark(props.id)
         history.push('/bookmarks')
     }
@@ -36,7 +35,7 @@ const BookmarkCard = (props) => {
         <div className="bookmark-card" id={`bookmark-${props.id}`}>
             <h2 className="bookmark-headline">{props.headline}</h2>
                 <p className="bookmark-description">{props.description}</p>
-                <Link className="bookmark-web-url" onClick={() => openInNewTab("http://" + `${props.web_url}`)}>{props.web_url}</Link>
+                <Link to='#' className="bookmark-web-url" onClick={() => openInNewTab("http://" + `${props.web_url}`)}>{props.web_url}</Link>
                 <Button 
                     id={props.id}
                     onClick={handleFavorite}

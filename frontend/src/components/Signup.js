@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { signupUser } from '../actions/index'
@@ -57,4 +57,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Signup)
+export default connect(null, mapDispatchToProps)(Signup) */

@@ -1,11 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy ]
-
-
-
+  
   def index
-      @categories = Category.all
-      render json: @categories
+      categories = Category.all
+      render json: categories
   end
     
       # GET /categories/1 or /categories/1.json
@@ -19,7 +17,6 @@ class CategoriesController < ApplicationController
     def create
         
         @category = Category.new(category_params)
-        @category.user = User.find_by_id(current_user[:id])
         if @category.save
           render json: @category, status: :created
         else

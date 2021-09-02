@@ -38,7 +38,7 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
   config.jwt do |jwt|
-    jwt.secret = '1'
+    jwt.secret = ENV['JWT_SECRET']
     jwt.dispatch_requests = [
       ['POST', %r{^/login$}]
     ]

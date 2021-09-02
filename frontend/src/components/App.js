@@ -3,9 +3,9 @@ import { Router, Route, Switch } from 'react-router-dom'
 import '../App.css'
 
 import Navbar from './Navbar'
-import Login from './Login'
+/* import Login from './Login'
 import Signup from './Signup'
-import Logout from './Logout'
+import Logout from './Logout' */
 import Bookmarks from '../containers/Bookmarks'
 import AboutUs from '../containers/AboutUs'
 import Categories from '../containers/Categories'
@@ -15,10 +15,10 @@ import BookmarkCard from '../containers/BookmarkCard'
 import { connect } from 'react-redux'
 import history from '../history'
 
-import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark, updateQuery } from '../actions/index'
+import { getBookmarks, createBookmark, deleteBookmark, favoriteBookmark, filterCategory} from '../actions/index'
 import { getCategories, createCategory, deleteCategory } from '../actions/index'
-import { signupUser, loginUser, logoutUser } from '../actions/index'
-import { checkAuth } from '../actions/users'
+
+
 
 
 
@@ -27,7 +27,6 @@ class App extends React.Component {
   componentDidMount(){
     this.props.getBookmarks()
     this.props.getCategories()
-    this.props.checkAuth()
   }
   
  
@@ -39,13 +38,10 @@ class App extends React.Component {
             <Switch>
               <Route exact path='/' render={() => <Home />}/>
               <Route exact path='/about' render={() => <AboutUs/>} />
-              <Route exact path="/login" render={routeProps => <Login loginUser={this.props.loginUser} {...routeProps} />}/>
-              <Route exact path="/signup" render={routeProps => <Signup signupUser={this.props.signupUser} {...routeProps} />}/>
-              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} getBookmarks={this.props.getBookmarks} createBookmark={this.props.createBookmark} query={this.props.query} updateQuery={this.props.updateQuery} deleteBookmark={this.props.deleteBookmark}  favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
-              <Route exact path="/logout" render={routeProps => <Logout logoutUser={this.props.logoutUser} {...routeProps}/>}/>
+              <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} getBookmarks={this.props.getBookmarks} createBookmark={this.props.createBookmark} filterCategory={this.props.filterCategory} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} {...routeProps} /> }/>
               <Route exact path='/bookmarks/:id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>}/>
-              <Route exact path='/bookmarks/:category_id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} query={this.props.query} updateQuery={this.props.updateQuery} {...routeProps}/>}/>
+              <Route exact path='/categories/:id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>}/>
             </Switch>
         </Router>
       </div>
@@ -58,7 +54,6 @@ const mapStateToProps = (state) => {
   return {
     bookmarks: state.bookmarks.bookmarks,
     categories: state.categories.categories,
-    users: state.users,
     requesting: state.requesting
   }
 }
@@ -73,11 +68,7 @@ const mapDispatchToProps = (dispatch) => {
     createCategory: (category) => dispatch(createCategory(category)),
     deleteCategory: (id) => dispatch(deleteCategory(id)),
     getCategories: () => dispatch(getCategories()),
-    signupUser: (user) => dispatch(signupUser(user)),
-    loginUser: (user) => dispatch(loginUser(user)),
-    logoutUser: () => dispatch(logoutUser()),
-    checkAuth: () => dispatch(checkAuth()),
-    updateQuery: (query) => dispatch(updateQuery(query))
+    filterCategory: (id) => dispatch(filterCategory(id))
   }
 }
 

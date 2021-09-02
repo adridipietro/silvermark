@@ -1,5 +1,4 @@
 import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, ERROR, LOADING_CATEGORIES } from './types'
-import { getToken } from './users'
 
 
 export function createCategory(data){
@@ -8,8 +7,7 @@ export function createCategory(data){
         fetch(`http://localhost:3000/categories/`, {
             method: "post",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: getToken()
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         })
@@ -34,8 +32,7 @@ export function deleteCategory(id){
             method: "DELETE",
             headers: {
                 "Content-Type": 'application/json',
-                "Accepts": 'application/json',
-                Authorization: getToken()
+                "Accepts": 'application/json'
             }
         })
         .then(resp => {
@@ -43,7 +40,7 @@ export function deleteCategory(id){
                 dispatch({ type: DELETE_CATEGORY })
             } else {
                 return resp.json().then((json) => {
-                    dispatch({type: ERROR})
+                    
                     return Promise.reject(json)
                 })
             }
@@ -56,8 +53,7 @@ export function getCategories(){
         dispatch({type: LOADING_CATEGORIES})
         fetch("http://localhost:3000/categories", {
             headers: {
-                "Content-Type": "application/json",
-                Authorization: getToken()
+                "Content-Type": "application/json"
             }
         })
         .then(resp => {
@@ -67,7 +63,7 @@ export function getCategories(){
                 })
             } else {
                 return resp.json().then((json) => {
-                    dispatch({type: ERROR})
+                    
                     Promise.reject(json)
                 })
             }

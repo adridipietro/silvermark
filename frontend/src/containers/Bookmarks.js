@@ -10,27 +10,24 @@ import { useSelector } from 'react-redux'
 
 
 const Bookmarks = (props) => {
-    //debugger
 
-    const renderBookmarkCollection = (props, query) => {
-        if (!query) {
+    const query = useSelector(state => state.bookmarks.query)
+
+    const renderBookmarkCollection = () => {
             return props.bookmarks.map(bookmark => {
                 return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
             })
-        } else if (query){
-            return filterByCategory(props, query).map(bookmark => {
-                return <BookmarkCard key={bookmark.id} favoriteBookmark={props.favoriteBookmark} deleteBookmark={props.deleteBookmark} {...bookmark}/>
-            })
+    }
+
+    const filterByCategory = (props) => {
+        if (!!query) {
+            const filteredBookmarks = props.bookmarks.filter(bookmark => bookmark.query)
+            return filteredBookmarks
+        } else {
+            renderBookmarkCollection()
         }
     }
   
-    const filterByCategory = (props, query) => {
-       return props.bookmarks.filter(bookmark => {
-           return bookmark.headline.includes(query)
-       })
-      }
-      
-     const query = useSelector(state => state.bookmarks.query)
   
     return (
         <>
@@ -38,13 +35,13 @@ const Bookmarks = (props) => {
               <br></br>
               <BookmarkForm />
               <br></br>
-              <CategoryForm/>
+              <CategoryForm />
               <br></br>
-              <FilterBar/>
+              <FilterBar filterByCategory={filterByCategory} />
               <br></br>    
           </div>
           <div className="bookmark-collection-container">
-            {renderBookmarkCollection(props, query)}  
+            {renderBookmarkCollection(props)}  
           </div>
         </>
     )

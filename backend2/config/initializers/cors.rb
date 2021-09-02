@@ -12,7 +12,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       resource '*',
         headers: :any,
         methods: :any,
-        expose: %w(Authorization),
+        expose: :any,
         max_age: 600
       # resource '*',
       #   headers: :any,
