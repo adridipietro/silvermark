@@ -15,7 +15,7 @@ class FilterBar extends React.Component {
   
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.filterCategory(this.state)
+        this.props.filterCategory(this.state.category_id)
         document.querySelector(".filter-category").reset()
         history.push(`/categories/${this.state.category_id}`)
         debugger

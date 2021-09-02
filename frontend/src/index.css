@@ -18,9 +18,15 @@ div.navbar {
 }
 
 .MuiListItem-container{
-  position: center;
-  max-width: auto;
+  border: black;
+  border-style: inset;
+  border-width: 1px;
+  width: 1000px;
+}
 
+.MuiAvatar-colorDefault {
+  color: #fafafa;
+  background-color: #1d1c1c;
 }
 
 select:hover{
@@ -72,6 +78,9 @@ select {
   margin: 1rem 2rem;
 }
 
+.MuiGrid-item {
+  border: black
+}
 
 
 span.MuiButton-label:focus {
