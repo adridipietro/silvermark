@@ -3,9 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import '../App.css'
 
 import Navbar from './Navbar'
-/* import Login from './Login'
-import Signup from './Signup'
-import Logout from './Logout' */
+import FilterCategory from '../containers/FilterCategory'
 import Bookmarks from '../containers/Bookmarks'
 import AboutUs from '../containers/AboutUs'
 import Categories from '../containers/Categories'
@@ -41,7 +39,7 @@ class App extends React.Component {
               <Route exact path="/bookmarks" render={routeProps => <Bookmarks bookmarks={this.props.bookmarks} getBookmarks={this.props.getBookmarks} createBookmark={this.props.createBookmark} filterCategory={this.props.filterCategory} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} categories={this.props.categories} createCategory={this.props.createCategory} {...routeProps} />}/>
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} {...routeProps} /> }/>
               <Route exact path='/bookmarks/:id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>}/>
-              <Route exact path='/categories/:id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>}/>
+              <Route exact path='/categories/:id' render={routeProps => <FilterCategory categories={this.props.categories} bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>}/>
             </Switch>
         </Router>
       </div>

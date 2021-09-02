@@ -3,7 +3,7 @@ import { MenuItem, Select } from '@material-ui/core'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import {filterCategory} from '../actions/index'
-
+import history from '../history'
 
 
 class FilterBar extends React.Component {
@@ -17,11 +17,12 @@ class FilterBar extends React.Component {
         e.preventDefault()
         this.props.filterCategory(this.state)
         document.querySelector(".filter-category").reset()
-        this.props.history.push(`/categories/${this.state}`)
+        history.push(`/categories/${this.state.category_id}`)
+        debugger
     }
 
-    handleChange = (e) => {
-        debugger
+    handleSelectChange = (e) => {
+        
         this.setState({
             category_id: e.target.value
         })
@@ -29,15 +30,13 @@ class FilterBar extends React.Component {
 
     render() {
         return (
-            <form className="filter-category" onClick={() => this.handleClick}>
+            <form className="filter-category" onSubmit={this.handleSubmit}>
                 <p>FILTER BY CATEGORY</p>
-                <Select id="category-input" onChange={this.handleChange}>
-                    <MenuItem value="null" disabled>category</MenuItem>
-                        {this.props.categories.map(category => {
-                            return (
-                                <MenuItem key={category.id} name={category.name} value={category.id}>{category.name}</MenuItem>
-                            )
-                        })}
+                <Select labelId="demo-simple-select-autowidth-label" id="category-input" value="category" onChange={this.handleSelectChange}>
+                        <MenuItem value="" disabled>category</MenuItem>
+                            {this.props.categories.map(category => {
+                                return <MenuItem key={category.id} name={category.name} value={category.id} >{category.name}</MenuItem>
+                            })}
                 </Select>
                 <Button type="submit" value="Login">SUBMIT</Button>
             </form>
