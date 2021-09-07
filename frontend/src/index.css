@@ -78,6 +78,15 @@ select {
   margin: 1rem 2rem;
 }
 
+.up-vote-container{
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 1rem;
+  height: 1rem;
+  margin: 1rem 2rem;
+}
+
 .MuiGrid-item {
   border: black
 }

@@ -10,8 +10,12 @@ import { PropTypes } from 'prop-types'
 
 
 const BookmarkCard = (props) => {
+
+    //const count = 0
+
     const history = useHistory()
     const [selected, setSelected] = useState(false)
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         setSelected(JSON.parse(window.localStorage.getItem("favorite")))
@@ -21,7 +25,8 @@ const BookmarkCard = (props) => {
     const handleFavorite = () => {
         props.favoriteBookmark(props.id)
         setSelected(!selected)
-        history.push('/bookmarks')
+        //history.push('/bookmarks')
+        setCount(count + 1)
     }
 
     const handleDelete = () => {
@@ -60,6 +65,9 @@ const BookmarkCard = (props) => {
                     onClick={handleDelete}
                     className="delete-button">
                 </Button><br></br>
+                <div className="up-vote-container">
+                    <p className="up-vote">{count}</p>
+                </div>
         </div>
 
     )
