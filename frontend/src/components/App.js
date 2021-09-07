@@ -52,8 +52,8 @@ class App extends React.Component {
               <Route exact path="/categories" render={routeProps => <Categories categories={this.props.categories} deleteCategory={this.props.deleteCategory} {...routeProps} /> }/>
               <Route exact path='/bookmarks/:id' render={routeProps => <BookmarkCard categories={this.props.categories} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>}/>
               <Route exact path='/categories/:id' render={routeProps => {
-                const bookmarks = this.props.bookmarks.filter(bookmark => bookmark.category_id === routeProps.match.params.id)
-                return (!!bookmarks)? (
+                this.props.bookmarks.filter(bookmark => bookmark.category_id === routeProps.match.params.id)
+                return (!!this.props.bookmarks)? (
                   <FilterCategory categories={this.props.categories} bookmarks={this.props.bookmarks} deleteBookmark={this.props.deleteBookmark} favoriteBookmark={this.props.favoriteBookmark} {...routeProps}/>
                 ) : (
                   <ErrorPage/>

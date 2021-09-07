@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from "@material-ui/core/Button"
 import DeleteIcon from "@material-ui/icons/Delete"
 import FavoriteIcon from "@material-ui/icons/Favorite"
@@ -12,6 +12,10 @@ import { PropTypes } from 'prop-types'
 const BookmarkCard = (props) => {
     const history = useHistory()
     const [selected, setSelected] = useState(false)
+
+    useEffect(() => {
+        setSelected(JSON.parse(window.localStorage.getItem("favorite")))
+    }, [])
 
 
     const handleFavorite = () => {

@@ -1,4 +1,4 @@
-import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, ERROR, LOADING_CATEGORIES } from './types'
+import { CREATE_CATEGORY,  DELETE_CATEGORY, GET_CATEGORIES, LOADING_CATEGORIES } from './types'
 
 
 export function createCategory(data){

@@ -21,7 +21,7 @@ export default (state = {categories: [], loading: false}, action) => {
             return {...state, categories: [...state.categories, action.payload], loading: false }
         case DELETE_CATEGORY:
             const removeDeletedCategory = state.categories.filter(category => category.id !== action.payload)
-            return {categories: removeDeletedCategory}
+            return {categories: removeDeletedCategory, loading: false}
         case FILTER_BY_CATEGORY:
             let value = action.payload.value
             let filteredValues = state.categories.filter(category => {

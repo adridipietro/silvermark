@@ -18,7 +18,7 @@ class FilterBar extends React.Component {
         this.props.filterCategory(this.state.category_id)
         document.querySelector(".filter-category").reset()
         history.push(`/categories/${this.state.category_id}`)
-        debugger
+       // debugger
     }
 
     handleSelectChange = (e) => {

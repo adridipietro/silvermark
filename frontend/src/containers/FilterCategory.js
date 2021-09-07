@@ -15,7 +15,6 @@ const FilterCategory = (props) => {
     return (
         <div class="filtered">
             {renderFilteredBookmarks()}
-            
         </div>
 
     )

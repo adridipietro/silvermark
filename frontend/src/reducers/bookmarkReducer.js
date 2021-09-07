@@ -31,7 +31,7 @@ export default (state = {bookmarks: [], loading: false}, action) => {
                     ...state.bookmarks.slice(0, index), 
                     {...state.bookmarks[index], favorite: true},
                     ...state.bookmarks.slice(index + 1)
-                ], error: "", loading: false}
+                ], loading: false}
             ): state
         
         case DELETE_BOOKMARK:
