@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { connect } from 'react-redux'
 import React from 'react'
 import BookmarkCard from './BookmarkCard'
 
@@ -15,11 +15,18 @@ const FilterCategory = (props) => {
     return (
         <div class="filtered">
             {renderFilteredBookmarks()}
+            
         </div>
 
     )
 }
 
+const mapStateToProps = (state) => {
+    return{
+        categories: state.categories.categories
+    }
+}
+
 
     
-export default FilterCategory
+export default connect(mapStateToProps, null)(FilterCategory)

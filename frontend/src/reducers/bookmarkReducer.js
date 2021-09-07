@@ -25,21 +25,20 @@ export default (state = {bookmarks: [], loading: false}, action) => {
                 loading: false 
             }
         case FAVORITE_BOOKMARK:
-            return state.bookmarks.map(bookmark => {
-                if (bookmark.id !== action.payload.toString()){
-                    return bookmark
-                }
-                return {
-                    ...bookmark,
-                    favorite: !bookmark.favorite
-                }
-            })
+            const index = state.bookmarks.findIndex(bookmark => String(bookmark.id) === String(action.payload.id))
+            return !!index || index === 0 ? (
+                {...state, bookmarks: [
+                    ...state.bookmarks.slice(0, index), 
+                    {...state.bookmarks[index], favorite: true},
+                    ...state.bookmarks.slice(index + 1)
+                ], error: "", loading: false}
+            ): state
         
         case DELETE_BOOKMARK:
             const removeDeletedBookmark = state.bookmarks.filter(bookmark => bookmark.id !== action.payload) 
             return {bookmarks: removeDeletedBookmark, loading: false}
         case FILTER_CATEGORY:
-            const filteredResults = state.bookmarks.filter(bookmark => bookmark.category_id == action.payload )
+            const filteredResults = state.bookmarks.filter(bookmark => bookmark.category_id === action.payload )
             return {
                 ...state, 
                 bookmarks: filteredResults

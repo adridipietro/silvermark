@@ -20,7 +20,7 @@ export default (state = {categories: [], loading: false}, action) => {
         case CREATE_CATEGORY:
             return {...state, categories: [...state.categories, action.payload], loading: false }
         case DELETE_CATEGORY:
-            const removeDeletedCategory = state.categories.filter(category => category.id != action.payload)
+            const removeDeletedCategory = state.categories.filter(category => category.id !== action.payload)
             return {categories: removeDeletedCategory}
         case FILTER_BY_CATEGORY:
             let value = action.payload.value

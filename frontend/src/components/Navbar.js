@@ -33,6 +33,7 @@ const capitalize = (str) => {
 class Navbar extends React.Component {
 
 
+
      render() {
         return (
                 <div className="navbar">
@@ -73,6 +74,7 @@ class Navbar extends React.Component {
                         {this.props.categories.map(category => {
                             return <NavLink to={`/categories/${category.id}`} className="nav-link"
                             style={categorylink}
+                            onClick={this.handleClick}
                             key={`${category.id}`}
                             activeStyle={{
                             background: 'white',

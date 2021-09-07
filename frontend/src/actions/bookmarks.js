@@ -89,7 +89,7 @@ export function filterCategory(id) {
     }
 }
 
-export function favoriteBookmark(id, favorite){
+export function favoriteBookmark(id){
         return(dispatch, getState) => {
             const bookmark = getState().bookmarks.bookmarks.find(bookmark => bookmark.id === id)
             const data = {
@@ -97,7 +97,7 @@ export function favoriteBookmark(id, favorite){
                 web_url: bookmark.web_url,
                 description: bookmark.description,
                 id: id, 
-                favorite: favorite
+                favorite: bookmark.favorite
             }
             const configObject = {
                 method: "PATCH",
@@ -112,7 +112,6 @@ export function favoriteBookmark(id, favorite){
             .then(response => {
                 if (response.ok) {
                    response.json().then(json => {
-                        response.header("Access-Control-Allow-Origin", "*")
                         dispatch({type: FAVORITE_BOOKMARK, payload: json})
                    })
                 } else {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from "@material-ui/core/Button"
 import DeleteIcon from "@material-ui/icons/Delete"
 import FavoriteIcon from "@material-ui/icons/Favorite"
@@ -6,14 +6,17 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { deleteBookmark, favoriteBookmark } from '../actions/index'
 import { Link } from 'react-router-dom'
+import { PropTypes } from 'prop-types'
 
 
 const BookmarkCard = (props) => {
     const history = useHistory()
+    const [selected, setSelected] = useState(false)
 
 
     const handleFavorite = () => {
         props.favoriteBookmark(props.id)
+        setSelected(!selected)
         history.push('/bookmarks')
     }
 
@@ -37,10 +40,14 @@ const BookmarkCard = (props) => {
                 <p className="bookmark-description">{props.description}</p>
                 <Link to='#' className="bookmark-web-url" onClick={() => openInNewTab("http://" + `${props.web_url}`)}>{props.web_url}</Link>
                 <Button 
+                    value={selected}
+                    selected={selected}
                     id={props.id}
                     onClick={handleFavorite}
                     className="favorite-button" 
-                    startIcon={<FavoriteIcon/>}>
+                    startIcon={<FavoriteIcon/>}
+                    defaultValue={props.favorite}
+                    >
                 </Button><br></br>
                 <Button
                     id={props.id}
@@ -54,6 +61,13 @@ const BookmarkCard = (props) => {
     )
 }
 
+BookmarkCard.propTypes = {
+    favorite: PropTypes.bool
+}
+  
+BookmarkCard.defaultProps = {
+    favorite: false
+}
 
     
 const mapDispatchToProps = (dispatch) => {

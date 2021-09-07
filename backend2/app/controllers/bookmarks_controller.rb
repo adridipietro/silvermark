@@ -1,6 +1,6 @@
 
 class BookmarksController < ApplicationController
-  before_action :set_bookmark, only: [:show,  :destroy]
+  before_action :set_bookmark, only: [:show, :update, :destroy]
   
 
   # GET /bookmarks or /bookmarks.json
@@ -50,7 +50,7 @@ class BookmarksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bookmark_params
-      params.require(:bookmark).permit!
+      params.require(:bookmark).permit(:headline, :web_url, :description, :favorite, :category_id)
     end
 
 
